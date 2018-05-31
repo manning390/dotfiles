@@ -1,0 +1,8 @@
+!bin
+*.DS_store
+tmp/**/*
+!tmp/cache/.keep
+.env
+.bundle
+log/*.log
+
