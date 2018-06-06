@@ -1,0 +1,26 @@
+[init]
+	templatedir = ~/.git_template
+[push]
+	default = current
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	last = log -1
+	unstage = reset HEAD --
+	ca = commit --amend
+[core]
+	execludesfile = ~/.gitignore
+	autocrlf = input
+	pager = less -FMRiX
+	editor = subl -n -w
+[commit]
+	template = ~/.gitmessage
+[fetch]
+	prune = true
+[user]
+	email = michaelmanning390@gmail.com
+	name = Michael Manning
+[github]
+	user = manning390
