@@ -1,6 +1,7 @@
 # Unix
 alias tlf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln
+alias xclip="xclip -selection c" # Make xclip work properly
 alias mkdir='mkdir -p' # Always make full path if not exist
 alias ...='../..'
 alias -g G='| grep'
