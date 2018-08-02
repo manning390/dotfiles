@@ -10,14 +10,17 @@ alias -g L=' wc -1'
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-alias nord="openpyn"
+alias league="leagueoflegends"
+alias irc="weechat"
+alias nord="sudo openpyn"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="\vim"
 alias zshrc="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias art="php artisan"
-alias="src" # Requires zsh_reload
+#alias ="src" # Requires zsh_reload
+alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
