@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Define functions
 fancy_echo() {
@@ -40,7 +40,9 @@ read throwawayinput
 
 # Repositories
 fancy_echo "Adding Repositories apt"
-sudo add-apt-repository -y ppa:ondrej/php ppa:neovim-ppa/stable universe
+sudo add-apt-repository -y ppa:ondrej/php
+sudo add-apt-repository -y ppa:neovim-ppa/stable
+sudo add-apt-repository -y universe
 
 # Install scripts
 fancy_echo "Updating apt"
@@ -54,7 +56,7 @@ sudo apt install -y software-properties-common python-dev python-pip python3-dev
 
 # fancy_echo "Installing Dropbox"
 # Need to update the wget to work
-if ! [-x "$(command -v dropbox)" ]; then
+if ! [ -x "$(command -v dropbox)" ]; then
     wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
     sudo apt install -y ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
 fi
@@ -80,13 +82,12 @@ fancy_echo "Installing Powerline font"
 git clone git@github.com:powerline/fonts.git ~/fonts-delete && ~/fonts-delete/install.sh && rm -rf ~/fonts-delete
 
 # PHP
-fancy_echo "Finding most recent PHP version"
 PHPLATEST="$(curl -s 'https://secure.php.net/releases/?json' | jq '[.[] | .version][0]' | cut -c2-4)"
 fancy_echo "Installing PHP version ${PHPLATEST}"
 sudo apt install -y php${PHPLATEST}-cli php${PHPLATEST}-gd php${PHPLATEST}-mysql php${PHPLATEST}-pgsql php${PHPLATEST}-imap php${PHPLATEST}-memcached php${PHPLATEST}-mbstring php${PHPLATEST}-xml php${PHPLATEST}-curl php${PHPLATEST}-bcmath php${PHPLATEST}-sqlite3 php${PHPLATEST}-xdebug
 
 fancy_echo "Install Composer with global plugins"
-if ! [-x "$(command -v composer)" ]; then
+if ! [ -x "$(command -v composer)" ]; then
     php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
 fi
 composer global require hirak/prestissimo phpunit/phpunit phpunit/php-invoker -q -n

@@ -18,12 +18,6 @@
     ~/.vim:
         force: true
         path: vim
-    ~/.xinitrc: xinitrc
-    ~/.weechat:
-        create: true
-        force: true
-        path: weechat/
-    ~/bin: bin/
     ~/.zshrc:
         force: true
         path: zshrc
