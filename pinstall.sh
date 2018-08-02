@@ -7,15 +7,14 @@ fancy_echo() {
     printf "\n$fmt\n" "$@"
 }
 
-fancy_echo "Installing git"
-sudo apt install -y git
+fancy_echo "Installing git and curl"
+sudo apt install -y git curl
 
 fancy_echo "Installing oh-my-zsh"
 # Source: https://gist.github.com/tsabat/1498393
 sudo apt install -y zsh
-wget https://github.com/robbyrussel/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 chsh -s `which zsh`
-
 
 # fancy_echo "Setting up Github SSH"
 # echo "Please enter your github email."

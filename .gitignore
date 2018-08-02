@@ -1,8 +1,4 @@
-!bin
-*.DS_store
-tmp/**/*
-!tmp/cache/.keep
-.env
-.bundle
-log/*.log
-
+__pycache__
+weechat/script/plugins.xml.gz
+weechat/aspell.conf
+bin/php

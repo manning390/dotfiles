@@ -35,8 +35,12 @@ append_to_zshrc() {
 }
 
 # Check Pre-Install
-echo "Did you need to run a pre-install (pinstall.sh)? Ctrl+c now if you do, otherwise continue with enter..."
+echo "Did you need to run a pre-install (pinstall.sh)? ^C now if you do, otherwise continue with enter..."
 read throwawayinput
+
+# Repositories
+fancy_echo "Adding Repositories apt"
+sudo add-apt-repository -y ppa:ondrej/php ppa:neovim-ppa/stable universe
 
 # Install scripts
 fancy_echo "Updating apt"
@@ -46,50 +50,47 @@ fancy_echo "Installing CLI tools"
 sudo apt install -y tmux curl wget zip unzip htop jq cut
 
 fancy_echo "Installing Python"
-sudo apt install software-properties-common
-sudo apt install python-dev python-pip python3-dev python3-pip python-gpg
+sudo apt install -y software-properties-common python-dev python-pip python3-dev python3-pip python-gpg
 
 # fancy_echo "Installing Dropbox"
 # Need to update the wget to work
 # wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" # Download the deb && sudo apt install ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
 
 fancy_echo "Installing Nord VPN Manager"
-sudo apt install openvpn
+sudo apt install -y openvpn
 sudo python3 -m pip install openpyn --upgrade
 #sudo openpyn --init
 
 fancy_echo "Installing Neovim"
-sudo apt-add-repository ppa:neovim-ppa/stable
-sudo apt update
 sudo apt install -y neovim
-fancy_echo "Installing Vim-Plug"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 
 #fancy_echo "Setting up tmux"
 #git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-### SHELL
 fancy_echo "Installing Firacode font"
-sudo add-apt-repository universe
-sudo apt update
 sudo apt install fonts-firacode
 
 fancy_echo "Installing Powerline font"
 git clone git@github.com:powerline/fonts.git ~/fonts-delete && ~/fonts-delete/install.sh && rm -rf ~/fonts-delete
-fancy_echo "Adding PHP repositories"
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt update
 
-### PHP
+# PHP
 fancy_echo "Finding most recent PHP version"
 PHPLATEST="$(curl -s 'https://secure.php.net/releases/?json' | jq '[.[] | .version][0]' | cut -c2-4)"
-
 fancy_echo "Installing PHP version ${PHPLATEST}"
 sudo apt install -y php${PHPLATEST}-cli php${PHPLATEST}-gd php${PHPLATEST}-mysql php${PHPLATEST}-pgsql php${PHPLATEST}-imap php${PHPLATEST}-memcached php${PHPLATEST}-mbstring php${PHPLATEST}-xml php${PHPLATEST}-curl php${PHPLATEST}-bcmath php${PHPLATEST}-sqlite3 php${PHPLATEST}-xdebug
 
-fancy_echo "Install Composer"
-php -r "readfile('http://getcomposer.org/installer');"
- | sudo php -- --install-dir=/usr/bin/ --filename=composer
+fancy_echo "Install Composer + hirak/prestissimo"
+php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
 composer global require hirak/prestissimo -q -n
-# source ~/.dotfiles/setup/ossettings.sh
+
+set -e
+
+CONFIG="install.conf.yaml"
+DOTBOT_DIR="dotbot"
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${BASEDIR}"
+git submodule update --init --recursive "${DOTBOT_DIR}"
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
