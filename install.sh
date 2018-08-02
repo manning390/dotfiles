@@ -83,6 +83,7 @@ fancy_echo "Install Composer + hirak/prestissimo"
 php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
 composer global require hirak/prestissimo -q -n
 
+# Dotbot
 set -e
 
 CONFIG="install.conf.yaml"
