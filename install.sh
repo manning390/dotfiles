@@ -54,8 +54,10 @@ sudo apt install -y software-properties-common python-dev python-pip python3-dev
 
 # fancy_echo "Installing Dropbox"
 # Need to update the wget to work
-wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
-sudo apt install -y ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
+if ! [-x "$(command -v dropbox)" ]; then
+    wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+    sudo apt install -y ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
+fi
 
 fancy_echo "Weechat"
 sudo apt install -y weechat
@@ -83,11 +85,11 @@ PHPLATEST="$(curl -s 'https://secure.php.net/releases/?json' | jq '[.[] | .versi
 fancy_echo "Installing PHP version ${PHPLATEST}"
 sudo apt install -y php${PHPLATEST}-cli php${PHPLATEST}-gd php${PHPLATEST}-mysql php${PHPLATEST}-pgsql php${PHPLATEST}-imap php${PHPLATEST}-memcached php${PHPLATEST}-mbstring php${PHPLATEST}-xml php${PHPLATEST}-curl php${PHPLATEST}-bcmath php${PHPLATEST}-sqlite3 php${PHPLATEST}-xdebug
 
-fancy_echo "Install Composer + hirak/prestissimo"
+fancy_echo "Install Composer with global plugins"
 if ! [-x "$(command -v composer)" ]; then
     php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
 fi
-composer global require hirak/prestissimo -q -n
+composer global require hirak/prestissimo phpunit/phpunit phpunit/php-invoker -q -n
 
 # Dotbot
 set -e

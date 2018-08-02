@@ -53,4 +53,7 @@ Run ```install.sh``` for applications and configs
   - bcmath
   - sqlite3
   - xdebug
-- Composer + [hirak/prestissimo](https://github.com/hirak/prestissimo) (via php & composer)
+- Composer (via php)
+  - [hirak/prestissimo](https://github.com/hirak/prestissimo)
+  - phpunit/phpunit
+  - phpunit/php-invoker
