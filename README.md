@@ -25,6 +25,8 @@ Run ```install.sh``` for applications and configs
 - htop
 - jq
 - cut
+- xsel
+- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
 - software-properties-common
 - python-dev
 - python-pip
@@ -34,6 +36,8 @@ Run ```install.sh``` for applications and configs
 - openvpn
 - [openpyn](https://github.com/jotyGill/openpyn-nordvpn) (via pip)
 - neovim
+- dropbox
+- weechat
 - fonts-firacode
 - [powerline fonts](https://github.com/powerline/fonts) (via git)
 - [PHP](https://secure.php.net/releases/?json) (Installs latest version with following mods)

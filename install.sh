@@ -47,14 +47,18 @@ fancy_echo "Updating apt"
 sudo apt update
 
 fancy_echo "Installing CLI tools"
-sudo apt install -y tmux curl wget zip unzip htop jq cut
+sudo apt install -y tmux curl wget zip unzip htop jq cut xsel silversearcher-ag
 
 fancy_echo "Installing Python"
 sudo apt install -y software-properties-common python-dev python-pip python3-dev python3-pip python-gpg
 
 # fancy_echo "Installing Dropbox"
 # Need to update the wget to work
-# wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb" # Download the deb && sudo apt install ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
+wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+sudo apt install -y ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
+
+fancy_echo "Weechat"
+sudo apt install -y weechat
 
 fancy_echo "Installing Nord VPN Manager"
 sudo apt install -y openvpn
@@ -68,7 +72,7 @@ sudo apt install -y neovim
 #git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 fancy_echo "Installing Firacode font"
-sudo apt install fonts-firacode
+sudo apt install -y fonts-firacode
 
 fancy_echo "Installing Powerline font"
 git clone git@github.com:powerline/fonts.git ~/fonts-delete && ~/fonts-delete/install.sh && rm -rf ~/fonts-delete
