@@ -1,7 +1,7 @@
 call plug#begin(g:configPath . '/plugged')
  
 Plug 'nightsense/snow'
-Plug 'altercation/vim-colors-solarized'
+Plug 'vimwiki/vimwiki'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
