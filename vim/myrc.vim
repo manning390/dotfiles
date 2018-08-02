@@ -8,7 +8,7 @@ runtime! mappings.vim
  	set hidden
  	set history=1000
  	set wildmenu
- 	setwildmode=list:longest,full
+ 	set wildmode=list:longest,full
 	set backspace=indent,eol,start
  	set nobackup
  	let &directory=g:configPath .'/swap//'
@@ -19,7 +19,7 @@ runtime! mappings.vim
 
 	if has('clipboard')
 		if has('unnamedplus')
-			set clipboard=unnamed, unnamedplus " When possible use + register for copy-paste
+			set clipboard=unnamed,unnamedplus " When possible use + register for copy-paste
 		else
 			set clipboard=unnamed
 		endif
@@ -53,12 +53,12 @@ runtime! mappings.vim
 	set splitright
 	set nofoldenable
 
-	#let g:airline_theme='snow_dark'
+	let g:airline_theme='snow_dark'
 	let g:airline_left_sep='›'  " Slightly fancier than '>'
 	let g:airline_right_sep='‹' " Slightly fancier than '<'
 
-	#let g:lightline = {'colorscheme':'snow_dark'}
- 
+	let g:lightline={'colorscheme':'snow_dark'}
+
 
 	let g:indent_guides_start_level = 2
 	let g:indent_guides_guide_size = 1
