@@ -1,0 +1,29 @@
+- clean: ['~']
+
+- link:
+    ~/.bash_aliases:
+        force: true
+        path: aliases
+    ~/.config/nvim:
+        force: true
+        create: true
+        path: vim
+    ~/.gitconfig:
+        create: true
+        force: true
+        path: gitconfig
+    ~/.tmux.conf:
+        force: true
+        path: tmux.conf
+    ~/.vim:
+        force: true
+        path: vim
+    ~/.xinitrc: xinitrc
+    ~/.weechat:
+        create: true
+        force: true
+        path: weechat/
+    ~/bin: bin/
+    ~/.zshrc:
+        force: true
+        path: zshrc
