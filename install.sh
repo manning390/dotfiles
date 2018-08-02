@@ -84,7 +84,9 @@ fancy_echo "Installing PHP version ${PHPLATEST}"
 sudo apt install -y php${PHPLATEST}-cli php${PHPLATEST}-gd php${PHPLATEST}-mysql php${PHPLATEST}-pgsql php${PHPLATEST}-imap php${PHPLATEST}-memcached php${PHPLATEST}-mbstring php${PHPLATEST}-xml php${PHPLATEST}-curl php${PHPLATEST}-bcmath php${PHPLATEST}-sqlite3 php${PHPLATEST}-xdebug
 
 fancy_echo "Install Composer + hirak/prestissimo"
-php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
+if ! [-x "$(command -v composer)" ]; then
+    php -r "readfile('http://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/bin/ --filename=composer
+fi
 composer global require hirak/prestissimo -q -n
 
 # Dotbot
