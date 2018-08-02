@@ -13,6 +13,7 @@ sudo apt install -y git curl zsh
 fancy_echo "Installing oh-my-zsh"
 # Source: https://gist.github.com/tsabat/1498393
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "Changing to zsh with chsh, may require prompt"
 chsh -s `which zsh`
 
 # fancy_echo "Setting up Github SSH"
@@ -26,7 +27,7 @@ chsh -s `which zsh`
 fancy_echo "Add key to github to finish setup."
 echo "Press enter to open instructions."
 read throwaway_input
-open https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+xdg-open https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
 fancy_echo "System need to reboot for zsh"
 fancy_echo "use 'sudo shutdown -r 0' to do so now"
