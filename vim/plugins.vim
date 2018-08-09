@@ -1,5 +1,5 @@
 call plug#begin(g:configPath . '/plugged')
- 
+
 Plug 'nightsense/snow'
 Plug 'vimwiki/vimwiki'
 Plug 'rhysd/conflict-marker.vim'
@@ -21,13 +21,14 @@ Plug 'vim-vdebug/vdebug', { 'for': 'php' }
 Plug 'janko-m/vim-test'
 Plug 'phpactor/phpactor', { 'for': 'php', 'do': 'composer install' }
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'markonm/traces.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'machakann/vim-sandwich'
 Plug 'SirVer/ultisnips'
 Plug 'w0rp/ale'
+Plug 'calviken/vim-gdscript3'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -37,7 +38,7 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'kristijanhusak/deoplete-phpactor'
+"Plug 'kristijanhusak/deoplete-phpactor'
 
 call plug#end()
 
