@@ -31,3 +31,4 @@ xdg-open https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-ac
 
 fancy_echo "System need to reboot for zsh"
 fancy_echo "use 'sudo shutdown -r 0' to do so now"
+
