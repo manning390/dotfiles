@@ -21,3 +21,6 @@
     ~/.zshrc:
         force: true
         path: zshrc
+    ~/.i3:
+        force: true
+        path: i3
