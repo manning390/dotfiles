@@ -27,3 +27,9 @@
     ~/.i3:
         force: true
         path: i3
+    ~/.xmodmap:
+        force: true
+        path: xmodmap
+    ~/.xinitrc:
+        force: true
+        path: xinitrc
