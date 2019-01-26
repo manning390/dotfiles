@@ -5,6 +5,12 @@ runtime! mappings.vim
 " General: {
  	syntax on
  	filetype plugin indent on
+    set noexpandtab
+    set copyindent
+    set preserveindent
+    set softtabstop=0
+    set shiftwidth=4
+    set tabstop=4
  	set hidden
  	set history=1000
  	set wildmenu
@@ -102,4 +108,10 @@ runtime! mappings.vim
     augroup END
 
     "autocmd BufWritePost * execute Shtuff()
+
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
 " }

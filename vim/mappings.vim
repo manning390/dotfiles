@@ -33,7 +33,7 @@ nnoremap <Leader>cf :let @+ = expand("%")<CR> " copy file path
     " http://stackoverflow.com/a/8064607/127816
     vnoremap . :normal .<CR>
 
-    " MoveLines: {
+" MoveLines: {
         nnoremap <C-J> :m .+1<CR>==
         nnoremap <C-K> :m .-2<CR>==
         inoremap <C-J> <Esc>:m .+1<CR>==gi
@@ -74,19 +74,24 @@ nnoremap <Leader>cf :let @+ = expand("%")<CR> " copy file path
 
 " Search: {
     nmap <silent> <leader>/ :set invhlsearch<CR>
+    nmap <silent> <leader><space> :set invhlsearch<CR>
+" }
+
+" Sidebar: {
+    map <leader>kb :NERDTreeToggle<CR>
 " }
 
 " UI: {
-    nnoremap 1<Backspace> :set background=dark<CR>
-    nnoremap 2<Backspace> :set background=light<CR>
+"    nnoremap 1<Backspace> :set background=dark<CR>
+"    nnoremap 2<Backspace> :set background=light<CR>
 " }
 
 " Refactoring: {
-    nnoremap <Leader>u :call phpactor#UseAdd()<CR>
-    nnoremap <Leader>e :call phpactor#ClassExpand()<CR>
-    vnoremap <silent><Leader>em :call phpactor#ExtractMethod()<CR>
+    "nnoremap <Leader>u :call phpactor#UseAdd()<CR>
+    "nnoremap <Leader>e :call phpactor#ClassExpand()<CR>
+    "vnoremap <silent><Leader>em :call phpactor#ExtractMethod()<CR>
     "nnoremap <Leader>pp :call phpactor#ContextMenu()<CR>
-    nnoremap <Leader>o :call phpactor#GotoDefinition()<CR>
+    "nnoremap <Leader>o :call phpactor#GotoDefinition()<CR>
     "nnoremap <Leader>pd :call phpactor#OffsetTypeInfo()<CR>
     "nnoremap <Leader>pfm :call phpactor#MoveFile()<CR>
     "nnoremap <Leader>pfc :call phpactor#CopyFile()<CR>

@@ -8,9 +8,9 @@ function! StripTrailingWhitespace()
     call cursor(l, c)
 endfunction
 
-function! FatRunnerStrategy(cmd)
-  call system("fat-runner run " . shellescape("clear;" . a:cmd))
-endfunction
+"function! FatRunnerStrategy(cmd)
+"  call system("fat-runner run " . shellescape("clear;" . a:cmd))
+"endfunction
 
 function! ExpandSnippet(snippet)
     execute 'normal! a'.a:snippet."\<c-r>=UltiSnips#ExpandSnippet()\<cr>"

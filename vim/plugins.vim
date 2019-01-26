@@ -14,6 +14,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'mattn/emmet-vim'
@@ -60,9 +61,9 @@ let g:php_cs_fixer_config_file = '.php_cs'
 
 let g:deoplete#enable_at_startup = 1
 let g:vdebug_options = {"break_on_open": 0}
-let test#strategy = "fat_runner"
+"let test#strategy = "fat_runner"
 let g:phpactorPhpBin = '/usr/bin/php'
-let g:test#custom_strategies = {'fat_runner': function('FatRunnerStrategy')}
+"let g:test#custom_strategies = {'fat_runner': function('FatRunnerStrategy')}
 "let g:UltiSnipsSnippetsDir = g:configPath . '/UltiSnips'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
