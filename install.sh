@@ -56,10 +56,11 @@ sudo apt install -y software-properties-common python-dev python-pip python3-dev
 
 # fancy_echo "Installing Dropbox"
 # Need to update the wget to work
-if ! [ -x "$(command -v dropbox)" ]; then
-    wget -O ~/dropbox-delete/dropbox.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
-    sudo apt install -y ~/dropbox-delete/dropbox.deb && rm -rf ~/dropbox-delete
-fi
+#if ! [ -x "$(command -v dropbox)" ]; then
+#    wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+#    ./.dropbox-dist/dropboxd
+#    rm ./dropbox-dist
+#fi
 
 fancy_echo "Weechat"
 sudo apt install -y weechat

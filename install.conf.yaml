@@ -8,9 +8,6 @@
         force: true
         create: true
         path: vim
-    ~/.config/plasma-workspace:
-        force: true
-        path: plasma-workspace
     ~/.gitconfig:
         create: true
         force: true
