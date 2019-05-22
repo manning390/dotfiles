@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/tali/.oh-my-zsh
+export ZSH=/home/mm/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -58,14 +58,14 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-nvm colored-man-pages git sublime last-working-dir tmux yarn zsh_reload)
+plugins=(colored-man-pages git sublime last-working-dir tmux zsh_reload)
 #  vi-mode # No idication in normal mode
 export NVM_LAZY_LOAD=true
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-DEFAULT_USER=tali
+DEFAULT_USER=mm
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -74,8 +74,6 @@ DEFAULT_USER=tali
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='nvim'
-else
-   export EDITOR='subl'
 fi
 
 # Compilation flags
@@ -92,4 +90,8 @@ export ARCHFLAGS="-arch x86_64"
 # Example aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-path=(~/.perl6/bin /opt/rakudo-pkg/bin /opt/rakudo-pkg/share/perl6/site/bin $path[@])
+export PATH=/usr/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

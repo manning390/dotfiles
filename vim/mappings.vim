@@ -8,6 +8,9 @@ nnoremap , ;
     nnoremap <Leader>vr :e ~/.config/nvim/workrc.vim<CR>
     nnoremap <Leader>vp :e ~/.config/nvim/plugins.vim<CR>
 
+	" CtrlP doesn't index files in .gitignore
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 " Editing
     inoremap ;; <ESC>A;<ESC>
     inoremap ,, <ESC>A,<ESC>
@@ -27,3 +30,7 @@ nnoremap , ;
 " Search
     nmap <silent> <leader>/ :set invhlsearch<CR>
     nmap <silent> <leader><space> :set invhlsearch <CR>
+
+" Comments
+"	nmap <C-/> <Plug>NERDCommenterToggle
+"	vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
