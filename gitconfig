@@ -8,17 +8,16 @@
 	last = log -1
 	unstage = reset HEAD --
 	ca = commit --amend
+	tree=log --all --graph --decorate --oneline
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input
 	pager = less -FMRiX
 	editor = nvim
-[commit]
-	template = ~/.gitmessage
 [fetch]
 	prune = true
 [user]
-	email = michaelmanning390@gmail.com
+	email = michael.manning@xpo.com
 	name = Michael Manning
 [github]
-	user = manning390
+	user = Michael-Manning
