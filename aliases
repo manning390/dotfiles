@@ -1,7 +1,6 @@
 # Unix
 alias tlf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln
-alias xclip="xclip -selection c" # Make xclip work properly
 alias mkdir='mkdir -p' # Always make full path if not exist
 alias ...='../..'
 alias -g G='| grep'
@@ -20,12 +19,16 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias art="php artisan"
 alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
 
+# Git
+alias gpom="git push origin master"
+alias gpod="git push origin development"
+
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
 
 # Navigation
-alias cdcode='cd ~/Documents/code'
-alias cdwiki='cd ~/Dropbox/vimwiki'
+alias cdcode='cd /workspace'
+alias cdwiki='cd ~/vimwiki'
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
