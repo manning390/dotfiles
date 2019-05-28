@@ -54,13 +54,16 @@ ENABLE_CORRECTION="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Plugins
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git sublime last-working-dir tmux zsh_reload)
-#  vi-mode # No idication in normal mode
-export NVM_LAZY_LOAD=true
+plugins=(
+colored-man-pages
+git
+#last-working-dir
+#tmux
+zsh_reload
+fzf
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -71,13 +74,10 @@ DEFAULT_USER=mm
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
-fi
+export EDITOR='nvim'
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+#export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -87,11 +87,18 @@ export ARCHFLAGS="-arch x86_64"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
+# Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+# Scripts
+for f in ~/.scripts/*; do
+	source $f
+done
 
 export PATH=/usr/bin:$PATH
 
+export NVM_LAZY_LOAD=true
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+

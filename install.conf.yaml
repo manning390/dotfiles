@@ -4,6 +4,9 @@
     ~/.aliases:
         force: true
         path: aliases
+    ~/.scripts:
+        force: true
+        path: scripts
     ~/.config/nvim:
         force: true
         create: true
@@ -21,3 +24,7 @@
     ~/.zshrc:
         force: true
         path: zshrc
+    ~/.fzf:
+        force: true
+        path: fzf
+

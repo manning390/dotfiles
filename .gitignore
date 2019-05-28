@@ -2,3 +2,7 @@ __pycache__
 weechat/script/plugins.xml.gz
 weechat/aspell.conf
 bin/php
+fzf
+vim/plugged
+vim/undo
+vim/swap
