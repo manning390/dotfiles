@@ -29,6 +29,7 @@ Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
 Plug 'SirVer/ultisnips' " Snippet engine
+Plug 'rafi/awesome-vim-colorschemes' " color schemes
 
 call plug#end()
 
@@ -66,9 +67,17 @@ let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 " Deoplete settings
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources = {'_': ['ale']} " Use Ale as a source of completion
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete = 1
 
 " Ale settings
-"let g:ale_fixers = {''}
+let g:ale_fixers = {
+	\'vimwiki': 'markdown',
+	\'vim': 'vint',
+	\'zsh': 'sh',
+	\'javascript': ['prettier', 'eslint'],
+	\'css': ['prettier'],
+	\}
 "let g:ale_fix_on_save=1
 "let g:ale_sign_error = '✘'
 "let g:ale_sign_warning = '⚠'

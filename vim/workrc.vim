@@ -7,13 +7,13 @@ runtime! mappings.vim
 	filetype plugin indent on
 	syntax on
 
-	set tabstop=4 " A tab if four spaces
+	set tabstop=2 " A tab is four spaces
+	set softtabstop=2
+	set shiftwidth=2 " number of spaces to use for autoindenting
 	set autoindent " always set autoindenting on
 	set copyindent " copy the previos indentation on autoindenting
-	set noexpandtab " don't convert tabs to spaces (default off)
+	set expandtab " always convert tabs to spaces
 	set preserveindent " preserves original tabs or spaces in use
-	set softtabstop=0
-	set shiftwidth=4 " number of spaces to use for autoindenting
 	set shiftround " use multiple of siftwidth when indenting with '<' and '>'
 
 	let &directory=g:configPath .'/swap//' " set where we're saving swaps
@@ -28,10 +28,13 @@ runtime! mappings.vim
 	set laststatus=2 " Ensures lightline shows up
 	set showtabline=2 " Ensures tabline shows up
 
-" UI
-	set background=dark " used by snow
-	colorscheme snow " color scheme
-	let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
+	set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
+	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
+
+	" UI
+	let g:sierra_Twilight = 1
+	colorscheme sierra " color scheme
+  let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
 	set number " Show line numbers
 	set relativenumber " Relative line numbers
 	set showmatch " show matching parenthesis
