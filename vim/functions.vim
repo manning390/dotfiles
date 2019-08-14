@@ -36,3 +36,21 @@ endfunction
 " https://github.com/ddrscott/vim-side-search
 cabbrev SS SideSearch
 
+command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right'))
+
+
+function! SortFunc()
+" select range to be sorted, then:
+  :g/\v\) \{/,/\v\},/ s/$\n/@@@
+" (Vim expands that to: `:'<,'>g/\v\) \{/,/\v\},/ s/$\n/@@@`
+
+" Then select the lines and:
+  :sort
+" (Vim expands that to: `:'<,'>sort`)
+
+" Then select the lines and split back onto multiple lines again:
+  :s/@@@/\r/g
+" (Vim expands that to: `:'<,'>s/@@@/\r/g`)
+endfunction
+
+cabbrev sub substitute

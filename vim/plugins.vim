@@ -2,7 +2,6 @@ call plug#begin(g:configPath . '/plugged')
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File sidebar
 Plug 'scrooloose/nerdcommenter' " Toggle comments
-Plug 'nightsense/snow' " Color scheme
 Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
 Plug 'itchyny/lightline.vim' " Bottom status bar
 Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
@@ -10,7 +9,7 @@ Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
-Plug 'junegunn/fzf.vim' " Vim integration for previous plugin
+Plug 'manning390/fzf.vim' " Vim integration for previous plugin
 Plug 'tpope/vim-fugitive' " Git integration
 " Autocompletion
 if has('nvim')
@@ -28,9 +27,12 @@ Plug 'markonm/traces.vim' " Adds preview for substitutions
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
-Plug 'SirVer/ultisnips' " Snippet engine
-Plug 'rafi/awesome-vim-colorschemes' " color schemes
+"Plug 'SirVer/ultisnips' " Snippet engine
+Plug 'ryanoasis/vim-devicons'
 
+" Color themes
+Plug 'nightsense/snow' " Color scheme
+Plug 'rafi/awesome-vim-colorschemes' " color schemes
 call plug#end()
 
 "
@@ -88,3 +90,10 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical" " :UltiSnipsEdit splits window
+
+" Fzf
+let g:fzf_layout = { 'down': '~60%' }
+
+" Comments
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1

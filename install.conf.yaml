@@ -11,6 +11,9 @@
         force: true
         create: true
         path: vim
+    /mnt/c/Users/Michael.Manning/.gitconfig:
+      force: true
+      path: gitconfig
     ~/.gitconfig:
         create: true
         force: true

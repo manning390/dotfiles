@@ -8,8 +8,11 @@
 	last = log -1
 	unstage = reset HEAD --
 	ca = commit --amend
+	cp = cherry-pick
 	tree=log --all --graph --decorate --oneline
   mv = "!branchmv() { git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi }; branchmv"
+  clear = "!dumb() { clear; }; dumb"
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input

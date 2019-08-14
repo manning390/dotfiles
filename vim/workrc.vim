@@ -15,6 +15,7 @@ runtime! mappings.vim
 	set expandtab " always convert tabs to spaces
 	set preserveindent " preserves original tabs or spaces in use
 	set shiftround " use multiple of siftwidth when indenting with '<' and '>'
+	set encoding=UTF-8
 
 	let &directory=g:configPath .'/swap//' " set where we're saving swaps
 	let &undodir=g:configPath .'/undo//' " and undos
@@ -32,11 +33,8 @@ runtime! mappings.vim
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
 
 	" UI
-	let g:sierra_Twilight = 1
-	colorscheme sierra " color scheme
-  let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
+	colorscheme OceanicNext " color scheme
 	set number " Show line numbers
-	set relativenumber " Relative line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
 	set title " show title in window
@@ -59,3 +57,5 @@ runtime! mappings.vim
 " Auto commands (run functions/snippets)
 	autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
 	autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+  "autocmd! VimEnter * command! -nargs=* -complete=file Ag :call fzf#vim#ag_raw(<q-args>, fzf#wrap('ag-raw',
+"\ {'options': "--preview 'preview $(cut -d: -f1 <<< {}) 2> /dev/null | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))

@@ -32,7 +32,10 @@ alias cdcode='cd ~/workspace'
 alias cdwiki='cd ~/vimwiki'
 
 alias cat='bat'
+alias py="python3"
 alias ping='prettyping'
+alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
