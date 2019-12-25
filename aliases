@@ -9,8 +9,8 @@ alias -g L=' wc -1'
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-alias irc="weechat"
-alias nord="sudo openpyn"
+# alias irc="weechat"
+# alias nord="sudo openpyn"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="\vim"
@@ -27,8 +27,6 @@ alias gpod="git push origin development"
 alias path="echo $PATH | tr -s ':' '\n'"
 
 # Navigation
-alias cdwork='cd ~/workspace'
-alias cdcode='cd ~/workspace'
 alias cdwiki='cd ~/vimwiki'
 
 alias cat='bat'
