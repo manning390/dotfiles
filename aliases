@@ -36,4 +36,4 @@ alias cat='bat'
 alias root='cd $(git rev-parse --show-cdup)'
 
 # Create a lastpass copy password alias
-#alias cpass='lpass show -c --password -F'
+alias cpass='lpass show -c --password -G'
