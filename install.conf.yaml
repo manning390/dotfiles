@@ -35,3 +35,11 @@
         create: true
         force: true
         path: xinitrc
+    ~/.config/ranger:
+        path: ranger
+    ~/.config/picom:
+      create: true
+      path: picom
+    ~/.config/mpv:
+      create: true
+      path: mpv
