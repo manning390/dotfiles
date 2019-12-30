@@ -27,4 +27,11 @@
     ~/.fzf:
         force: true
         path: fzf
-
+    ~/.config/i3:
+        create: true
+        force: true
+        path: i3
+    ~/.xinitrc:
+        create: true
+        force: true
+        path: xinitrc
