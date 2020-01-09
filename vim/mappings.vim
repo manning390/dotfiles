@@ -11,7 +11,8 @@ nnoremap , ;
   " CtrlP doesn't index files in .gitignore
     map <C-p> :GitFiles<CR>
     "map <C-P> :Commands<CR>
-    nnoremap <leader>yf :let @+ = expand("%")<CR> " copy file path
+    nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file name
+    nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
 
 " Editing
   " Jump to the end of the of a line and insert the character there instead

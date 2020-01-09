@@ -7,6 +7,7 @@ Plug 'itchyny/lightline.vim' " Bottom status bar
 Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
 Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
+Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'} " typescript syntax
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
 Plug 'manning390/fzf.vim' " Vim integration for previous plugin
@@ -19,6 +20,7 @@ else
   	Plug 'roxma/nvim-yarp'
   	Plug 'roxma/vim-hug-neovim-rpc'
 endif
+" Plug 'Shougo/denite.nvim'
 Plug 'ddrscott/vim-side-search' " Adds :SideSearch (SS) using ag
 Plug 'machakann/vim-sandwich' " Adds 'surround' motion (s)
 Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion to
@@ -41,29 +43,29 @@ call plug#end()
 
 " Lightline settings & integrations
 let g:lightline#bufferline#show_number=2 " numbers are ordinal
-"let g:lightline#bufferline#modified='*' " shows file has been modified
+let g:lightline#bufferline#modified='*' " shows file has been modified
 let g:lightline#bufferline#unnamed='[No Name]' " unsaved files are no name
-"let g:lightline#bufferline#number_seperator='|' " seperator between buffer and name
+let g:lightline#bufferline#number_seperator='|' " seperator between buffer and name
 let g:lightline = {}
 let g:lightline.tabline          = {'left': [['buffers']]}
 let g:lightline.component_expand = {
-	\'buffers': 'lightline#bufferline#buffers',
+  \'buffers': 'lightline#bufferline#buffers',
     \'linter_checking': 'lightline#ale#checking',
     \'linter_warnings': 'lightline#ale#warnings',
     \'linter_errors': 'lightline#ale#errors',
     \'linter_ok': 'lightline#ale#ok',
-	\}
+  \}
 let g:lightline.component_type   = {
-	\'buffers': 'tabsel',
+  \'buffers': 'tabsel',
     \'linter_checking': 'left',
     \'linter_warnings': 'warning',
     \'linter_errors': 'error',
     \'linter_ok': 'left',
-	\}
+  \}
 let g:lightline.active = {
-	\'left': [['mode','paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
-	\'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
-	\}
+  \'left': [['mode','paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
+  \'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
+  \}
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 
 " Deoplete settings
@@ -75,14 +77,18 @@ let g:deoplete#auto_complete = 1
 " Ale settings
 let g:ale_fixers = {
 	\'vimwiki': 'markdown',
-	\'vim': 'vint',
+  \'vim': 'vint',
 	\'zsh': 'sh',
 	\'javascript': ['prettier', 'eslint'],
 	\'css': ['prettier'],
-	\}
-"let g:ale_fix_on_save=1
-"let g:ale_sign_error = '✘'
-"let g:ale_sign_warning = '⚠'
+\}
+let g:agle_lint_on_enter = 0
+let g:ale_fix_on_save=1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_completion_tsserver_autoimport = 1
+
+" let g:ale_sign_error = '✘'
+" let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 

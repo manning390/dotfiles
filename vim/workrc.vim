@@ -56,6 +56,6 @@ runtime! mappings.vim
 
 " Auto commands (run functions/snippets)
 	autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
-	autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+	" autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
   "autocmd! VimEnter * command! -nargs=* -complete=file Ag :call fzf#vim#ag_raw(<q-args>, fzf#wrap('ag-raw',
 "\ {'options': "--preview 'preview $(cut -d: -f1 <<< {}) 2> /dev/null | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))

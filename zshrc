@@ -103,3 +103,5 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_OPTS='--bind up:preview-up,down:preview-down'
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
