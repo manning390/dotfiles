@@ -46,7 +46,9 @@ let g:lightline#bufferline#show_number=2 " numbers are ordinal
 let g:lightline#bufferline#modified='*' " shows file has been modified
 let g:lightline#bufferline#unnamed='[No Name]' " unsaved files are no name
 let g:lightline#bufferline#number_seperator='|' " seperator between buffer and name
-let g:lightline = {}
+let g:lightline = {
+    \'colorscheme': 'snow_dark'
+  \}
 let g:lightline.tabline          = {'left': [['buffers']]}
 let g:lightline.component_expand = {
   \'buffers': 'lightline#bufferline#buffers',

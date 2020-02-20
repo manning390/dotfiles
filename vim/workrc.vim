@@ -33,7 +33,8 @@ runtime! mappings.vim
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
 
 	" UI
-	colorscheme OceanicNext " color scheme
+	set background=dark
+	colorscheme snow " color scheme
 	set number " Show line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
