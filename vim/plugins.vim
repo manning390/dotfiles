@@ -26,8 +26,8 @@ Plug 'machakann/vim-sandwich' " Adds 'surround' motion (s)
 Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion to
 Plug 'tpope/vim-eunuch' " Adds various commands
 Plug 'markonm/traces.vim' " Adds preview for substitutions
-Plug 'w0rp/ale' " Asynchronous Lint Engine
-Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
+" Plug 'w0rp/ale' " Asynchronous Lint Engine
+" Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
 "Plug 'SirVer/ultisnips' " Snippet engine
 Plug 'ryanoasis/vim-devicons'
@@ -75,22 +75,22 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_complete = 1
 
 " Ale settings
-let g:ale_fixers = {
-	\'vimwiki': 'markdown',
-  \'vim': 'vint',
-	\'zsh': 'sh',
-	\'javascript': ['prettier', 'eslint'],
-	\'css': ['prettier'],
-\}
-let g:agle_lint_on_enter = 0
-let g:ale_fix_on_save=1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_completion_tsserver_autoimport = 1
+" let g:ale_fixers = {
+	" \'vimwiki': 'markdown',
+  " \'vim': 'vint',
+	" \'zsh': 'sh',
+	" \'javascript': ['prettier', 'eslint'],
+	" \'css': ['prettier'],
+" \}
+" let g:agle_lint_on_enter = 0
+" let g:ale_fix_on_save=1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_completion_tsserver_autoimport = 1
 
 " let g:ale_sign_error = '✘'
 " let g:ale_sign_warning = '⚠'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+" highlight ALEErrorSign ctermbg=NONE ctermfg=red
+" highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " Ultisnips settings
 let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets
