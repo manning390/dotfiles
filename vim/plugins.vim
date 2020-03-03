@@ -88,7 +88,7 @@ let g:ale_fixers = {
   \'scss': ['prettier'],
   \'html': ['prettier'],
 \}
-" let g:agle_lint_on_enter = 0
+let g:agle_lint_on_enter = 0
 let g:ale_fix_on_save=1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_completion_tsserver_autoimport = 1
@@ -104,6 +104,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical" " :UltiSnipsEdit splits window
 
 " Fzf
+let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'up': '~30%' }
 
 " Comments
