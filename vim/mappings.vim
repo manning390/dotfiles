@@ -73,8 +73,8 @@ nnoremap , ;
 
   " Ale jumping
   nmap <silent> gd :ALEGoToDefinition<CR>
-  nmap <silent> gf :ALEFindReferences
-  nmap <silent> gh :ALEHover
+  nmap <silent> gf :ALEFindReferences<CR>
+  nmap <silent> gh :ALEHover<CR>
 
   " Buffer jumping
   nmap <leader>1 <Plug>lightline#bufferline#go(1)
@@ -91,7 +91,7 @@ nnoremap , ;
 " Sidebar
   nmap <leader>kb :NERDTreeToggle<CR>
 
-" Autocomplete
+" Deoplete Autocomplete
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'

@@ -32,10 +32,12 @@ runtime! mappings.vim
 	set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
 
+  set formatoptions-=ro
+
 	" UI
 	set background=dark
 	colorscheme snow " color scheme
-	set number " Show line numbers
+	set number relativenumber " Show line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
 	set title " show title in window
@@ -56,7 +58,18 @@ runtime! mappings.vim
     set smartcase " ignore case if search pattern is all lowercase
 
 " Auto commands (run functions/snippets)
-	autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
+au FileType vim setlocal fo-=cro " Stop comment continuation on new lines and auto wrapping
+
+autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
 	" autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
   "autocmd! VimEnter * command! -nargs=* -complete=file Ag :call fzf#vim#ag_raw(<q-args>, fzf#wrap('ag-raw',
 "\ {'options': "--preview 'preview $(cut -d: -f1 <<< {}) 2> /dev/null | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+
+" Hybrid number lines
+" When in normal mode, relative numbers otherwise normal
+" https://jeffkreeftmeijer.com/vim-number/
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
