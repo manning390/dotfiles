@@ -1,6 +1,8 @@
+" Run other config files
 runtime! functions.vim
 runtime! plugins.vim
 runtime! mappings.vim
+" Run local project last at bottom of page
 
 " General
 	set nocompatible
@@ -36,7 +38,7 @@ runtime! mappings.vim
 
 	" UI
 	set background=dark
-	colorscheme snow " color scheme
+	colorscheme xcodedark " color scheme
 	set number relativenumber " Show line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
@@ -58,12 +60,10 @@ runtime! mappings.vim
     set smartcase " ignore case if search pattern is all lowercase
 
 " Auto commands (run functions/snippets)
-au FileType vim setlocal fo-=cro " Stop comment continuation on new lines and auto wrapping
+autocmd FileType vim setlocal fo-=cro " Stop comment continuation on new lines and auto wrapping
 
-autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
-	" autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
-  "autocmd! VimEnter * command! -nargs=* -complete=file Ag :call fzf#vim#ag_raw(<q-args>, fzf#wrap('ag-raw',
-"\ {'options': "--preview 'preview $(cut -d: -f1 <<< {}) 2> /dev/null | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+" Strip Trialing whitespace after save on every file trim
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 " Hybrid number lines
 " When in normal mode, relative numbers otherwise normal
@@ -73,3 +73,8 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+" Load project specific settings, don't output error
+" Expects vim to always open at root of project
+" Run last incase we want to overwrite anything
+silent! source .vimlocal

@@ -1,3 +1,6 @@
+" Makes %% abbreviation which expands to current buffer path
+cabbr <expr> %% expand('%:p:h')
+
 " Trips whitespace by vim replace
 " Saves cursor position before exec and returns it
 function! StripTrailingWhitespace()
@@ -36,8 +39,12 @@ endfunction
 " https://github.com/ddrscott/vim-side-search
 cabbrev SS SideSearch
 
+" FZF + vim
 command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right'))
-
+" function! FZFRawAg(the_tail, ...)
+    " return call('fzf#vim#grep', extend(['ag ' . a:the_tail, 1], a:000))
+" endfunction
+" command! -nargs=+ -complete=file RAg call FZFRawAg(<q-args>)
 
 function! SortFunc()
 " select range to be sorted, then:

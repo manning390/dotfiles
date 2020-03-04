@@ -14,11 +14,11 @@ Plug 'manning390/fzf.vim' " Vim integration for previous plugin
 Plug 'tpope/vim-fugitive' " Git integration
 " Autocompletion
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete menu
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete menu
 else
-	Plug 'Shougo/deoplete.nvim'
-  	Plug 'roxma/nvim-yarp'
-  	Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 " Plug 'Shougo/denite.nvim'
 Plug 'ddrscott/vim-side-search' " Adds :SideSearch (SS) using ag
@@ -30,11 +30,13 @@ Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
 "Plug 'SirVer/ultisnips' " Snippet engine
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
+Plug 'qpkorr/vim-bufkill'
 
 " Color themes
-Plug 'nightsense/snow' " Color scheme
-Plug 'rafi/awesome-vim-colorschemes' " color schemes
+Plug 'arzg/vim-colors-xcode'
+Plug 'nightsense/snow'
+Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
 
 "
@@ -47,23 +49,23 @@ let g:lightline#bufferline#modified='*' " shows file has been modified
 let g:lightline#bufferline#unnamed='[No Name]' " unsaved files are no name
 let g:lightline#bufferline#number_seperator='|' " seperator between buffer and name
 let g:lightline = {
-    \'colorscheme': 'snow_dark'
-  \}
+    \'colorscheme': 'wombat'
+\}
 let g:lightline.tabline          = {'left': [['buffers']]}
 let g:lightline.component_expand = {
-  \'buffers': 'lightline#bufferline#buffers',
+    \'buffers': 'lightline#bufferline#buffers',
     \'linter_checking': 'lightline#ale#checking',
     \'linter_warnings': 'lightline#ale#warnings',
     \'linter_errors': 'lightline#ale#errors',
     \'linter_ok': 'lightline#ale#ok',
-  \}
+\}
 let g:lightline.component_type   = {
-  \'buffers': 'tabsel',
+    \'buffers': 'tabsel',
     \'linter_checking': 'left',
     \'linter_warnings': 'warning',
     \'linter_errors': 'error',
     \'linter_ok': 'left',
-  \}
+\}
 let g:lightline.active = {
   \'left': [['mode','paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
   \'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
@@ -71,7 +73,8 @@ let g:lightline.active = {
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 
 " Deoplete settings
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
+autocmd InsertEnter * call deoplete#enable() " Run after entering and not when launching
 let g:deoplete#sources = {'_': ['ale']} " Use Ale as a source of completion
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_complete = 1
@@ -89,14 +92,14 @@ let g:ale_fixers = {
   \'html': ['prettier'],
 \}
 let g:agle_lint_on_enter = 0
-let g:ale_fix_on_save=1
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_completion_tsserver_autoimport = 1
 
-" let g:ale_sign_error = '✘'
-" let g:ale_sign_warning = '⚠'
-" highlight ALEErrorSign ctermbg=NONE ctermfg=red
-" highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=red
 
 " Ultisnips settings
 let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets

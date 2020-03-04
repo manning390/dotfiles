@@ -9,7 +9,8 @@ nnoremap , ;
     nnoremap <leader>vp :e ~/.config/nvim/plugins.vim<CR>
 
     " CtrlP doesn't index files in .gitignore
-    map <C-p> :GitFiles<CR>
+    map <C-p> :Files<CR>
+    " map <C-p> :GitFiles<CR>
     " map <C-S-p> :Commands<CR>
     nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file name
     nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
@@ -59,6 +60,9 @@ nnoremap , ;
     nnoremap <leader>b :Buffers<CR>
     nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
+    cnoreabbrev bd BD
+    cnoreabbrev bw BW
+    cnoreabbrev bun BUN
     map <leader>q :bp<bar>bd #<CR> " Close buffer without deleteing pane
 
     " Move around panes
@@ -92,15 +96,28 @@ nnoremap , ;
     nmap <leader>kb :NERDTreeToggle<CR>
 
 " Deoplete Autocomplete
-function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction "}}}
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
+    " When autocomplete triggers, automatically selects first option
+    set completeopt+=noinsert
+    " When enter is pressed within a popup menu, will take the selected option and apply it, otherwise normal CR behavior
+    inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+    " Manually triggering autocomplete, checks if menu is open, and selects next one, else opens the menu
+    inoremap <silent><expr> <C-Space>
+		    \ pumvisible() ? "\<C-n>" :
+		    \ deoplete#manual_complete()
+		call deoplete#custom#option('candidate_marks',
+		      \ ['A', 'S', 'D', 'F', 'G'])
+		inoremap <expr>A       pumvisible() ?
+		\ deoplete#insert_candidate(0) : 'A'
+		inoremap <expr>S       pumvisible() ?
+		\ deoplete#insert_candidate(1) : 'S'
+		inoremap <expr>D       pumvisible() ?
+		\ deoplete#insert_candidate(2) : 'D'
+		inoremap <expr>F       pumvisible() ?
+		\ deoplete#insert_candidate(3) : 'F'
+		inoremap <expr>G       pumvisible() ?
+		\ deoplete#insert_candidate(4) : 'G'
 
 " Comments
-" nmap <C-_> <Plug>NERDCommenterToggle
-" vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+    " Requires terminal support for / or usually mapped to _
+    " nmap <C-_> <Plug>NERDCommenterToggle
+    " vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
