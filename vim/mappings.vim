@@ -11,7 +11,8 @@ nnoremap , ;
   " CtrlP doesn't index files in .gitignore
     map <C-p> :GitFiles<CR>
     "map <C-P> :Commands<CR>
-    nnoremap <leader>yf :let @+ = expand("%")<CR> " copy file path
+    nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file path
+    nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
 
 " Editing
   " Jump to the end of the of a line and insert the character there instead
@@ -30,19 +31,15 @@ nnoremap , ;
     " http://stackoverflow.com/a/8064607/127816
     vnoremap . :normal .<CR>
 
-    " Manual autocomplete trigger
-    inoremap <expr> <C-Space> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
-
     " Swap carat and 0, default behavior on second press
     nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-    nnoremap <silent> , :call ToggleMovement(',', ';')<CR> " Not sure if this works given my leader
     nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
     nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
     nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
     nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
 
     " Fix cursor position on visual yanks
-   vnoremap <expr>y "my\"" . v:register . "y`y"
+    vnoremap <expr>y "my\"" . v:register . "y`y"
 
     " show whitespace
     nnoremap <F5> :set invlist!<CR>
@@ -58,7 +55,11 @@ nnoremap , ;
   nnoremap <leader>b :Buffers<CR>
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
-  map <leader>q :bp<bar>bd #<CR> " Close buffer without deleteing pane
+  " Close buffer without deleteing pane
+  cnoreabbrev bd BD
+  cnoreabbrev bW BW
+  cnoreabbrev bun BUN
+  map <leader>q :bp<bar>bd #<CR>
 
   " Move around panes
   map <C-l> <C-w>l
@@ -90,6 +91,14 @@ nnoremap , ;
 " Sidebar
   nmap <leader>kb :NERDTreeToggle<CR>
 
+" Deoplete Autocomplete
+    " When autocomplete triggers, automatically selects first option
+    set completeopt+=noinsert
+    " When enter is pressed within a popup menu, will take the selected option and apply it, otherwise normal CR behavior
+    inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+    " Manual autocomplete trigger
+    inoremap <silent><expr> <C-Space> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+
 " Comments
-" nmap <C-/> <Plug>NERDCommenterToggle
-" vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
+  nmap <C-_> <Plug>NERDCommenterToggle
+  vmap <C-_> <Plug>NERDCommenterToggle<CR>gv

@@ -15,6 +15,7 @@ runtime! mappings.vim
 	set expandtab " always convert tabs to spaces
 	set preserveindent " preserves original tabs or spaces in use
 	set shiftround " use multiple of siftwidth when indenting with '<' and '>'
+	set encoding=UTF-8
 
 	let &directory=g:configPath .'/swap//' " set where we're saving swaps
 	let &undodir=g:configPath .'/undo//' " and undos
@@ -31,12 +32,13 @@ runtime! mappings.vim
 	set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
 
+  set formatoptions-=ro
+
 	" UI
 	let g:sierra_Twilight = 1
 	colorscheme sierra " color scheme
   let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
-	set number " Show line numbers
-	set relativenumber " Relative line numbers
+	set number relativenumber " Show line numbers Relative line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
 	set title " show title in window
@@ -56,6 +58,24 @@ runtime! mappings.vim
     set ignorecase " ignore case when searching
     set smartcase " ignore case if search pattern is all lowercase
 
+
 " Auto commands (run functions/snippets)
+  autocmd FileType vim setlocal fo-=cro " Stop comment continuation on new lines and autowrapping
+
+  " Strip trailing whitespace after save on every file
 	autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
 	autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+  " Hybrid number lines
+  " When in normal mode, relative numbers otherwise normal
+  " https://jeffkreeftmeijer.com/vim-number/
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  augroup END
+
+  " Load project specific settings, don't output error
+  " Expects vim to always open at root of project
+  " Run last incase we want to overwrite anything
+  silent! source .vimlocal

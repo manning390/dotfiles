@@ -43,3 +43,7 @@
     ~/.config/mpv:
       create: true
       path: mpv
+    ~/.Xresources:
+      path: Xresources/Xresources
+    ~/.config/rofi:
+      path: rofi

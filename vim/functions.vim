@@ -1,3 +1,6 @@
+" Makes %% abbreviation which expands to current buffer path
+cabbrev <expr> %% expand('%:p:h')
+
 " Trips whitespace by vim replace
 " Saves cursor position before exec and returns it
 function! StripTrailingWhitespace()
@@ -36,3 +39,8 @@ endfunction
 " https://github.com/ddrscott/vim-side-search
 cabbrev SS SideSearch
 
+" FZF + vim
+command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right'))
+
+" Make substitute something I can remember
+cabbrev sub substitute

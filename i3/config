@@ -1,12 +1,19 @@
-# (No) Title Bars
-for_window [class="^.*"] border pixel 0
+#########################################
+#  _ _____                              #
+# (_)___ /        __ _  __ _ _ __  ___  #
+# | | |_ \ _____ / _` |/ _` | '_ \/ __| #
+# | |___) |_____| (_| | (_| | |_) \__ \ #
+# |_|____/       \__, |\__,_| .__/|___/ #
+#                |___/      |_|         #
+#                                       #
+#########################################
 
-# Gaps
-gaps inner 10
-gaps outer 0
-smart_gaps on
+# Mod key
+# Mod4 = windows
+set $mod Mod4
 
-# Font
+# Font fot window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
 font pango:Fira Code 8
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
@@ -18,27 +25,7 @@ font pango:Fira Code 8
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Focused Window screenshot
-bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $mod Mod4
-
-set $up k
-set $down j
-set $left h
-set $right l
+exec --no-startup-id nm-applet
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -47,20 +34,20 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+c kill
+bindsym $mod+q kill
+bindsym $mod+c kill
 
-# close i3
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3msg exit'"
+# Start rofi (a program launcher)
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+Shift+return exec rofi -show drun
+bindsym $mod+Shift+d exec rofi -show run
 
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec ulauncher
-bindsym $mod+Shift+Return exec ulauncher
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# Use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up k
+set $down j
+set $left h
+set $right l
 
 # change focus
 bindsym $mod+$left focus left
@@ -117,7 +104,7 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+#bindsym $mod+minus scratchpad show
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -131,6 +118,17 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -157,11 +155,13 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
+bindsym $mod+Shift+u reload
 bindsym $mod+z reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec xset dpms force suspend
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -196,5 +196,41 @@ bar {
         status_command i3status --config ~/.config/i3/i3status.conf
 }
 
-# Autostart up
-exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/Wallpaper/wallpaper.jpg
+# Picom (compton fork)
+#exec --no-starup-id picom --config ~/.config/picom/picom.conf #--blur-method kawase --blur-strength 10
+#bindsym $mod+p exec kill $(pidof picom)
+#bindsym $mod+Shift+p exec picom --config ~/.config/picom/picom.conf #--blur-method kawase --blur-strength 10
+
+# Autostart
+#exec --no-startup-id dropbox
+exec --no-startup-id nitrogen --restore
+
+# Audio keybindings
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Screenshots (selection, focused, whole screen)
+bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Mod1+Print --release exec "scrot -u /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+
+# assign programs to workspaces
+assign [class="Spotify"] $ws9
+assign [class="(?i)Steam"] $ws10
+
+# floating settings
+for_window [class="mpv"] floating enable
+for_window [class="calculator"] floating enable
+for_window [window_role="pop-up"] floating enable
+
+# i3 Gaps
+for_window [class="^.*"] border pixel 1
+gaps inner 8
+gaps outer 0
+smart_gaps on
+# Requires AUR i3-gaps-rounded-git currently merge on hold due to i3 vs i3-gaps merge
+#border_radius 5
+

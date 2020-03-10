@@ -2,7 +2,6 @@ call plug#begin(g:configPath . '/plugged')
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File sidebar
 Plug 'scrooloose/nerdcommenter' " Toggle comments
-Plug 'nightsense/snow' " Color scheme
 Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
 Plug 'itchyny/lightline.vim' " Bottom status bar
 Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
@@ -10,15 +9,15 @@ Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
-Plug 'junegunn/fzf.vim' " Vim integration for previous plugin
+Plug 'manning390/fzf.vim' " Vim integration for previous plugin, forked for customizations
 Plug 'tpope/vim-fugitive' " Git integration
 " Autocompletion
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
 	Plug 'Shougo/deoplete.nvim'
-  	Plug 'roxma/nvim-yarp'
-  	Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'ddrscott/vim-side-search' " Adds :SideSearch (SS) using ag
 Plug 'machakann/vim-sandwich' " Adds 'surround' motion (s)
@@ -28,8 +27,12 @@ Plug 'markonm/traces.vim' " Adds preview for substitutions
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
-Plug 'SirVer/ultisnips' " Snippet engine
+" Plug 'SirVer/ultisnips' " Snippet engine
+Plug 'qpkorr/vim-bufkill'
+
+" Color themes
 Plug 'rafi/awesome-vim-colorschemes' " color schemes
+Plug 'nightsense/snow' " Color scheme
 
 call plug#end()
 
@@ -65,7 +68,8 @@ let g:lightline.active = {
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 
 " Deoplete settings
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
+autocmd InsertEnter * call deoplete#enable() " run after entering and now hen launching
 let g:deoplete#sources = {'_': ['ale']} " Use Ale as a source of completion
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_complete = 1
@@ -78,9 +82,11 @@ let g:ale_fixers = {
 	\'javascript': ['prettier', 'eslint'],
 	\'css': ['prettier'],
 	\}
-"let g:ale_fix_on_save=1
-"let g:ale_sign_error = '✘'
-"let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_enter=0
+let g:ale_fix_on_save=1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
@@ -88,3 +94,11 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical" " :UltiSnipsEdit splits window
+
+" Fzf
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'up': '~30%' }
+
+" Comments
+let NERDSpaceDelims=1
+let NERDSpaceEmptyLines=1
