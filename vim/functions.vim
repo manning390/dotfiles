@@ -5,8 +5,8 @@ cabbrev <expr> %% expand('%:p:h')
 " Saves cursor position before exec and returns it
 function! StripTrailingWhitespace()
     let _s=@/ " Preparation: save last search, and cursor position
-    let l = line(".")
-    let c = col(".")
+    let l = line('.')
+    let c = col('.')
     " do the business:
     %s/\s\+$//e
     let @/=_s
@@ -29,18 +29,23 @@ command! Whitespace :set invlist!<CR>
 " does a the second arg
 function! ToggleMovement(firstOp, thenOp)
     let pos = getpos('.')
-    execute "normal! " . a:firstOp
+    execute 'normal! ' . a:firstOp
     if pos == getpos('.')
-        execute "normal! " . a:thenOp
+        execute 'normal! ' . a:thenOp
     endif
 endfunction
-
-" Maps SS to SideSearch
-" https://github.com/ddrscott/vim-side-search
-cabbrev SS SideSearch
 
 " FZF + vim
 command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right'))
 
 " Make substitute something I can remember
 cabbrev sub substitute
+
+" Shortcut to plugin configurations
+command! -nargs=1 PlugConfig execute  ':e ~/.config/nvim/plug-config/'. <q-args> .'.vim'
+
+" Tells us if we're in a git tree, helpful for specific mappings
+function! IsInGitTree()
+    silent! !git rev-parse --is-inside-work-tree
+    return v:shell_error == 0
+endfunction

@@ -60,12 +60,12 @@ ENABLE_CORRECTION="true"
 # Plugins
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
+zsh_reload # zshrc opens this file, src reloads it
 colored-man-pages
-git
-#last-working-dir
-#tmux
-zsh_reload
+last-working-dir
+tmux # Adds aliases to tmux
 fzf
+archlinux # Adds alias to package installers
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -77,10 +77,16 @@ DEFAULT_USER=rail
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+export ZSH_TMUX_AUTOSTART_ONCE=true
+export ZSH_TMUX_AUTOCONNECT=true
+export ZSH_TMUX_AUTOQUIT=true
+export ZSH_TMUX_FIXTERM=true
+
 export EDITOR='nvim'
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
+export HISTCONTROL=ignorespace
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -92,12 +98,14 @@ export ARCHFLAGS="-arch x86_64"
 #
 # Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+
 # Scripts
 for f in ~/.scripts/*; do
-	source $f
+  source $f
 done
 
-export PATH=/usr/bin:$PATH
+export PATH=/usr/bin:~/.local/bin:$PATH
+
 
 export NVM_LAZY_LOAD=true
 export NVM_DIR="$HOME/.nvm"
@@ -105,3 +113,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

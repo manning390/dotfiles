@@ -1,16 +1,19 @@
+" Leader
 let mapleader = ';'
+nnoremap , ; " Set original ; to , because it's useful
 
-nnoremap , ;
+" Config navigation hotkeys
+    nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR> " Custom functions and commands
+    nnoremap <leader>vm :e ~/.config/nvim/mappings.vim<CR> " Keymappings
+    nnoremap <leader>vr :e ~/.config/nvim/general.vim<CR> " General Settings
+    nnoremap <leader>vp :e ~/.config/nvim/plugins.vim<CR> " Plugin installation
+    nnoremap <leader>vl :e .vimlocal.vim<CR> " Local configs
+    nnoremap <leader>vc :PlugConfig<SPACE>
 
 " Files
-    nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR>
-    nnoremap <leader>vm :e ~/.config/nvim/mappings.vim<CR>
-    nnoremap <leader>vr :e ~/.config/nvim/workrc.vim<CR>
-    nnoremap <leader>vp :e ~/.config/nvim/plugins.vim<CR>
-
   " CtrlP doesn't index files in .gitignore
-    map <C-p> :GitFiles<CR>
-    "map <C-P> :Commands<CR>
+    map <expr> <C-p> IsInGitTree()? ':GitFiles<CR>':':Files<CR>'
+    map <C-S-e> :Commands<CR>
     nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file path
     nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
 
@@ -18,7 +21,7 @@ nnoremap , ;
   " Jump to the end of the of a line and insert the character there instead
     inoremap ;; <ESC>A;<ESC>
     inoremap ,, <ESC>A,<ESC>
-    inoremap ::: <ESC>A:<ESC>
+    " inoremap ::: <ESC>A:<ESC>
 
     " make Y yank till end of line
     nnoremap Y y$
@@ -45,11 +48,11 @@ nnoremap , ;
     nnoremap <F5> :set invlist!<CR>
 
 " Search
+  " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
   nmap <silent> <leader><space> :noh<CR>
-  nnoremap <silent> <Esc><Esc> <Esc>:noh<CR>
-
-  nnoremap <leader>ss :SideSearch <C-R><C-w><CR> | wincmd p
+  nmap <silent> <Esc><space> :noh<CR>
+  nmap <silent> <Esc><Esc> :noh<CR>
 
 " Navigation
   nnoremap <leader>b :Buffers<CR>
@@ -102,3 +105,12 @@ nnoremap , ;
 " Comments
   nmap <C-_> <Plug>NERDCommenterToggle
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+
+" Undotree
+  nnoremap <F6> :UndotreeToggle<CR>
+
+" C++ bindings
+augroup cppbindings
+  autocmd! cppbindings
+  autocmd Filetype cpp map <F4> :call CurtineIncSw()<CR>
+augroup end

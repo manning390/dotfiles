@@ -1,3 +1,3 @@
 let g:configPath=$HOME.'/.config/nvim'
 
-runtime! workrc.vim
+runtime! general.vim

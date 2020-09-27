@@ -3,11 +3,13 @@ alias tlf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln
 alias mkdir='mkdir -p' # Always make full path if not exist
 alias ...='../..'
-alias -g G='| grep'
-alias -g M='| less'
-alias -g L=' wc -1'
+#alias -g G='| grep'
+#alias -g M='| less'
+#alias -g L=' wc -1'
 alias e="$EDITOR"
 alias v="$VISUAL"
+
+alias fixesc="setxkbmap -option caps:escape"
 
 # alias irc="weechat"
 # alias nord="sudo openpyn"
@@ -41,3 +43,11 @@ alias cpass='lpass show -c --password -G'
 alias nord='nordvpn'
 
 alias sound='ncpamixer'
+
+# Swallowing on these apps
+alias zathura="devour zathura"
+alias evince="devour evince"
+alias pdf="evince"
+
+alias md="devour grip $1"
+alias vbam="devour visualboyadvance-m"
