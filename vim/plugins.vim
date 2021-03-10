@@ -2,7 +2,6 @@ call plug#begin(g:configPath . '/plugged')
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File sidebar
 Plug 'scrooloose/nerdcommenter' " Toggle comments
-Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
 Plug 'itchyny/lightline.vim' " Bottom status bar
 Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
 Plug 'mattn/emmet-vim' " HTML emmet
@@ -26,26 +25,14 @@ Plug 'markonm/traces.vim' " Adds preview for substitutions
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
-" Plug 'SirVer/ultisnips' " Snippet engine
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-utils/vim-man' " View man pages in vim
 Plug 'mbbill/undotree'
+Plug 'easymotion/vim-easymotion' " Jump to target
 
 " Color themes
 Plug 'rafi/awesome-vim-colorschemes' " color schemes
 Plug 'nightsense/snow' " Color scheme
-
-" C/C++
-Plug 'ericcurtin/CurtineIncSw.vim' " Switch between .c and .h buffers
-
-" Writing
-Plug 'junegunn/goyo.vim' " Distraction free mode
-Plug 'reedes/vim-pencil'
-Plug 'dbmrq/vim-ditto'
-Plug 'reedes/vim-litecorrect'
-Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-textobj-sentence'
-Plug 'reedes/vim-wordy'
 
 call plug#end()
 
@@ -57,13 +44,7 @@ runtime! plug-config/lightline.vim
 runtime! plug-config/deoplete.vim
 runtime! plug-config/ale.vim
 runtime! plug-config/fzf.vim
+runtime! plug-config/easymotion.vim
+runtime! plug-config/nerdcommenter.vim
 
-" Ultisnips settings
-" let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsEditSplit="vertical" " :UltiSnipsEdit splits window
-
-" Comments
-let NERDSpaceDelims=1
-let NERDSpaceEmptyLines=1
 

@@ -2,34 +2,37 @@
 alias tlf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln
 alias mkdir='mkdir -p' # Always make full path if not exist
-alias ...='../..'
+alias ...='cd ../..'
+alias ..='cd ..'
+alias ll=ls -l
+alias la=ls -a
 #alias -g G='| grep'
 #alias -g M='| less'
 #alias -g L=' wc -1'
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-alias fixesc="setxkbmap -option caps:escape"
-
-# alias irc="weechat"
-# alias nord="sudo openpyn"
+# Vim
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="\vim"
-alias zshrc="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias art="php artisan"
-alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
 
-# Git
-alias gpom="git push origin master"
-alias gpod="git push origin development"
+alias zshrc="vim ~/.zshrc"
+
+alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
+alias spacewhat="echo '? — untracked changes
++ — uncommitted changes in the index
+! — unstaged changes
+» — renamed files
+✘ — deleted files
+$ — stashed changes
+= — unmerged changes
+⇡ — ahead of remote branch
+⇣ — behind of remote branch
+⇕ — diverged changes'"
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
-
-# Navigation
-# alias cdwiki='cd ~/vimwiki'
 
 alias cat='bat'
 # alias ping='prettyping'
@@ -37,17 +40,4 @@ alias cat='bat'
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
-# Create a lastpass copy password alias
-alias cpass='lpass show -c --password -G'
-
-alias nord='nordvpn'
-
-alias sound='ncpamixer'
-
-# Swallowing on these apps
-alias zathura="devour zathura"
-alias evince="devour evince"
-alias pdf="evince"
-
-alias md="devour grip $1"
-alias vbam="devour visualboyadvance-m"
+alias work='cd ~/Workspace'

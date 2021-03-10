@@ -71,8 +71,8 @@ nnoremap , ; " Set original ; to , because it's useful
   map <C-k> <C-w>k
 
   " Previous and next buffer
-  noremap <A-k> :bp<CR>
-  noremap <A-j> :bn<CR>
+  noremap <C-k> :bp<CR>
+  noremap <C-j> :bn<CR>
 
   " Ale jumping
   nmap <silent> gd :ALEGoToDefinition<CR>

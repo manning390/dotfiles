@@ -24,26 +24,3 @@
     ~/.zshrc:
         force: true
         path: zshrc
-    ~/.fzf:
-        force: true
-        path: fzf
-    ~/.config/i3:
-        create: true
-        force: true
-        path: i3
-    ~/.xinitrc:
-        create: true
-        force: true
-        path: xinitrc
-    ~/.config/ranger:
-        path: ranger
-    ~/.config/picom:
-      create: true
-      path: picom
-    ~/.config/mpv:
-      create: true
-      path: mpv
-    ~/.Xresources:
-      path: Xresources/Xresources
-    ~/.config/rofi:
-      path: rofi
