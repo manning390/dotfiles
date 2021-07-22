@@ -19,6 +19,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Load Git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+# And just better compeletion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 fpath=(~/.zsh $fpath)
 
 autoload -Uz compinit && compinit

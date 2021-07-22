@@ -43,5 +43,5 @@ alias ping='prettyping'
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
-alias work='cd ~/Workspace/platform/server'
+alias work='cd ~/workspace/platform/server'
 alias chrome='open -a "Google Chrome"'
