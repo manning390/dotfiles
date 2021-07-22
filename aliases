@@ -4,8 +4,10 @@ alias ln='ln -v' # More verbose ln
 alias mkdir='mkdir -p' # Always make full path if not exist
 alias ...='cd ../..'
 alias ..='cd ..'
-alias ll=ls -l
-alias la=ls -a
+alias l=ls
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
 #alias -g G='| grep'
 #alias -g M='| less'
 #alias -g L=' wc -1'
@@ -20,24 +22,26 @@ alias oldvim="\vim"
 alias zshrc="vim ~/.zshrc"
 
 alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
-alias spacewhat="echo '? — untracked changes
-+ — uncommitted changes in the index
-! — unstaged changes
-» — renamed files
-✘ — deleted files
-$ — stashed changes
-= — unmerged changes
-⇡ — ahead of remote branch
-⇣ — behind of remote branch
-⇕ — diverged changes'"
+alias git\?="echo ' ? — untracked changes
+ + — uncommitted changes in the index
+ ! — unstaged changes
+ » — renamed files
+ ✘ — deleted files
+ $ — stashed changes
+ = — unmerged changes
+ ⇡ — ahead of remote branch
+ ⇣ — behind of remote branch
+ ⇕ — diverged changes'"
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
 
+alias t='tree'
 alias cat='bat'
-# alias ping='prettyping'
+alias ping='prettyping'
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
-alias work='cd ~/Workspace'
+alias work='cd ~/Workspace/platform/server'
+alias chrome='open -a "Google Chrome"'

@@ -1,10 +1,12 @@
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" Jump to anyuwhere you want wiht minimal keystrokes, with one keybinding
-" Can optionally make it two bindings
-nmap s <Plug>(easymotion-overwin-f)
+" Jump to anywhere you want wiht minimal keystrokes, with one keybinding
 
-" nmap s <Plug>(easymotion-overwin-f2) " Two keystroke jump
+" One keystroke jump
+" nmap s <Plug>(easymotion-overwin-f)
+
+" Two keystroke jump
+nmap s <Plug>(easymotion-overwin-f2)
 
 " Case-insensitive
 let g:EasyMotion_smarcase = 1

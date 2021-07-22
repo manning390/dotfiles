@@ -13,7 +13,7 @@ function fold {
 # Requires:
 # sudo apt install wamerican
 function spell {
-	cat /usr/share/dict/words | fzf --preview 'wn {} -over | fold' --preview-window=up:60%
+	\cat ~/.dotfiles/wordnet.txt | fzf --preview 'wn {} -over | fold' --preview-window=up:60%
 }
 
 # Lookup definition of word using `wn $q -over`

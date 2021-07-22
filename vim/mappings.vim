@@ -1,6 +1,14 @@
 " Leader
-let mapleader = ';'
-nnoremap , ; " Set original ; to , because it's useful
+  if g:colemak_dhm_automap
+    let mapleader = "'"
+    nnoremap ' <NOP>
+  else
+    let mapleader = ';'
+    nnoremap , ; " Set original ; to , because it's useful
+  endif
+  let maplocalleader = '\'
+  map <space> \
+  echom 'Leader is: ' . mapleader
 
 " Config navigation hotkeys
     nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR> " Custom functions and commands
@@ -36,8 +44,8 @@ nnoremap , ; " Set original ; to , because it's useful
 
     " Swap carat and 0, default behavior on second press
     nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-    nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
-    nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
+"    nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
+"    nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
     nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
     nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
 
@@ -47,11 +55,14 @@ nnoremap , ; " Set original ; to , because it's useful
     " show whitespace
     nnoremap <F5> :set invlist!<CR>
 
+    " custom case toggling
+    nnoremap <silent> ~ :silent call CustomCaseToggle()<CR>
+
 " Search
   " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
-  nmap <silent> <leader><space> :noh<CR>
-  nmap <silent> <Esc><space> :noh<CR>
+  " nmap <silent> <leader><space> :noh<CR>
+  " nmap <silent> <Esc><space> :noh<CR>
   nmap <silent> <Esc><Esc> :noh<CR>
 
 " Navigation
@@ -59,25 +70,38 @@ nnoremap , ; " Set original ; to , because it's useful
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
   " Close buffer without deleteing pane
-  cnoreabbrev bd BD
-  cnoreabbrev bW BW
-  cnoreabbrev bun BUN
+  " cnoreabbrev bd BD
+  " cnoreabbrev bW BW
+  " cnoreabbrev bun BUN
   map <leader>q :bp<bar>bd #<CR>
 
   " Move around panes
-  map <C-l> <C-w>l
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
+  execute 'map <C-'.g:left.'> <C-w>h'
+  execute 'map <C-'.g:right.'> <C-w>l'
+  execute 'map <C-'.g:down.'> <C-w>j'
+  execute 'map <C-'.g:up.'> <C-w>k'
+
+  " Quickfix lists
+  execute 'nnoremap <silent>g'.g:next.' :cnext<CR>'
+  execute 'nnoremap <silent>g'.g:previous.' :cprevious<CR>'
+  nnoremap <silent>gq :cclose<CR>
 
   " Previous and next buffer
-  noremap <C-k> :bp<CR>
-  noremap <C-j> :bn<CR>
+  execute 'noremap <A-'.g:up.'> :bp<CR>'
+  execute 'noremap <A-'.g:down.'> :bn<CR>'
+
+  " Fold jumping
+  execute "nnoremap <silent> <leader>z".g:down." :call NextClosedFold('j')<CR>"
+  execute "nnoremap <silent> <leader>z".g:up." :call NextClosedFold('k')<CR>"
 
   " Ale jumping
-  nmap <silent> gd :ALEGoToDefinition<CR>
-  nmap <silent> gf :ALEFindReferences
-  nmap <silent> gh :ALEHover
+  " nmap <silent>gd :ALEGoToDefinition<CR>
+  " nmap <silent>gf :ALEFindReferences<CR>
+  " nmap <silent>gh :ALEHover<CR>
+  nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
+  nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
+  nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
+  nmap <silent>gk <cmd>lua vim.lsp.buf.hover()<CR>
 
   " Buffer jumping
   nmap <leader>1 <Plug>lightline#bufferline#go(1)
@@ -95,22 +119,31 @@ nnoremap , ; " Set original ; to , because it's useful
   nmap <leader>kb :NERDTreeToggle<CR>
 
 " Deoplete Autocomplete
-    " When autocomplete triggers, automatically selects first option
-    set completeopt+=noinsert
     " When enter is pressed within a popup menu, will take the selected option and apply it, otherwise normal CR behavior
     inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
     " Manual autocomplete trigger
-    inoremap <silent><expr> <C-Space> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+    inoremap <silent><expr> <C-Space> pumvisible() ? "\<C-n>" : deoplete#manual_complete()
 
 " Comments
-  nmap <C-_> <Plug>NERDCommenterToggle
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " Undotree
   nnoremap <F6> :UndotreeToggle<CR>
 
+augroup nohonopen
+  au!
+  autocmd Filetype * :noh
+augroup end
+" Clj bindings
+augroup cljbindings
+  au!
+  autocmd Filetype clj
+    \  nnoremap <leader>( :RainbowParenthesesToggle<CR>
+    \| call RainbowToggleOn
+augroup end
+
 " C++ bindings
 augroup cppbindings
-  autocmd! cppbindings
+  au!
   autocmd Filetype cpp map <F4> :call CurtineIncSw()<CR>
 augroup end

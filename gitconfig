@@ -1,5 +1,7 @@
 [push]
 	default = current
+[pull]
+	rebase = false
 [alias]
 	st = status
 	ci = commit
@@ -9,7 +11,10 @@
 	unstage = reset HEAD --
 	ca = commit --amend
 	tree=log --all --graph --decorate --oneline
-    mv = "!branchmv() { git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi }; branchmv"
+  mv = "!branchmv() { git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi }; branchmv"
+  clear = "!stupid(){clear; echo 'Good job.'}; stupid"
+	yeet = !git add . && git commit
+	yolo = !git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\"  && git push origin HEAD -f
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input
@@ -20,3 +25,8 @@
 [user]
 	email = michael@teachbanzai.com
 	name = Michael Manning
+[url "ssh://git@github"]
+	insteadoOf = https://github.com
+[github]
+	user = manning390
+
