@@ -42,41 +42,5 @@ command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>,
 cabbrev sub substitute
 
 " Shortcut to plugin configurations
-command! -nargs=1 -complete=customlist,ListPlugConfigs PlugConfig execute ':e ~/.config/nvim/plug-config/'. <q-args> .'.vim'
-function! ListPlugConfigs(A,L,P)
-    return map(globpath('~/.config/nvim/plug-config/', '**'.a:A.'*.vim', 0, 1), "fnamemodify(v:val, ':t:r')")
-endfunction
+command! -nargs=1 PlugConfig execute  ':e ~/.config/nvim/plug-config/'. <q-args> .'.vim'
 
-" Tells us if we're in a git tree, helpful for specific mappings
-function! IsInGitTree()
-    silent! !git rev-parse --is-inside-work-tree
-    return v:shell_error == 0
-endfunction
-
-" Simply lets you jump to the nearest fold, uses jk chars for direction
-function! NextClosedFold(dir)
-    let cmd = 'norm!z' . a:dir
-    let view = winsaveview()
-    let [l0, l, open] = [0, view.lnum, 1]
-    while l != l0 && open
-        exe cmd
-        let [l0, l] = [l, line('.')]
-        let open = foldclosed(l) < 0
-    endwhile
-    if open
-        call winrestview(view)
-    endif
-endfunction
-
-function! CustomCaseToggle()
-    let char = getline('.')[col('.') - 1]
-    if char == '-'
-        normal! "_r_
-        normal! l
-    elseif char == '_'
-        normal! "_r-
-        normal! l
-    else
-        normal! ~
-    endif
-endfunction

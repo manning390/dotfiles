@@ -1,4 +1,5 @@
 #########################################
+#
 #  _ _____                              #
 # (_)___ /        __ _  __ _ _ __  ___  #
 # | | |_ \ _____ / _` |/ _` | '_ \/ __| #
@@ -44,10 +45,10 @@ bindsym $mod+Shift+d exec rofi -show run
 
 # Use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up k
-set $down j
-set $left h
-set $right l
+set $up e
+set $down n
+set $left m
+set $right i
 
 # change focus
 bindsym $mod+$left focus left
@@ -80,12 +81,12 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+t fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+f layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -225,6 +226,8 @@ for_window [class="mpv"] floating enable
 for_window [class="calculator"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [title="Main Window"] floating enable
+for_window [instance="Godot_Editor"] floating disable
+for_window [instance="Godot_Engine"] floating enable
 
 # i3 Gaps
 for_window [class="^.*"] border pixel 1

@@ -1,4 +1,5 @@
 call plug#begin(g:configPath . '/plugged')
+Plug 'manning390/vim-colemak-DHm' " Colemak keyboard support
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File sidebar
 Plug 'scrooloose/nerdcommenter' " Toggle comments
@@ -12,6 +13,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuz
 Plug 'manning390/fzf.vim' " Vim integration for previous plugin, forked for customizations
 Plug 'tpope/vim-fugitive' " Git integration
 " Autocompletion
+Plug 'neovim/nvim-lspconfig' " Native lsp
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -19,17 +21,19 @@ else
 	Plug 'roxma/nvim-yarp'
 	Plug 'roxma/vim-hug-neovim-rpc'
 endif
-" Plug 'machakann/vim-sandwich' " Adds 'surround' motion (s)
+Plug 'deoplete-plugins/deoplete-lsp' " Native LSP integration into autocomplete
+Plug 'ncm2/float-preview.nvim'
 Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion
 Plug 'tpope/vim-eunuch' " Adds various commands
 Plug 'markonm/traces.vim' " Adds preview for substitutions
-Plug 'dense-analysis/ale'
-Plug 'maximbaz/lightline-ale' " Error indicators from ale with lightline
 Plug 'airblade/vim-gitgutter' " Git gutters
-" Plug 'SirVer/ultisnips' " Snippet engine
-Plug 'qpkorr/vim-bufkill'
+Plug 'qpkorr/vim-bufkill' " Close buffers without warnings
 Plug 'vim-utils/vim-man' " View man pages in vim
 Plug 'mbbill/undotree'
+Plug 'easymotion/vim-easymotion' " Jump to letters
+
+" Godot
+Plug 'habamax/vim-godot'
 
 " Color themes
 Plug 'rafi/awesome-vim-colorschemes' " color schemes
@@ -40,30 +44,24 @@ Plug 'ericcurtin/CurtineIncSw.vim' " Switch between .c and .h buffers
 
 " Writing
 Plug 'junegunn/goyo.vim' " Distraction free mode
-Plug 'reedes/vim-pencil'
-Plug 'dbmrq/vim-ditto'
-Plug 'reedes/vim-litecorrect'
-Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-textobj-sentence'
+Plug 'junegunn/limelight.vim' " Highlight current paragraph, useful in goyo
+Plug 'reedes/vim-pencil' " Better word wrapping for writing
+Plug 'dbmrq/vim-ditto' " Highlight repeated words
+Plug 'reedes/vim-litecorrect' " Slightly autocorrect words, liek tihs
+Plug 'reedes/vim-lexical' " Better spell check
 Plug 'reedes/vim-wordy'
-
 call plug#end()
 
 "
 " Plugin configurations
 "
+runtime! plug-config/colemakdhm.vim
 runtime! plug-config/vimwiki.vim
 runtime! plug-config/lightline.vim
 runtime! plug-config/deoplete.vim
-runtime! plug-config/ale.vim
+runtime! plug-config/lsp.vim
+runtime! plug-config/preview.vim
 runtime! plug-config/fzf.vim
-
-" Ultisnips settings
-" let g:UltiSnipsSnippetsDir=g:configPath.'/snips//' " set where we're saving snippets
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsEditSplit="vertical" " :UltiSnipsEdit splits window
-
-" Comments
-let NERDSpaceDelims=1
-let NERDSpaceEmptyLines=1
+runtime! plug-config/easymotion.vim
+runtime! plug-config/nerdcommenter.vim
 

@@ -4,7 +4,7 @@
 # Executed by startx
 #
 
-setxkbmap -option caps:escape
+# [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap && export KEYBOARD=colemak
 
 numlockx &
 

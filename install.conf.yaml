@@ -47,3 +47,9 @@
       path: Xresources/Xresources
     ~/.config/rofi:
       path: rofi
+    ~/.config/kitty:
+        force: true
+        path: kitty
+    ~/.profile:
+        force: true
+        path: profile

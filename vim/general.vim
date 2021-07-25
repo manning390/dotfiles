@@ -21,7 +21,6 @@ runtime! mappings.vim
 	scriptencoding UTF-8
 
 	let &directory=g:configPath .'/swap//' " set where we're saving swaps
-    set noswapfile " that said, don't make swaps
     set undofile
 	let &undodir=g:configPath .'/undo//' " and undos
 
