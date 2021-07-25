@@ -5,6 +5,8 @@ lspconfig.clojure_lsp.setup{
 }
 lspconfig.tsserver.setup{}
 lspconfig.vimls.setup{}
-lspconfig.gdscript.setup{}
+lspconfig.gdscript.setup{
+    cmd = {"ncat", "localhost", "6008"}
+}
 -- lspconfig.phpactor.setup{} -- Requires installation https://phpactor.readthedocs.io/en/master/usage/standalone.html#global-installation
 EOF

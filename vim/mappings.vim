@@ -94,10 +94,7 @@
   execute "nnoremap <silent> <leader>z".g:down." :call NextClosedFold('j')<CR>"
   execute "nnoremap <silent> <leader>z".g:up." :call NextClosedFold('k')<CR>"
 
-  " Ale jumping
-  " nmap <silent>gd :ALEGoToDefinition<CR>
-  " nmap <silent>gf :ALEFindReferences<CR>
-  " nmap <silent>gh :ALEHover<CR>
+  " LSP jumping
   nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
