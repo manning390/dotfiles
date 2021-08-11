@@ -11,8 +11,8 @@ alias lla='ls -la'
 #alias -g G='| grep'
 #alias -g M='| less'
 #alias -g L=' wc -1'
-alias e="$EDITOR"
-alias v="$VISUAL"
+# alias e="$EDITOR"
+# alias v="$VISUAL"
 
 # Vim
 alias vim="nvim"

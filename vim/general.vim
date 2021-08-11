@@ -41,9 +41,10 @@ set formatoptions-=ro
 
 	" UI
 	" let g:sierra_Twilight = 1
+  set termguicolors
 	set background=dark
 	colorscheme snow " color scheme
-  let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
+	let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
 	set number relativenumber " Show line numbers Relative line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
@@ -66,6 +67,11 @@ set formatoptions-=ro
   set smartcase " ignore case if search pattern is all lowercase
 
 " Auto commands (run functions/snippets)
+	augroup highlight_yank
+    	autocmd!
+    	autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+	augroup END
+
 	augroup general
 		au!
 		autocmd FileType vim setlocal fo-=cro " Stop comment continuation on new lines and autowrapping

@@ -20,7 +20,7 @@ command! Space2Tab :set noexpandtab | ret!<CR>
 cabbrev s2t Space2Tab
 
 " Refreshes vim when making edits to configs
-command! Refresh :so ~/.config/nvim/init.vim
+command! Refresh :echo "Stop using this forehead"<CR>
 cabbrev re Refresh
 
 command! Whitespace :set invlist!<CR>

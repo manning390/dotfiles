@@ -10,6 +10,9 @@
   map <space> \
   echom 'Leader is: ' . mapleader
 
+  " Disable command mode
+  nnoremap <silent> Q <nop>
+
 " Config navigation hotkeys
     nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR> " Custom functions and commands
     nnoremap <leader>vm :e ~/.config/nvim/mappings.vim<CR> " Keymappings
@@ -17,13 +20,15 @@
     nnoremap <leader>vp :e ~/.config/nvim/plugins.vim<CR> " Plugin installation
     nnoremap <leader>vl :e .vimlocal.vim<CR> " Local configs
     nnoremap <leader>vc :PlugConfig<SPACE>
+    nnoremap <silent> <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
-" Files
-  " CtrlP doesn't index files in .gitignore
-    map <expr> <C-p> IsInGitTree()? ':GitFiles<CR>':':Files<CR>'
-    map <C-S-e> :Commands<CR>
-    nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file path
-    nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
+" Telescope
+  nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+  nnoremap <leader>pf :lua require('telescope.builtin').find_files()<CR>
+  nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+
+  nnoremap <leader>pw :lua require('telescope.builtin').grep_string(({ search = vim.fn.expand("<cword>")}))<CR>
+  nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 
 " Editing
   " Jump to the end of the of a line and insert the character there instead
@@ -31,8 +36,22 @@
     inoremap ,, <ESC>A,<ESC>
     " inoremap ::: <ESC>A:<ESC>
 
+    " Bypass delete buffer when pasting over selection
+    vnoremap <leader>p "_dP
+
     " make Y yank till end of line
     nnoremap Y y$
+
+    " Yank to clipboard
+    nnoremap <leader>y "+y
+    vnoremap <leader>y "+y
+
+    " Fix cursor position on visual yanks
+    " vnoremap <expr>y "my\"" . v:register . "y`y"
+
+    " Skip buffer on delete
+    nnoremap <leader>d "_d
+    vnoremap <leader>d "_d
 
     " Visual shifting (does not exit Visual mode)
     vnoremap < <gv
@@ -44,13 +63,6 @@
 
     " Swap carat and 0, default behavior on second press
     nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-"    nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
-"    nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
-    nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
-    nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
-
-    " Fix cursor position on visual yanks
-    vnoremap <expr>y "my\"" . v:register . "y`y"
 
     " show whitespace
     nnoremap <F5> :set invlist!<CR>
@@ -61,19 +73,16 @@
 " Search
   " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
-  " nmap <silent> <leader><space> :noh<CR>
-  " nmap <silent> <Esc><space> :noh<CR>
   nmap <silent> <Esc><Esc> :noh<CR>
 
 " Navigation
-  nnoremap <leader>b :Buffers<CR>
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
   " Close buffer without deleteing pane
   " cnoreabbrev bd BD
   " cnoreabbrev bW BW
   " cnoreabbrev bun BUN
-  map <leader>q :bp<bar>bd #<CR>
+  map <leader>q :bd<CR>
 
   " Move around panes
   execute 'map <C-'.g:left.'> <C-w>h'
@@ -94,29 +103,18 @@
   execute "nnoremap <silent> <leader>z".g:down." :call NextClosedFold('j')<CR>"
   execute "nnoremap <silent> <leader>z".g:up." :call NextClosedFold('k')<CR>"
 
-  " Ale jumping
-  " nmap <silent>gd :ALEGoToDefinition<CR>
-  " nmap <silent>gf :ALEFindReferences<CR>
-  " nmap <silent>gh :ALEHover<CR>
+  " LSP jumping
   nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
   nmap <silent>gk <cmd>lua vim.lsp.buf.hover()<CR>
 
   " Buffer jumping
-  nmap <leader>1 <Plug>lightline#bufferline#go(1)
-  nmap <leader>2 <Plug>lightline#bufferline#go(2)
-  nmap <leader>3 <Plug>lightline#bufferline#go(3)
-  nmap <leader>4 <Plug>lightline#bufferline#go(4)
-  nmap <leader>5 <Plug>lightline#bufferline#go(5)
-  nmap <leader>6 <Plug>lightline#bufferline#go(6)
-  nmap <leader>7 <Plug>lightline#bufferline#go(7)
-  nmap <leader>8 <Plug>lightline#bufferline#go(8)
-  nmap <leader>9 <Plug>lightline#bufferline#go(9)
-  nmap <leader>0 <Plug>lightline#bufferline#go(10)
-
-" Sidebar
-  nmap <leader>kb :NERDTreeToggle<CR>
+  nnoremap <silent> gb :BufferLinePick<CR>
+  for i in range(1,9)
+    execute 'nnoremap <leader>'.i.' :lua require"bufferline".go_to_buffer('.i.')<CR>'
+  endfor
+  nnoremap <leader>0 :lua require"bufferline".go_to_buffer(10)<CR>
 
 " Deoplete Autocomplete
     " When enter is pressed within a popup menu, will take the selected option and apply it, otherwise normal CR behavior
@@ -128,12 +126,14 @@
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " Undotree
-  nnoremap <F6> :UndotreeToggle<CR>
+  nnoremap <leader>u :UndotreeToggle<CR>
 
+" Turn of highlight when opening files
 augroup nohonopen
   au!
   autocmd Filetype * :noh
 augroup end
+
 " Clj bindings
 augroup cljbindings
   au!
