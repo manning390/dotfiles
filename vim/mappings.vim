@@ -39,8 +39,8 @@
 
 " Fugitive
   nmap <leader>gs :G<CR>
-  "nmap <leader>gc :Git commit<CR>
-  "nmap <leader>gp :Git push<CR>
+  nmap <leader>gc :G commit<CR>
+  nmap <leader>gp :G push<CR>
   if g:colemak_dhm_automap
     nmap <leader>gn :diffget //3<CR>
     nmap <leader>gt :diffget //2<CR>
