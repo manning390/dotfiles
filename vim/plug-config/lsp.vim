@@ -5,4 +5,6 @@ lspconfig.clojure_lsp.setup{
 }
 lspconfig.tsserver.setup{}
 lspconfig.vimls.setup{}
+
+lspconfig.cssls.setup{}
 EOF

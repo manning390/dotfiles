@@ -7,6 +7,13 @@ runtime! mappings.vim
 	filetype plugin indent on
 	syntax on
 
+	set path+=**
+	set wildmode=longest,list,full
+	set wildmenu
+	set wildignore+=**/.git/*
+	set wildignore+=**/node_modules/*
+	set completeopt=menuone,noselect
+
 	set noerrorbells
 	set tabstop=2 " A tab is two spaces
 	set softtabstop=2

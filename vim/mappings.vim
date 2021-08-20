@@ -30,6 +30,25 @@
   nnoremap <leader>pw :lua require('telescope.builtin').grep_string(({ search = vim.fn.expand("<cword>")}))<CR>
   nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 
+" Compe
+  inoremap <silent><expr> <C-Space> compe#complete()
+  inoremap <silent><expr> <CR>      compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
+  inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+  inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+  inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" Fugitive
+  nmap <leader>gs :G<CR>
+  "nmap <leader>gc :Git commit<CR>
+  "nmap <leader>gp :Git push<CR>
+  if g:colemak_dhm_automap
+    nmap <leader>gn :diffget //3<CR>
+    nmap <leader>gt :diffget //2<CR>
+  else
+    nmap <leader>gj :diffget //3<CR>
+    nmap <leader>gf :diffget //2<CR>
+  endif
+
 " Editing
   " Jump to the end of the of a line and insert the character there instead
     inoremap ;; <ESC>A;<ESC>
@@ -107,7 +126,7 @@
   nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
-  nmap <silent>gk <cmd>lua vim.lsp.buf.hover()<CR>
+  nmap <silent>gk <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 
   " Buffer jumping
   nnoremap <silent> gb :BufferLinePick<CR>
