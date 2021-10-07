@@ -1,9 +1,6 @@
-[submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
 [submodule "i3/gaps"]
 	path = i3/gaps
 	url = git@github:Airblader/i3
 [submodule "tmux-themepack"]
-	path = tmux-themepack
+	path = tmux/.tmux-themepack
 	url = https://github.com/jimeh/tmux-themepack.git
