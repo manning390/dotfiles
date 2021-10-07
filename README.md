@@ -1,3 +1,9 @@
+# Manning390 Dotfiles
+
+Welcome to my personal configuration hell. We're trying to tidy things up. Don't mind the parts on fire.
+
+Follow the installation steps down below for the appropriate OS.
+
 ## Mac OS
 ### Stow
 ```
