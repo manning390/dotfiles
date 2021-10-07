@@ -23,15 +23,6 @@ require("telescope").setup({
             },
         },
 
-        vimgrep_arguments = {
-            'ag',
-            '--nocolor',
-            '--noheading',
-            '--filename',
-            '--numbers',
-            '--column',
-            '--smart-case',
-        },
     },
     extensions = {
         fzy_native = {
@@ -42,4 +33,18 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzy_native")
+
+local M = {}
+M.search_dotfiles = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "< VimRC >",
+        cwd = vim.env.DOTFILES,
+        hidden = true,
+    })
+end
+M.git_branches = function()
+    require("telescope.builtin").git_branches({
+    })
+end
+return M
 EOF

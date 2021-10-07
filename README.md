@@ -1,59 +1,44 @@
-# Dotfile Configurations
+## Mac OS
+### Stow
+```
+brew install stow
+```
+#### Neovim
 
-In order to better organize configurations between environments I'll be keeping all of my configurations here in this dotfile repo.
+```
+brew install --HEAD neovim
+```
 
-The installation scripts will install all dependencies, edit manually to remove any installation.
+Ensure version is >0.5.0 or there will be issues with plugins
 
-Heavily inspired by [@FatBoyXPC](https://github.com/colbycheeze/dotfiles) and [@colbycheeze](https://github.com/colbycheeze/dotfiles) implementations. Uses [dotbot](https://github.com/anishathalye/dotbot) for dot file linking.
+#### Neovim Plugged
 
-# Installation
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+``````
+#### Finally do the thing
 
-Download this repo (or clone) to ```~/.dotfiles```
+```
+./.dotfiles/OSX
+```
 
-Run ```pinstall.sh``` for dependencies for ```install.sh```
-- git
-- curl
-- zsh
-- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+## Arch
 
-Run ```install.sh``` for applications and configs
-- tmux
-- curl
-- wget
-- zip
-- unzip
-- htop
-- jq
-- cut
-- xsel
-- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
-- software-properties-common
-- python-dev
-- python-pip
-- python3-dev
-- python3-pip
-- python-gpg
-- openvpn
-- [openpyn](https://github.com/jotyGill/openpyn-nordvpn) (via pip)
-- neovim
-- dropbox
-- weechat
-- fonts-firacode
-- [powerline fonts](https://github.com/powerline/fonts) (via git)
-- [PHP](https://secure.php.net/releases/?json) (Installs latest version with following mods)
-  - cli
-  - gd
-  - mysql
-  - pgsql
-  - imap
-  - memcached
-  - mbstring
-  - xml
-  - curl
-  - bcmath
-  - sqlite3
-  - xdebug
-- Composer (via php)
-  - [hirak/prestissimo](https://github.com/hirak/prestissimo)
-  - phpunit/phpunit
-  - phpunit/php-invoker
+### Stow
+ ???
+
+#### Neovim
+
+```
+paru -S neovim python-pynim
+```
+
+Ensure version is >0.5.0 or there will be issues with plugins
+
+#### Neovim Plugged
+
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+``````

@@ -14,6 +14,7 @@
   nnoremap <silent> Q <nop>
 
 " Config navigation hotkeys
+    " nnoremap <leader>vv :lua require('plug-config.telescope').search_dotfiles()<CR>
     nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR> " Custom functions and commands
     nnoremap <leader>vm :e ~/.config/nvim/mappings.vim<CR> " Keymappings
     nnoremap <leader>vr :e ~/.config/nvim/general.vim<CR> " General Settings
@@ -29,13 +30,6 @@
 
   nnoremap <leader>pw :lua require('telescope.builtin').grep_string(({ search = vim.fn.expand("<cword>")}))<CR>
   nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
-
-" Compe
-  inoremap <silent><expr> <C-Space> compe#complete()
-  inoremap <silent><expr> <CR>      compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
-  inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-  inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-  inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " Fugitive
   nmap <leader>gs :G<CR>
@@ -64,6 +58,9 @@
     " Yank to clipboard
     nnoremap <leader>y "+y
     vnoremap <leader>y "+y
+
+    nnoremap <leader>d "_d
+    vnoremap <leader>d "_d
 
     " Fix cursor position on visual yanks
     " vnoremap <expr>y "my\"" . v:register . "y`y"
@@ -126,7 +123,9 @@
   nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
-  nmap <silent>gk <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+  "nmap <silent>gk <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+  execute "nnoremap <silent><leader>".g:next." <cmd>lua vim.lsp.diagnostic.goto_next()<CR>"
+  execute "nnoremap <silent><leader>".g:previous." <cmd>lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>"
 
   " Buffer jumping
   nnoremap <silent> gb :BufferLinePick<CR>
@@ -134,12 +133,6 @@
     execute 'nnoremap <leader>'.i.' :lua require"bufferline".go_to_buffer('.i.')<CR>'
   endfor
   nnoremap <leader>0 :lua require"bufferline".go_to_buffer(10)<CR>
-
-" Deoplete Autocomplete
-    " When enter is pressed within a popup menu, will take the selected option and apply it, otherwise normal CR behavior
-    inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-    " Manual autocomplete trigger
-    inoremap <silent><expr> <C-Space> pumvisible() ? "\<C-n>" : deoplete#manual_complete()
 
 " Comments
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv

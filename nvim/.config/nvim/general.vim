@@ -12,7 +12,7 @@ runtime! mappings.vim
 	set wildmenu
 	set wildignore+=**/.git/*
 	set wildignore+=**/node_modules/*
-	set completeopt=menuone,noselect
+	set completeopt=menu,menuone,noselect
 
 	set noerrorbells
 	set tabstop=2 " A tab is two spaces

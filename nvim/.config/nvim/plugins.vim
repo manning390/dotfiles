@@ -2,18 +2,17 @@ call plug#begin(g:configPath . '/plugged')
 Plug 'manning390/vim-colemak-DHm' " colemak keyboard support
 Plug 'scrooloose/nerdcommenter' " Toggle comments
 Plug 'itchyny/lightline.vim' " Bottom status bar
-"Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
 
 Plug 'mattn/emmet-vim' " HTML emmet
-Plug 'sheerun/vim-polyglot' " syntax library
+Plug 'sheerun/vim-polyglot' " Syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'tpope/vim-fugitive' " Git integration
 
 " Telescope
-Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
@@ -22,10 +21,6 @@ Plug 'ncm2/float-preview.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-eunuch' " Adds various commands
 Plug 'markonm/traces.vim' " Adds preview for substitutions
-
-Plug 'neovim/nvim-lspconfig' " Neovim native LSP configs
-Plug 'hrsh7th/nvim-compe' " Autocomplete
-"Plug 'glepnir/lspsaga.nvim' " Context hover and code actions
 
 Plug 'airblade/vim-gitgutter' " Git gutters
 " Plug 'kshenoy/vim-signature' " Mark gutters
@@ -48,6 +43,12 @@ Plug 'guns/vim-clojure-highlight'
 " Color themes
 Plug 'nightsense/snow' " Color scheme
 
+Plug 'neovim/nvim-lspconfig' " Neovim native LSP configs
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}  " LSP autocomplete integration
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}  " Buffer autocomplete integration
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " Autocomplete (comes last)
+"Plug 'glepnir/lspsaga.nvim' " Context hover and code actions
+
 call plug#end()
 
 "
@@ -58,8 +59,8 @@ runtime! plug-config/colemakdhm.vim
 runtime! plug-config/signature.vim
 runtime! plug-config/vimwiki.vim
 runtime! plug-config/lightline.vim
+runtime! plug-config/cmp.vim
 runtime! plug-config/lsp.vim
-"runtime! plug-config/deoplete.vim
 runtime! plug-config/preview.vim
 runtime! plug-config/telescope.vim
 runtime! plug-config/nerdcommenter.vim
