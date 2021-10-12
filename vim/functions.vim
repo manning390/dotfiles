@@ -19,10 +19,6 @@ cabbrev t2s Tab2Space
 command! Space2Tab :set noexpandtab | ret!<CR>
 cabbrev s2t Space2Tab
 
-" Refreshes vim when making edits to configs
-command! Refresh :so ~/.config/nvim/init.vim
-cabbrev re Refresh
-
 command! Whitespace :set invlist!<CR>
 
 " Bind to keys so that the fist press does the first arg, the second press

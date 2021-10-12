@@ -17,11 +17,17 @@
     nnoremap <leader>vp :e ~/.config/nvim/plugins.vim<CR> " Plugin installation
     nnoremap <leader>vl :e .vimlocal.vim<CR> " Local configs
     nnoremap <leader>vc :PlugConfig<SPACE>
+    nnoremap <leader><CR> :so ~/.config/nvim/init.vim<BAR>:noh<CR>
 
 " Files
-  " CtrlP doesn't index files in .gitignore
-    map <expr> <C-p> IsInGitTree()? ':GitFiles<CR>':':Files<CR>'
-    map <C-S-e> :Commands<CR>
+    " Telescope
+    nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep For > ")})<CR>
+    nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+    nnoremap <leader>pf :lua require('telescope.builtin').find_files()<CR>
+    nnoremap <leader>pv :lua require('telescope.builtin').help_tags()<CR>
+    nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+
+    " Yanking names
     nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file path
     nnoremap <leader>yn :let @+ = expand("%:r")<CR> " copy file name
 
@@ -46,8 +52,8 @@
     nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 "    nnoremap <silent> H :call ToggleMovement('H', 'L')<CR>
 "    nnoremap <silent> L :call ToggleMovement('L', 'H')<CR>
-    nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
-    nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
+"   nnoremap <silent> G :call ToggleMovement('G', 'gg')<CR>
+"   nnoremap <silent> gg :call ToggleMovement('gg', 'G')<CR>
 
     " Fix cursor position on visual yanks
     vnoremap <expr>y "my\"" . v:register . "y`y"
@@ -99,6 +105,7 @@
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
   nmap <silent>gk <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent>gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 
   " Buffer jumping
   nmap <leader>1 <Plug>lightline#bufferline#go(1)
@@ -127,10 +134,12 @@
 " Undotree
   nnoremap <F6> :UndotreeToggle<CR>
 
+" No Highlight on Open
 augroup nohonopen
   au!
   autocmd Filetype * :noh
 augroup end
+
 " Clj bindings
 augroup cljbindings
   au!
@@ -143,4 +152,17 @@ augroup end
 augroup cppbindings
   au!
   autocmd Filetype cpp map <F4> :call CurtineIncSw()<CR>
+augroup end
+
+" Godot bindings
+func! GodotSettings() abort
+    setlocal foldmethod=manual
+    setlocal tabstop=4
+    nnoremap <buffer> <F4> :GodotRunLast<CR>
+    nnoremap <buffer> <F5> :GodotRun<CR>
+    nnoremap <buffer> <F6> :GodotRunCurrent<CR>
+    nnoremap <buffer> <F7> :GodotRunFZF<CR>
+endfunc
+augroup godot | au!
+    au FileType gdscript call GodotSettings()
 augroup end

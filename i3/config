@@ -36,6 +36,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
+bindsym --release $mod+Shift+q exec xkill
 bindsym $mod+c kill
 
 # Start rofi (a program launcher)
@@ -103,6 +104,8 @@ bindsym $mod+z focus child
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
+#bindsym $mod+m move workspace to output left
+
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 #bindsym $mod+minus scratchpad show
@@ -161,7 +164,7 @@ bindsym $mod+Shift+u reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec xset dpms force suspend
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Alt+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

@@ -60,7 +60,6 @@ ENABLE_CORRECTION="true"
 # Plugins
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
-zsh_reload # zshrc opens this file, src reloads it
 colored-man-pages
 last-working-dir
 tmux # Adds aliases to tmux

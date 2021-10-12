@@ -1,7 +1,6 @@
 call plug#begin(g:configPath . '/plugged')
 Plug 'manning390/vim-colemak-DHm' " Colemak keyboard support
 
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File sidebar
 Plug 'scrooloose/nerdcommenter' " Toggle comments
 Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
 Plug 'itchyny/lightline.vim' " Bottom status bar
@@ -9,11 +8,20 @@ Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
 Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
-Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
-Plug 'manning390/fzf.vim' " Vim integration for previous plugin, forked for customizations
+
+" Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
+" Plug 'manning390/fzf.vim' " Vim integration for previous plugin, forked for customizations
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
 Plug 'tpope/vim-fugitive' " Git integration
 " Autocompletion
 Plug 'neovim/nvim-lspconfig' " Native lsp
+Plug 'glepnir/lspsaga.nvim'
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -21,7 +29,10 @@ else
 	Plug 'roxma/nvim-yarp'
 	Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'deoplete-plugins/deoplete-lsp' " Native LSP integration into autocomplete
+
 Plug 'ncm2/float-preview.nvim'
 Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion
 Plug 'tpope/vim-eunuch' " Adds various commands
@@ -60,6 +71,7 @@ runtime! plug-config/vimwiki.vim
 runtime! plug-config/lightline.vim
 runtime! plug-config/deoplete.vim
 runtime! plug-config/lsp.vim
+runtime! plug-config/telescope.vim
 runtime! plug-config/preview.vim
 runtime! plug-config/fzf.vim
 runtime! plug-config/easymotion.vim

@@ -53,3 +53,6 @@
     ~/.profile:
         force: true
         path: profile
+    ~/.less:
+        force: true
+        path: less

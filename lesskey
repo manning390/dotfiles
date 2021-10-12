@@ -1,0 +1,10 @@
+#command
+n   forw-line
+N   forw-line-force
+e   back-line
+e   back-line-force
+h   repeat-search
+H   reverse-search
+k   help
+K   help
+
