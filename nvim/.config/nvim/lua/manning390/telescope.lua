@@ -1,4 +1,3 @@
-lua << EOF
 local actions = require("telescope.actions")
 require("telescope").setup({
     defaults = {
@@ -37,14 +36,15 @@ require("telescope").load_extension("fzy_native")
 local M = {}
 M.search_dotfiles = function()
     require("telescope.builtin").find_files({
-        prompt_title = "< VimRC >",
+        find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+        prompt_title = "< DOTFILES >",
         cwd = vim.env.DOTFILES,
-        hidden = true,
     })
 end
-M.git_branches = function()
-    require("telescope.builtin").git_branches({
-    })
-end
+
+-- M.git_branches = function()
+    -- require("telescope.builtin").git_branches({
+    -- })
+-- end
+
 return M
-EOF

@@ -3,18 +3,22 @@ Plug 'manning390/vim-colemak-DHm' " colemak keyboard support
 Plug 'scrooloose/nerdcommenter' " Toggle comments
 Plug 'itchyny/lightline.vim' " Bottom status bar
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/nvim-bufferline.lua'
 
-Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " Syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'tpope/vim-fugitive' " Git integration
 
-" Telescope
+" Telescope & Harpoon dep
+Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+
+" Telescope
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Harpoo"n
+Plug 'ThePrimeagen/harpoon'
 
 Plug 'ncm2/float-preview.nvim'
 "Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion
@@ -48,24 +52,25 @@ Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}  " LSP autocomplete integration
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}  " Buffer autocomplete integration
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " Autocomplete (comes last)
 "Plug 'glepnir/lspsaga.nvim' " Context hover and code actions
+Plug 'mattn/emmet-vim' " HTML emmet
 
 call plug#end()
 
 "
 " Plugin configurations
+" Using plug-config/ (custom dir) rather than plugin/ because it doesn't autoload
+" Have more control over the timing of loading
+"
 " Type <leader>vc then type the name of the file sans filetype
 "
+lua require('manning390')
 runtime! plug-config/colemakdhm.vim
 runtime! plug-config/signature.vim
 runtime! plug-config/vimwiki.vim
 runtime! plug-config/lightline.vim
-runtime! plug-config/cmp.vim
-runtime! plug-config/lsp.vim
 runtime! plug-config/preview.vim
-runtime! plug-config/telescope.vim
 runtime! plug-config/nerdcommenter.vim
 runtime! plug-config/rainbow.vim
 runtime! plug-config/emmet.vim
 lua require('nvim-autopairs').setup{}
-runtime! plug-config/bufferline.vim
 "runtime! plug-config/saga.vim

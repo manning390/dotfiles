@@ -14,7 +14,6 @@
   nnoremap <silent> Q <nop>
 
 " Config navigation hotkeys
-    " nnoremap <leader>vv :lua require('plug-config.telescope').search_dotfiles()<CR>
     nnoremap <leader>vf :e ~/.config/nvim/functions.vim<CR> " Custom functions and commands
     nnoremap <leader>vm :e ~/.config/nvim/mappings.vim<CR> " Keymappings
     nnoremap <leader>vr :e ~/.config/nvim/general.vim<CR> " General Settings
@@ -26,10 +25,10 @@
 " Telescope
   nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
   nnoremap <leader>pf :lua require('telescope.builtin').find_files()<CR>
-  nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-
+  nnoremap <leader>pg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
   nnoremap <leader>pw :lua require('telescope.builtin').grep_string(({ search = vim.fn.expand("<cword>")}))<CR>
   nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+  nnoremap <leader>pv :lua require('manning390.telescope').search_dotfiles()<CR>
 
 " Fugitive
   nmap <leader>gs :G<CR>
@@ -89,7 +88,7 @@
 " Search
   " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
-  nmap <silent> <Esc><Esc> :noh<CR>
+  nnoremap <silent> <Esc><Esc> :noh<CR>
 
 " Navigation
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
@@ -98,7 +97,7 @@
   " cnoreabbrev bd BD
   " cnoreabbrev bW BW
   " cnoreabbrev bun BUN
-  map <leader>q :bd<CR>
+  map <leader>q :BD<CR>
 
   " Move around panes
   execute 'map <C-'.g:left.'> <C-w>h'
@@ -127,12 +126,14 @@
   execute "nnoremap <silent><leader>".g:next." <cmd>lua vim.lsp.diagnostic.goto_next()<CR>"
   execute "nnoremap <silent><leader>".g:previous." <cmd>lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>"
 
-  " Buffer jumping
-  nnoremap <silent> gb :BufferLinePick<CR>
-  for i in range(1,9)
-    execute 'nnoremap <leader>'.i.' :lua require"bufferline".go_to_buffer('.i.')<CR>'
+  " Harpoon jumping
+  nnoremap <leader>a <cmd>lua require("harpoon.mark").add_file()<CR>
+  nnoremap <leader>` <cmd>lua require"harpoon.ui".toggle_quick_menu()<CR>
+  nnoremap <C-e> <cmd>lua require"harpoon.ui".toggle_quick_menu()<CR>
+  nnoremap <C-y> <cmd>lua require"harpoon.cmd-ui".toggle_quick_menu()<CR>
+  for i in range(1,4)
+    execute 'nnoremap <leader>'.i.' <cmd>lua require"harpoon.ui".nav_file('.i.')<CR>'
   endfor
-  nnoremap <leader>0 :lua require"bufferline".go_to_buffer(10)<CR>
 
 " Comments
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv

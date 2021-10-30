@@ -4,6 +4,8 @@
 # Profile
 [[ -f ~/.profile ]] && source ~/.profile
 
+export DOTFILES=~/.dotfiles
+
 # Scripts
 for f in ~/.scripts/*; do
   source $f

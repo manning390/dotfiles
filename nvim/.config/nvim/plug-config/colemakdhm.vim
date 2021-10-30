@@ -28,3 +28,4 @@ let g:up       = get(g:colemak_dhm_mappings.up, bind_to)
 let g:next     = get(g:colemak_dhm_mappings.next, bind_to)
 let g:previous = get(g:colemak_dhm_mappings.previous, bind_to)
 let g:mark     = get(g:colemak_dhm_mappings.mark, bind_to)
+

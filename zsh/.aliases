@@ -17,9 +17,8 @@ alias lla='ls -la'
 # Vim
 alias vim="nvim"
 alias vi="nvim"
-alias oldvim="\vim"
 
-alias zshrc="vim ~/.zshrc"
+alias zshrc="vi ~/.zshrc"
 
 alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
 alias git\?="echo ' ? — untracked changes
@@ -43,5 +42,5 @@ alias ping='prettyping'
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
-alias work='cd ~/workspace/platform/server'
+alias work='cd ~/workspace/platform/'
 alias chrome='open -a "Google Chrome"'
