@@ -37,9 +37,7 @@ runtime! mappings.vim
 	set sidescroll=1 " sidescroll when needed
 	set nowrap " don't wrap lines
 
-	set hidden " hides buffers rather than closing them when not active
 	set laststatus=2 " Ensures lightline shows up
-	set showtabline=2 " Ensures tabline shows up
 
 	set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
@@ -51,7 +49,6 @@ set formatoptions-=ro
   set termguicolors
 	set background=dark
 	colorscheme snow " color scheme
-	let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
 	set number relativenumber " Show line numbers Relative line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
@@ -84,7 +81,6 @@ set formatoptions-=ro
 		autocmd FileType vim setlocal fo-=cro " Stop comment continuation on new lines and autowrapping
   		" Strip trailing whitespace after save on every file
 		autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
-		autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 	augroup END
 
   " Hybrid number lines

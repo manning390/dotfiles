@@ -88,7 +88,7 @@
 " Search
   " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
-  nnoremap <silent> <Esc><Esc> :noh<CR>
+  nnoremap <silent><esc><esc> :noh<CR>
 
 " Navigation
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>

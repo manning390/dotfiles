@@ -1,7 +1,7 @@
 call plug#begin(g:configPath . '/plugged')
 Plug 'manning390/vim-colemak-DHm' " colemak keyboard support
 Plug 'scrooloose/nerdcommenter' " Toggle comments
-Plug 'itchyny/lightline.vim' " Bottom status bar
+Plug 'nvim-lualine/lualine.nvim' " Bottom status bar
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'sheerun/vim-polyglot' " Syntax library
@@ -28,7 +28,7 @@ Plug 'markonm/traces.vim' " Adds preview for substitutions
 
 Plug 'airblade/vim-gitgutter' " Git gutters
 " Plug 'kshenoy/vim-signature' " Mark gutters
-Plug 'qpkorr/vim-bufkill'
+Plug 'qpkorr/vim-bufkill' " Close buffers without killing splits
 Plug 'vim-utils/vim-man' " View man pages in vim
 Plug 'mbbill/undotree'
 Plug 'justinmk/vim-sneak' " Remaps S to two char search
@@ -67,7 +67,7 @@ lua require('manning390')
 runtime! plug-config/colemakdhm.vim
 runtime! plug-config/signature.vim
 runtime! plug-config/vimwiki.vim
-runtime! plug-config/lightline.vim
+" runtime! plug-config/lightline.vim
 runtime! plug-config/preview.vim
 runtime! plug-config/nerdcommenter.vim
 runtime! plug-config/rainbow.vim
