@@ -88,7 +88,7 @@
 " Search
   " No highlight!!!
   nmap <silent> <leader>/ :noh<CR>
-  nnoremap <silent><esc><esc> :noh<CR>
+  nnoremap <silent><esc><esc> :let @/ = ""<CR>
 
 " Navigation
   nmap <leader>ff [I:let nr = input("which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
@@ -127,13 +127,16 @@
   execute "nnoremap <silent><leader>".g:previous." <cmd>lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>"
 
   " Harpoon jumping
-  nnoremap <leader>a <cmd>lua require("harpoon.mark").add_file()<CR>
+  nnoremap <leader>a <cmd>lua require"harpoon.mark".add_file()<CR>
   nnoremap <leader>` <cmd>lua require"harpoon.ui".toggle_quick_menu()<CR>
-  nnoremap <C-e> <cmd>lua require"harpoon.ui".toggle_quick_menu()<CR>
-  nnoremap <C-y> <cmd>lua require"harpoon.cmd-ui".toggle_quick_menu()<CR>
-  for i in range(1,4)
+  for i in range(1,9)
     execute 'nnoremap <leader>'.i.' <cmd>lua require"harpoon.ui".nav_file('.i.')<CR>'
   endfor
+  nnoremap <leader>tc <cmd>lua require"harpoon.cmd-ui".toggle_quick_menu()<CR>
+  nnoremap <leader>tt <cmd>lua require"harpoon.term".gotoTerminal(1)<CR>
+  nnoremap <leader>ts <cmd>lua require"harpoon.term".gotoTerminal(0)<CR>
+  " nnoremap <leader>ct <cmd>lua require"harpoon.term".sendCommand(1,1)<CR>
+  " nnoremap <leader>cs <cmd>lua require"harpoon.term".sendCommand(1,2)<CR>
 
 " Comments
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
@@ -141,7 +144,7 @@
 " Undotree
   nnoremap <leader>u :UndotreeToggle<CR>
 
-" Turn of highlight when opening files
+" Turn off highlight when opening files
 augroup nohonopen
   au!
   autocmd Filetype * :noh
@@ -150,9 +153,8 @@ augroup end
 " Clj bindings
 augroup cljbindings
   au!
-  autocmd Filetype clj
-    \  nnoremap <leader>( :RainbowParenthesesToggle<CR>
-    \| call RainbowToggleOn
+  autocmd Filetype clj nnoremap <leader>( :RainbowParenthesesToggle<CR>
+  autocmd Filetype clj call RainbowToggleOn
 augroup end
 
 " C++ bindings

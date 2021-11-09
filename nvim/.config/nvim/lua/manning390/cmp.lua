@@ -1,4 +1,3 @@
-
 local cmp = require("cmp")
 cmp.setup({
     mapping = {
@@ -10,8 +9,16 @@ cmp.setup({
         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
     },
+    snippet = {
+        expand = function(args)
+            require'luasnip'.lsp_expand(args.body)
+        end
+    },
     sources = {
         { name = 'nvim_lsp'},
         { name = 'buffer'},
+        { name = 'path'},
+--        { name = 'cmdline'},
+        { name = 'luasnip'}
     },
 })

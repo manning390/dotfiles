@@ -6,6 +6,8 @@
 
 export DOTFILES=~/.dotfiles
 
+KEYTIMEOUT=1
+
 # Scripts
 for f in ~/.scripts/*; do
   source $f

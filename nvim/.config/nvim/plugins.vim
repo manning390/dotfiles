@@ -50,9 +50,14 @@ Plug 'nightsense/snow' " Color scheme
 Plug 'neovim/nvim-lspconfig' " Neovim native LSP configs
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}  " LSP autocomplete integration
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}  " Buffer autocomplete integration
+Plug 'hrsh7th/cmp-path', {'branch': 'main'}  " Buffer autocomplete integration
+Plug 'hrsh7th/cmp-cmdline', {'branch': 'main'}  " Buffer autocomplete integration
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " Autocomplete (comes last)
 "Plug 'glepnir/lspsaga.nvim' " Context hover and code actions
 Plug 'mattn/emmet-vim' " HTML emmet
+
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 call plug#end()
 
