@@ -122,9 +122,14 @@
   nmap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
   nmap <silent>gD <cmd>lua vim.lsp.buf.declaration()<CR>
   nmap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
-  "nmap <silent>gk <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
   execute "nnoremap <silent><leader>".g:next." <cmd>lua vim.lsp.diagnostic.goto_next()<CR>"
   execute "nnoremap <silent><leader>".g:previous." <cmd>lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>"
+
+  " Saga
+  nmap <silent>gk :Lspsaga hover_doc<CR>
+  nmap <silent>gs :Lspsaga signature_help<CR>
+  nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+  vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
 
   " Harpoon jumping
   nnoremap <leader>a <cmd>lua require"harpoon.mark".add_file()<CR>
@@ -139,6 +144,7 @@
   " nnoremap <leader>cs <cmd>lua require"harpoon.term".sendCommand(1,2)<CR>
 
 " Comments
+  nmap <C-_> <Plug>NERDCommenterToggle<CR>
   vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " Undotree
