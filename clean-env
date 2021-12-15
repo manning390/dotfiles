@@ -6,3 +6,4 @@ do
     stow -D $folder
 done
 popd
+

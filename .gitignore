@@ -3,6 +3,5 @@ wordnet.txt
 weechat/script/plugins.xml.gz
 weechat/aspell.conf
 bin/php
-fzf
 **/undo/**
 **/swap/**

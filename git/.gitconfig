@@ -24,8 +24,10 @@
 [fetch]
 	prune = true
 [user]
-	email = michael@teachbanzai.com
+	email = michael@manning390.com
 	name = Michael Manning
+[includeIf "gitdir:~/work/"]
+    path = ~/.work.gitconfig
 [url "ssh://git@github"]
 	insteadoOf = https://github.com
 [github]
