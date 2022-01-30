@@ -12,14 +12,33 @@ function opoff() {
 }
 function opp() {
     opon
-    p=$(op get item "$1" | jq -r '.details.fields[] | select(.designation=="password").value')
-    # echo $p
-    echo $p | xclip -selection clipboard
+    i=$1
+    if [[ -n $OP_SESSION_my ]]; then
+        if [[ -n $OP_CACHED_UUID ]]; then
+            i=$OP_CACHED_UUID
+        fi
+        op get item $i | jq -r '.details.fields[] | select(.designation=="password").value' | xclip -selection clipboard
+    fi
 }
-opw() {
+function opw() {
     opon
-    u=$(op get item "$1" | jq -r '.details.fields[] | select(.designation=="username").value')
-    echo $u
-    echo $u | xclip -selection clipboard
-}
+    i=$1
+    if [[ -n $OP_SESSION_my ]]; then
+        if [[ -n $OP_CACHED_UUID ]]; then
+            i=$OP_CACHED_UUID
+        fi
 
+        u=$(op get item $i | jq -r '.details.fields[] | select(.designation=="username").value')
+        echo $u
+        echo $u | xclip -selection clipboard
+    fi
+}
+function ops() {
+    opon
+    if [[ -n $OP_SESSION_my ]]; then
+        t=$(op list items --categories Login | jq -c '.[]|.overview.title' |tr -d '\042'| fzf --preview 'op get item {} | jq "{title: .overview.title, url: .overview.url, uuid: .uuid}"')
+        export OP_CACHED_UUID=$(op get item $t --cache | jq -r '.uuid' | tr -d '\042')
+        echo "Cached Search, Password in clipboard"
+        opp
+    fi
+}

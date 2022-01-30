@@ -48,6 +48,7 @@ alias zathura="devour zathura"
 alias evince="devour evince"
 alias pdf="evince"
 
+alias code="cd ~/code/"
 alias gdvi="nvr --servername gdvi"
 alias md="devour grip $1"
 alias vbam="devour visualboyadvance-m"

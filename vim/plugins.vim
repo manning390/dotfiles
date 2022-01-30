@@ -3,55 +3,41 @@ Plug 'manning390/vim-colemak-DHm' " Colemak keyboard support
 
 Plug 'scrooloose/nerdcommenter' " Toggle comments
 Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
-Plug 'itchyny/lightline.vim' " Bottom status bar
-Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline with lightline
+Plug 'nvim-lualine/lualine.nvim' " Bottom status bar
+Plug 'kyazdani42/nvim-web-devicons' " Dev icons
+
 Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
-
-" Plug 'junegunn/fzf', { 'dir': '~/.dotfiles/fzf', 'do': './install --all' } " Fuzzy search files
-" Plug 'manning390/fzf.vim' " Vim integration for previous plugin, forked for customizations
+Plug 'tpope/vim-fugitive' " Git integration
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-Plug 'tpope/vim-fugitive' " Git integration
-" Autocompletion
-Plug 'neovim/nvim-lspconfig' " Native lsp
-Plug 'glepnir/lspsaga.nvim'
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'roxma/nvim-yarp'
-	Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'deoplete-plugins/deoplete-lsp' " Native LSP integration into autocomplete
+" Harpoon
+Plug 'ThePrimeagen/harpoon'
 
 Plug 'ncm2/float-preview.nvim'
-Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion
+Plug 'windwp/nvim-autopairs' " Adds auto surround and deletion
 Plug 'tpope/vim-eunuch' " Adds various commands
 Plug 'markonm/traces.vim' " Adds preview for substitutions
+
 Plug 'airblade/vim-gitgutter' " Git gutters
 Plug 'qpkorr/vim-bufkill' " Close buffers without warnings
 Plug 'vim-utils/vim-man' " View man pages in vim
 Plug 'mbbill/undotree'
-Plug 'easymotion/vim-easymotion' " Jump to letters
+Plug 'justinmk/vim-sneak' " Remaps S to two char search
+Plug 'Yggdroot/indentLine'
 
 " Godot
 Plug 'habamax/vim-godot'
 
 " Color themes
-Plug 'rafi/awesome-vim-colorschemes' " color schemes
 Plug 'nightsense/snow' " Color scheme
-
-" C/C++
-Plug 'ericcurtin/CurtineIncSw.vim' " Switch between .c and .h buffers
 
 " Writing
 Plug 'junegunn/goyo.vim' " Distraction free mode
@@ -61,19 +47,31 @@ Plug 'dbmrq/vim-ditto' " Highlight repeated words
 Plug 'reedes/vim-litecorrect' " Slightly autocorrect words, liek tihs
 Plug 'reedes/vim-lexical' " Better spell check
 Plug 'reedes/vim-wordy'
+
+" Autocompletion
+Plug 'neovim/nvim-lspconfig' " Native lsp
+"Plug 'glepnir/lspsaga.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'} " LSP autocomplete integration
+Plug 'hrsh7th/cmp-buffer',   {'branch': 'main'} " Buffer autocomplete integration
+Plug 'hrsh7th/cmp-path',     {'branch': 'main'} " Path autocomplete integration
+Plug 'hrsh7th/cmp-cmdline',  {'branch': 'main'} " Cmdline autocomplete integration
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " LSP autocomplete integration
+
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 call plug#end()
 
 "
 " Plugin configurations
 "
+
+lua require('manning390')
 runtime! plug-config/colemakdhm.vim
 runtime! plug-config/vimwiki.vim
-runtime! plug-config/lightline.vim
-runtime! plug-config/deoplete.vim
-runtime! plug-config/lsp.vim
-runtime! plug-config/telescope.vim
+"runtime! plug-config/lsp.vim
+"runtime! plug-config/telescope.vim
 runtime! plug-config/preview.vim
-runtime! plug-config/fzf.vim
-runtime! plug-config/easymotion.vim
 runtime! plug-config/nerdcommenter.vim
+
+lua require'nvim-autopairs'.setup{}
 

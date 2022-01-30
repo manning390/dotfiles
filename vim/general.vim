@@ -1,4 +1,3 @@
-
 runtime! functions.vim
 runtime! plugins.vim
 runtime! mappings.vim
@@ -22,6 +21,7 @@ runtime! mappings.vim
 	scriptencoding UTF-8
 
 	let &directory=g:configPath .'/swap//' " set where we're saving swaps
+	set noswapfile
     set undofile
 	let &undodir=g:configPath .'/undo//' " and undos
 
@@ -31,18 +31,16 @@ runtime! mappings.vim
 	set nowrap " don't wrap lines
 
 	set hidden " hides buffers rather than closing them when not active
-	set laststatus=2 " Ensures lightline shows up
-	set showtabline=2 " Ensures tabline shows up
 
 	set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
 	"set listchars=eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·
 
-set formatoptions-=ro
+    set formatoptions-=ro
 
 	" UI
-	let g:sierra_Twilight = 1
-	colorscheme sierra " color scheme
-    let g:lightline.colorscheme = 'snow_dark' " lightline match colorscheme
+	set termguicolors
+	set background=dark
+	colorscheme snow
 	set number relativenumber " Show line numbers Relative line numbers
 	set showmatch " show matching parenthesis
 	set cursorline " show what line the cursor is on
@@ -62,7 +60,7 @@ set formatoptions-=ro
 " Search
   set hlsearch " highlight search terms
   set incsearch " show search matches as you type
-  set wildignorecase
+  set ignorecase
   set smartcase " ignore case if search pattern is all lowercase
 
 " Auto commands (run functions/snippets)
@@ -70,7 +68,6 @@ set formatoptions-=ro
 		autocmd FileType vim setlocal fo-=cro " Stop comment continuation on new lines and autowrapping
   		" Strip trailing whitespace after save on every file
 		autocmd BufWritePre * call StripTrailingWhitespace() " after save on every file trim trailing whitespace
-		autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 	augroup END
 
   " Hybrid number lines

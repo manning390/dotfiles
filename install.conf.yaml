@@ -56,3 +56,6 @@
     ~/.less:
         force: true
         path: less
+    ~/.config/dunst:
+        force: true
+        path: .config/dunst

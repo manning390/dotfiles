@@ -40,9 +40,9 @@ bindsym --release $mod+Shift+q exec xkill
 bindsym $mod+c kill
 
 # Start rofi (a program launcher)
-bindsym $mod+d exec rofi -show drun
-bindsym $mod+Shift+return exec rofi -show drun
-bindsym $mod+Shift+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun -show-icons
+bindsym $mod+Shift+return exec rofi -show drun -show-icons
+bindsym $mod+Shift+d exec rofi -show run -show-icons
 
 # Use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -130,7 +130,6 @@ set $ws15 "15"
 set $ws16 "16"
 set $ws17 "17"
 set $ws18 "18"
-set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
@@ -207,6 +206,7 @@ bar {
 # Autostart
 #exec --no-startup-id dropbox
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id dunst
 
 # Audio keybindings
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -231,6 +231,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [title="Main Window"] floating enable
 for_window [instance="Godot_Editor"] floating disable
 for_window [instance="Godot_Engine"] floating enable
+for_window [class="rofi"] border_radius 24
 
 # i3 Gaps
 for_window [class="^.*"] border pixel 1
