@@ -38,6 +38,9 @@ endfunction
 " FZF + vim
 command! -bang -nargs=? -complete=file GitFiles :call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right'))
 
+" Better wrapping
+command! -nargs=* Wrap set wrap linebreak nolist
+
 " Make substitute something I can remember
 cabbrev sub substitute
 
@@ -76,6 +79,12 @@ function! CustomCaseToggle()
     elseif char == '_'
         normal! "_r-
         normal! l
+    elseif char == "'"
+      normal! "_r"
+      normal! l
+    elseif char == '"'
+      normal! "_r'
+      normal! l
     else
         normal! ~
     endif
@@ -87,3 +96,7 @@ fun! EmptyRegisters()
         call setreg(r, [])
     endfor
 endfun
+
+" How I'll remember how to use it
+cabbrev todo :TodoTelescope
+cabbrev todoq :TodoQuickFix

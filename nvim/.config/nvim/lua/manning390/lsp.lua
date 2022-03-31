@@ -24,11 +24,18 @@ local langservers = {
   clojure_lsp = {
     root_dir = lspconfig.util.root_pattern('server/project.clj', 'project.clj', 'deps.edn', '.git', '*/project.clj');
   },
+  clangd = {
+    init_options = {
+      compilationDatabaseDirectory = "build"
+    }
+  },
+  'cmake',
   'html',
   'vimls',
-  'cssls',
+  -- 'cssls',
   'ls_emmet',
   'tailwindcss',
+--  'eslint',
   'tsserver',
 }
 

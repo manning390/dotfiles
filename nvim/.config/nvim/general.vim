@@ -46,6 +46,7 @@ set formatoptions-=ro
 
 	" UI
 	" let g:sierra_Twilight = 1
+	set conceallevel=0
   set termguicolors
 	set background=dark
 	colorscheme snow " color scheme
@@ -91,6 +92,11 @@ set formatoptions-=ro
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
   augroup END
+
+  " augroup fmt
+    " autocmd!
+    " autocmd BufWritePre * Neoformat
+  " augroup END
 
   " Load project specific settings, don't output error
   " Expects vim to always open at root of project

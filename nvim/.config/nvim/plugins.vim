@@ -4,9 +4,10 @@ Plug 'scrooloose/nerdcommenter' " Toggle comments
 Plug 'nvim-lualine/lualine.nvim' " Bottom status bar
 Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'sheerun/vim-polyglot' " Syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'tpope/vim-fugitive' " Git integration
+
+Plug 'sbdchd/neoformat' " Formatters
 
 " Telescope & Harpoon dep
 Plug 'nvim-lua/popup.nvim'
@@ -17,11 +18,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-" Harpoo"n
+" Harpoooon!
 Plug 'ThePrimeagen/harpoon'
 
 Plug 'ncm2/float-preview.nvim'
-"Plug 'jiangmiao/auto-pairs' " Adds auto surround and deletion
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-eunuch' " Adds various commands
 Plug 'markonm/traces.vim' " Adds preview for substitutions
@@ -33,6 +33,7 @@ Plug 'vim-utils/vim-man' " View man pages in vim
 Plug 'mbbill/undotree'
 Plug 'justinmk/vim-sneak' " Remaps S to two char search
 Plug 'Yggdroot/indentLine' " Indent guides
+Plug 'folke/todo-comments.nvim' " Better todo comment integration w/ search
 
 " Clojure
 Plug 'Olical/conjure', {'for': 'clojure', 'tag': 'v4.18.0'}
@@ -53,15 +54,17 @@ Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}  " Buffer autocomplete integration
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}  " Buffer autocomplete integration
 Plug 'hrsh7th/cmp-cmdline', {'branch': 'main'}  " Buffer autocomplete integration
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " Autocomplete (comes last)
-Plug 'glepnir/lspsaga.nvim' " Context hover and code actions
+Plug 'tami5/lspsaga.nvim' " Context hover and code actions
 Plug 'folke/trouble.nvim'
-Plug 'mattn/emmet-vim' " HTML emmet
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'guns/vim-clojure-static'
 
+Plug 'dhruvasagar/vim-marp'
+
 call plug#end()
+let g:indentLine_conceallevel = 0
 
 "
 " Plugin configurations

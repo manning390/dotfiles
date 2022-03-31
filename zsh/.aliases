@@ -8,6 +8,7 @@ alias l=ls
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
+alias :w="clear; echo 'Very saved.'"
 #alias -g G='| grep'
 #alias -g M='| less'
 #alias -g L=' wc -1'

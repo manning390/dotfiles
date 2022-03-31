@@ -125,6 +125,10 @@
   execute "nnoremap <silent><leader>".g:next." <cmd>lua vim.lsp.diagnostic.goto_next()<CR>"
   execute "nnoremap <silent><leader>".g:previous." <cmd>lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>"
 
+  " Trouble (LSP error msg)
+  nnoremap <leader>xx <cmd>TroubleToggle<CR>
+  nnoremap <leader>xq <cmd>TroubleToggle quickfix<CR>
+
   " Saga
   nmap <silent>gk :Lspsaga hover_doc<CR>
   nmap <silent>gs :Lspsaga signature_help<CR>
