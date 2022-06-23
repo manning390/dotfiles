@@ -115,3 +115,5 @@ eval "$(op completion zsh)"; compdef _op op # 1password completion loading
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.profile ] && source ~/.profile
+
+alias luamake=/home/rail/code/repos/lua-language-server/3rd/luamake/luamake

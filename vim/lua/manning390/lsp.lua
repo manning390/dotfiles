@@ -1,38 +1,45 @@
 local lspconfig = require'lspconfig'
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-lspconfig.clangd.setup{
-    init_options = {
-        compilationDatabaseDirectory = "build"
+local configs = require'lspconfig.configs'
+
+local vim_capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim_capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local langservers = {
+    clangd = {
+        init_options = {
+            compilationDatabaseDirectory = "build"
+        }
     },
-   capabilities = capabilities
-}
-lspconfig.phpactor.setup{
-   capabilities = capabilities
-}
-lspconfig.clangd.setup{
-   capabilities = capabilities
-}
-lspconfig.cmake.setup{
-   capabilities = capabilities
-}
-lspconfig.tsserver.setup{
-   capabilities = capabilities
-}
-lspconfig.vimls.setup{
-   capabilities = capabilities
-}
-lspconfig.cssls.setup{}
-lspconfig.gdscript.setup{
-    cmd = {"ncat", "localhost", "6008"},
-    capabilities = capabilities,
-    on_attach = function (client)
-        local _notify = client.notify
-        client.notify = function (method, params)
-            if method == 'textDocument/didClose' then
-                return
+    gdscript = {
+        cmd = {"ncat", "localhost", "6008"},
+        on_attach = function (client)
+            local _notify = client.notify
+            client.notify = function (method, params)
+                if method == 'textDocument/didClose' then
+                    return
+                end
+                _notify(method, params)
             end
-            _notify(method, params)
         end
-    end
+    },
+    emmet_ls = {
+        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    },
+    'cmake',
+    'phpactor',
+    'tsserver',
+    'vimls',
+    'cssls',
+    'sumneko_lua'
 }
 
+-- Loop through langservers and do basic setup
+for k, v in pairs(langservers) do
+  local c = {capabilities = capabilities}
+  if type(v) == 'table' then
+    for _, t in pairs(v) do table.insert(c, t) end
+    v = k
+  end
+  lspconfig[v].setup(c)
+end

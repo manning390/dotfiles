@@ -56,6 +56,7 @@ Plug 'hrsh7th/cmp-buffer',   {'branch': 'main'} " Buffer autocomplete integratio
 Plug 'hrsh7th/cmp-path',     {'branch': 'main'} " Path autocomplete integration
 Plug 'hrsh7th/cmp-cmdline',  {'branch': 'main'} " Cmdline autocomplete integration
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " LSP autocomplete integration
+Plug 'folke/trouble.nvim', {'branch': 'main'} " LSP diagnostics results
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'

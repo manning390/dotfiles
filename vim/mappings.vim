@@ -54,6 +54,7 @@
 
     " Bypass delete buffer when pasting over selection
     vnoremap <leader>p "_dP
+    nnoremap <leader>pp "+p
 
     " make Y yank till end of line
     nnoremap Y y$
@@ -63,10 +64,6 @@
 
     nnoremap <leader>d "_d
     vnoremap <leader>d "_d
-
-    " Visual shifting (does not exit Visual mode)
-    vnoremap < <gv
-    vnoremap > >gv
 
     " Allow using the repeat operator with a visual selection (!)
     " http://stackoverflow.com/a/8064607/127816
@@ -101,10 +98,10 @@
   map <leader>q :bp<bar>bd #<CR>
 
   " Move around panes
-  execute 'map <C-'.g:left.'> <C-w>h'
-  execute 'map <C-'.g:right.'> <C-w>l'
-  execute 'map <C-'.g:down.'> <C-w>j'
-  execute 'map <C-'.g:up.'> <C-w>k'
+  execute 'noremap <C-'.g:left.'> <C-w><C-h>'
+  execute 'noremap <C-'.g:right.'> <C-w><C-l>'
+  execute 'noremap <C-'.g:down.'> <C-w><C-j>'
+  execute 'noremap <C-'.g:up.'> <C-w><C-k>'
 
   " Quickfix lists
   execute 'nnoremap <silent>g'.g:next.' :cnext<CR>'
