@@ -1,13 +1,50 @@
-# Dotfile Configurations
+# Manning390 Dotfiles
 
-In order to better organize configurations between environments I'll be keeping all of my configurations here in this dotfile repo.
+Welcome to my personal configuration hell. We're trying to tidy things up. Don't mind the parts on fire.
 
-The installation scripts will install all dependencies, edit manually to remove any installation.
+Follow the installation steps down below for the appropriate OS.
 
-Heavily inspired by [@FatBoyXPC](https://github.com/colbycheeze/dotfiles) and [@colbycheeze](https://github.com/colbycheeze/dotfiles) implementations. Uses [dotbot](https://github.com/anishathalye/dotbot) for dot file linking.
+## Mac OS
+### Stow
+```
+brew install stow
+```
+#### Neovim
 
-## In constant and infrequent updates.
+```
+brew install --HEAD neovim
+```
 
-Most commit messages are created with `git yolo` alias.
+Ensure version is >0.5.0 or there will be issues with plugins
 
-This repo is for me but may be useful to others.
+#### Neovim Plugged
+
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+``````
+#### Finally do the thing
+
+```
+./.dotfiles/OSX
+```
+
+## Arch
+
+### Stow
+ ???
+
+#### Neovim
+
+```
+paru -S neovim python-pynim
+```
+
+Ensure version is >0.5.0 or there will be issues with plugins
+
+#### Neovim Plugged
+
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+``````
