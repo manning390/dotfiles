@@ -44,6 +44,8 @@ alias nord='nordvpn'
 alias sound='ncpamixer'
 alias :w='clear;echo 21'
 
+alias luamake=/home/rail/code/repos/lua-language-server/3rd/luamake/luamake
+
 # Swallowing on these apps
 alias zathura="devour zathura"
 alias evince="devour evince"
