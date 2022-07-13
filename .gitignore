@@ -3,3 +3,4 @@ nvim/.config/plugged
 nvim/.config/undo
 nvim/.config/swap
 misc/rofi-themes-collection
+zsh/.profile
