@@ -25,7 +25,7 @@ M.notify_output = function(command, opts)
   })
 end
 
-function toggleMovement(first, second)
+M.toggleMovement = function(first, second)
 	local pos = table.concat(vim.fn.getpos('.'), ' ')
 	vim.cmd('normal! '..first)
 	if pos == table.concat(vim.fn.getpos('.'), ' ') then
@@ -33,7 +33,7 @@ function toggleMovement(first, second)
 	end
 end
 
-function customCaseToggle()	
+M.customCaseToggle = function()	
     local p = vim.fn.col('.')
     local char = string.sub(vim.api.nvim_get_current_line(), p, p)
     local seq = ({
