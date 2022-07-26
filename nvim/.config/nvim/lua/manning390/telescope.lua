@@ -11,12 +11,15 @@ require("telescope").setup({
 
         file_ignore_patterns = {
             "node_modules",
+            "vendor"
         },
 
         mappings = {
             i = {
+                ["<C-u>"] = false,
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
+                ["<C-g>"] = actions.send_to_qflist,
                 ["<esc>"] = actions.close,
             },
         },
@@ -40,6 +43,11 @@ M.search_dotfiles = function()
         prompt_title = "< DOTFILES >",
         cwd = vim.env.DOTFILES,
     })
+end
+M.project_files = function()
+    local opts = {}
+    local ok = pcall(require'telescope.builtin'.git_files, opts)
+    if not ok then require'telescope.builtin'.find_files(opts) end
 end
 
 -- M.git_branches = function()

@@ -104,7 +104,7 @@ for f in ~/.scripts/*; do
 done
 
 export PATH=/usr/bin:~/.local/bin:$PATH
-
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export NVM_LAZY_LOAD=true
 export NVM_DIR="$HOME/.nvm"
