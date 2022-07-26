@@ -8,15 +8,24 @@ return require('packer').startup(function()
 		'numToStr/Comment.nvim',
 		config = function() require('Comment').setup() end
 	}
-	use 'nvim-lualine/lualine.nvim' -- Bottom status bar
-	use 'kyazdani42/nvim-web-devicons' -- Dev icons
+	use {
+  		'nvim-lualine/lualine.nvim', -- Bottom status bar
+  		 requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
 	use 'sheerun/vim-polyglot' -- Syntax library
 	use 'tpope/vim-fugitive' -- Git integration
-	use 'lewis6991/gitsigns.nvim' -- Async git signs
-	use 'nightsense/snow' -- Color scheme
-	use 'windwp/nvim-autopairs'
+	use {
+		'lewis6991/gitsigns.nvim', -- Async git signs
+		config = function() require('gitsigns').setup() end
+	}
+	use 'haystackandroid/snow' -- Color scheme
+	use 'arcticicestudio/nord-vim'
+	use {
+		'windwp/nvim-autopairs',
+		config = function() require("nvim-autopairs").setup()  end
+	}
 
-	use 'rcarriga/nvim-notify'
+	use 'rcarriga/nvim-notify' -- Good notifications
 
 	-- Common dependencies
 	use 'nvim-lua/popup.nvim'
@@ -43,7 +52,10 @@ return require('packer').startup(function()
 	use 'folke/trouble.nvim'
 
 	-- Auto complete
-	use 'hrsh7th/nvim-cmp'
+	use {
+		'hrsh7th/nvim-cmp',
+		requires = { 'onsails/lspkind.nvim' }
+	}
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-nvim-lsp'

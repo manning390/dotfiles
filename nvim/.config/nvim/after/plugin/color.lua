@@ -1,4 +1,4 @@
 
 vim.o.background = 'dark'
-vim.cmd 'colorscheme snow'
+vim.cmd 'colorscheme nord'
 

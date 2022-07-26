@@ -34,7 +34,7 @@ vim.o.viewdir = cache_dir .. 'view/'
 vim.o.sidescroll = 1 --sidescroll when needed
 vim.o.wrap = false --don't wrap lines
 vim.o.linebreak = true
-vim.o.colorcolumn = "80"
+--vim.o.colorcolumn = "80"
 vim.signcolumn = "yes"
 
 vim.o.hidden = true --hides buffers rather than closing them when not active

@@ -14,8 +14,8 @@ local xnoremap = bind('x')
 local inoremap = bind('i')
 
 vim.g.mapleader = "'"
-vim.g.localmapleader = '\\'
-vim.keymap.set('', ' ', '\\')
+-- vim.g.localmapleader = '\\'
+-- vim.keymap.set('', ' ', '\\')
 print('Leader is '..vim.g.mapleader)
 
 nmap('<leader>/', ':noh<CR>', {silent =true})
@@ -104,6 +104,7 @@ nnoremap('<leader>s', '<cmd>source ~/.config/nvim/lua/manning390/luasnip.lua<CR>
 -- Editing
 inoremap(';;', '<ESC>A;')
 inoremap(',,', '<ESC>A,')
+inoremap('<space><space>', '<ESC>A')
 
 vnoremap('<', '<gv')
 vnoremap('>', '>gv')
