@@ -1,16 +1,16 @@
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi
+#if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#  exec startx
+#fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/rail/.oh-my-zsh
+export ZSH=/Users/mmanning2/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -62,9 +62,9 @@ ENABLE_CORRECTION="true"
 plugins=(
 colored-man-pages
 last-working-dir
-tmux # Adds aliases to tmux
-fzf
-archlinux # Adds alias to package installers
+#tmux # Adds aliases to tmux
+#fzf
+#archlinux # Adds alias to package installers
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -111,8 +111,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(op completion zsh)"; compdef _op op # 1password completion loading
-
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.profile ] && source ~/.profile
-
+echo "Hi. Hello. Welcome. <3"

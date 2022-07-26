@@ -8,7 +8,7 @@
   endif
   let maplocalleader = '\'
   map <space> \
-echom ''
+" echom ''
 echom 'Leader is: ' . mapleader
 
 " Disable command mode
@@ -24,12 +24,14 @@ echom 'Leader is: ' . mapleader
   nnoremap <leader><CR> :so ~/.config/nvim/init.vim<BAR>:noh<CR>
 
 " Telescope
-  nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+  nnoremap <silent><C-p> :lua require('telescope.builtin').git_files()<CR>
   nnoremap <leader>pf :lua require('telescope.builtin').find_files()<CR>
-  nnoremap <leader>pg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+  nnoremap <leader>p/ :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
   nnoremap <leader>pw :lua require('telescope.builtin').grep_string(({ search = vim.fn.expand("<cword>")}))<CR>
   nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>pv :lua require('manning390.telescope').search_dotfiles()<CR>
+  nnoremap <leader>pg :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+  nnoremap <leader>pG :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 " Yanking names
   nnoremap <leader>yf :let @+ = expand("%:p")<CR> " copy file path
@@ -54,8 +56,8 @@ echom 'Leader is: ' . mapleader
     " inoremap ::: <ESC>A:<ESC>
 
     " Bypass delete buffer when pasting over selection
-    vnoremap <leader>p "_dP
-    nnoremap <leader>pp "+p
+    vnoremap <leader>pp "_dP
+    nnoremap <leader>p "+p
 
     " make Y yank till end of line
     nnoremap Y y$
@@ -137,9 +139,13 @@ echom 'Leader is: ' . mapleader
   nnoremap <leader>ct <cmd>lua require"harpoon.term".sendCommand(1,1)<CR>
   nnoremap <leader>cs <cmd>lua require"harpoon.term".sendCommand(1,2)<CR>
 
+  " Formatting
+    nnoremap <silent> <leader>f :Format<CR>
+    nnoremap <silent> <leader>F :FormatWrite<CR>
+
 " Comments
-  nmap <C-_> <Plug>NERDCommenterToggle<CR>
-  vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+  nmap <C-/> <Plug>NERDCommenterToggle<CR>
+  vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
 
 " Undotree
   nnoremap <F6> :UndotreeToggle<CR>

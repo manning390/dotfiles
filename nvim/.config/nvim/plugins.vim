@@ -6,7 +6,7 @@ Plug 'vimwiki/vimwiki' " Keep notes in vim wiki
 Plug 'nvim-lualine/lualine.nvim' " Bottom status bar
 Plug 'kyazdani42/nvim-web-devicons' " Dev icons
 
-Plug 'mattn/emmet-vim' " HTML emmet
+"Plug 'mattn/emmet-vim' " HTML emmet
 Plug 'sheerun/vim-polyglot' " syntax library
 Plug 'nathanaelkane/vim-indent-guides' " Intend guides
 Plug 'tpope/vim-fugitive' " Git integration
@@ -20,6 +20,9 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " Harpoon
 Plug 'ThePrimeagen/harpoon'
+
+" Git Worktree
+Plug 'ThePrimeagen/git-worktree.nvim'
 
 Plug 'ncm2/float-preview.nvim'
 Plug 'windwp/nvim-autopairs' " Adds auto surround and deletion
@@ -55,8 +58,12 @@ Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'} " LSP autocomplete integration
 Plug 'hrsh7th/cmp-buffer',   {'branch': 'main'} " Buffer autocomplete integration
 Plug 'hrsh7th/cmp-path',     {'branch': 'main'} " Path autocomplete integration
 Plug 'hrsh7th/cmp-cmdline',  {'branch': 'main'} " Cmdline autocomplete integration
+Plug 'hrsh7th/cmp-calc', {'branch': 'main' } " calculations/math autocomplete
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'} " LSP autocomplete integration
 Plug 'folke/trouble.nvim', {'branch': 'main'} " LSP diagnostics results
+
+" Formatting
+Plug 'mhartington/formatter.nvim'
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'

@@ -29,6 +29,7 @@ local langservers = {
     'cmake',
     'phpactor',
     'tsserver',
+    'eslint',
     'vimls',
     'cssls',
     'sumneko_lua'

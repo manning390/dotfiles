@@ -1,3 +1,5 @@
+-- use { 'L3M0N4D3/LuaSnip' }
+-- use { 'saadparwaiz1/cmp_luasnip' }
 local cmp = require("cmp")
 cmp.setup({
     mapping = {
@@ -18,6 +20,7 @@ cmp.setup({
         { name = 'nvim_lsp'},
         { name = 'buffer'},
         { name = 'path'},
+        { name = 'calc'},
 --        { name = 'cmdline'},
         { name = 'luasnip'}
     },
