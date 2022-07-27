@@ -43,6 +43,7 @@ alias nord='nordvpn'
 
 alias sound='ncpamixer'
 alias :w='clear;echo 21'
+alias :q='exit'
 
 alias luamake=/home/rail/code/repos/lua-language-server/3rd/luamake/luamake
 

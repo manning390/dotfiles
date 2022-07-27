@@ -20,7 +20,6 @@ cmp.setup({
                 end
             end,
         },
-        ['<esc>'] = cmp.mapping.close(),
         ['<cr>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = {

@@ -1,4 +1,7 @@
+require('nightfox').setup {
+    
+}
 
 vim.o.background = 'dark'
-vim.cmd 'colorscheme nord'
+vim.cmd 'colorscheme nordfox'
 

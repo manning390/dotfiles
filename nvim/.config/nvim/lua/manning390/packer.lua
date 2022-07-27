@@ -12,6 +12,7 @@ return require('packer').startup(function()
   		'nvim-lualine/lualine.nvim', -- Bottom status bar
   		 requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
+	use 'feline-nvim/feline.nvim'
 	use 'sheerun/vim-polyglot' -- Syntax library
 	use 'tpope/vim-fugitive' -- Git integration
 	use {
@@ -20,6 +21,7 @@ return require('packer').startup(function()
 	}
 	use 'haystackandroid/snow' -- Color scheme
 	use 'arcticicestudio/nord-vim'
+	use 'EdenEast/nightfox.nvim'
 	use {
 		'windwp/nvim-autopairs',
 		config = function() require("nvim-autopairs").setup()  end
