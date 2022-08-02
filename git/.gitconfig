@@ -24,11 +24,11 @@
 [fetch]
 	prune = true
 [user]
-	email = michael@manning390.com
+	email = mmanning2@chewy.com
 	name = Michael Manning
 [url "ssh://git@github"]
     insteradOf = https://github.com
 [github]
-	user = Michael-Manning
+	user = mmanning2
 [init]
 	defaultBranch = dev
