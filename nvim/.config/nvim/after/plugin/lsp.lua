@@ -3,9 +3,10 @@ local lspconfig = require('lspconfig')
 
 local vim_capabilities = vim.lsp.protocol.make_client_capabilities()
 vim_capabilities.textDocument.completion.completionItem.snippetSupport = true
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim_capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim_capabilities)
 
 local langservers = {
+  'tsserver',
   clangd = {
     init_options = {
       compilationDatabaseDirectory = "build"
@@ -28,13 +29,12 @@ local langservers = {
   },
   'cmake',
   'phpactor',
-  'tailwindcss',
+  -- 'tailwindcss',
   'vimls',
   'cssls',
-  'emmet_ls',
---  'eslint',
-  'tsserver',
-  'sumneko_lua'
+  'eslint',
+  'java_language_server',
+  -- 'sumneko_lua'
 }
 
 -- Loop through langservers and do basic setup

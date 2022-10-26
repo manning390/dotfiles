@@ -2,6 +2,8 @@
 --syntax on
 local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
 
+vim.env.BASH_ENV = '~/.aliases'
+
 vim.o.termguicolors = true
 vim.o.mouse = 'nv'
 vim.o.errorbells = false
@@ -36,6 +38,8 @@ vim.o.wrap = false --don't wrap lines
 vim.o.linebreak = true
 --vim.o.colorcolumn = "80"
 vim.signcolumn = "yes"
+vim.o.foldmethod = 'indent'
+vim.o.foldlevel=99
 
 vim.o.hidden = true --hides buffers rather than closing them when not active
 

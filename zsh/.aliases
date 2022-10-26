@@ -1,3 +1,4 @@
+#!/bin/sh
 # Unix
 alias tlf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln

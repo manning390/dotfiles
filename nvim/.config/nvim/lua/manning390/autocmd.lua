@@ -26,3 +26,7 @@ vim.api.nvim_create_autocmd({'BufWritePost'}, {
         vim.notify('Packer Compile', 'info', {render = 'minimal'})
     end
 })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    group = vim.api.nvim_create_augroup('openFolds', { clear = true }),
+    command = 'normal! zR'
+})

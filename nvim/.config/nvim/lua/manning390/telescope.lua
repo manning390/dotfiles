@@ -5,7 +5,7 @@ require("telescope").setup({
         prompt_prefix = " >",
         color_devicons = true,
 
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        file_previewer = require("telescope.previewers").cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
@@ -16,11 +16,10 @@ require("telescope").setup({
 
         mappings = {
             i = {
-                ["<C-u>"] = false,
+                -- ["<C-u>"] = false,
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_to_qflist,
-                ["<esc>"] = actions.close,
             },
         },
 
@@ -49,10 +48,5 @@ M.project_files = function()
     local ok = pcall(require'telescope.builtin'.git_files, opts)
     if not ok then require'telescope.builtin'.find_files(opts) end
 end
-
--- M.git_branches = function()
-    -- require("telescope.builtin").git_branches({
-    -- })
--- end
 
 return M
