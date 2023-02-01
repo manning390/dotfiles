@@ -33,7 +33,6 @@ local langservers = {
   'vimls',
   'cssls',
   'eslint',
-  'java_language_server',
   -- 'sumneko_lua'
 }
 
@@ -46,3 +45,16 @@ for k, v in pairs(langservers) do
   end
   lspconfig[v].setup(c)
 end
+
+vim.diagnostic.config({
+    virtual_text = false
+})
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.api.nvim_create_autocmd({'CursorHold,CursorHoldI'}, {
+    pattern = {'*'},
+    group = vim.api.nvim_create_augroup('diagnostic', {clear = true}),
+    callback = function()
+      vim.diagnostic.open_float(nil, {focus=false})
+    end
+})

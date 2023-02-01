@@ -1,4 +1,4 @@
--- Only required if you have packer configured as `opt`
+-- Only required if you have packer configured as `opt`packerpacker
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -14,14 +14,32 @@ return require('packer').startup(function(use)
 		config = function() require('Comment').setup() end
 	}
 	use {
+		'lukas-reineke/indent-blankline.nvim',
+		config = function() require('indent_blankline').setup {
+			char = '|',
+			show_trailing_blankline_indent = false,
+		} end,
+	}
+	use {
   		'nvim-lualine/lualine.nvim', -- Bottom status bar
   		 requires = { 'kyazdani42/nvim-web-devicons'}
 	}
 	use 'sheerun/vim-polyglot' -- Syntax library
+
 	use 'tpope/vim-fugitive' -- Git integration
+	use 'tpope/vim-rhubarb'
+	use 'tpope/vim-sleuth'
 	use {
 		'lewis6991/gitsigns.nvim', -- Async git signs
-		config = function() require('gitsigns').setup() end
+		config = function() require('gitsigns').setup {
+			signs = {
+    				add = { text = '+' },
+    				change = { text = '~' },
+    				delete = { text = '_' },
+    				topdelete = { text = '‾' },
+    				changedelete = { text = '~' },
+			}
+		} end
 	}
  	-- Color scheme
 	use 'haystackandroid/snow'
@@ -34,6 +52,7 @@ return require('packer').startup(function(use)
 		}  end
 	}
 
+
 	use 'rcarriga/nvim-notify' -- Good notifications
 
 	use 'tpope/vim-abolish' -- Better substitutions and iabbrev
@@ -41,10 +60,22 @@ return require('packer').startup(function(use)
 	-- Common dependencies
 	use 'nvim-lua/popup.nvim'
 	use 'nvim-lua/plenary.nvim'
-	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+	use {
+		'nvim-treesitter/nvim-treesitter',
+        run = function()
+        	pcall(require('nvim-treesitter.install').update { with_sync = true})
+        end,
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter-textobjects',
+		after = 'nvim-treesitter'
+	}
 
 	-- Telescope
-	use 'nvim-telescope/telescope.nvim'
+	use {
+		'nvim-telescope/telescope.nvim',
+  		requires = { "nvim-lua/plenary.nvim" }
+	}
 	use 'nvim-telescope/telescope-fzy-native.nvim'
 
 	-- Worktrees
@@ -66,24 +97,72 @@ return require('packer').startup(function(use)
 	}
 
 	-- Lsp Stuff
-	use 'neovim/nvim-lspconfig'
-	use 'glepnir/lspsaga.nvim'
+	use {
+		'neovim/nvim-lspconfig',
+		requires = {
+			-- Automatically install LSPs to stdpath for neovim
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
+			-- Useful status updates for LSP
+			'j-hui/fidget.nvim',
+		}
+	}
+	use {
+		'glepnir/lspsaga.nvim',
+		config = function()
+			local status, saga = pcall(require, "lspsaga")
+			if (not status) then return end
+
+			saga.setup({
+				-- server_filetype_map = {
+				-- 	typescript = 'typescript'
+				-- }
+			})
+		end
+	}
 	use 'folke/trouble.nvim'
+	use {
+		'jose-elias-alvarez/null-ls.nvim',
+		config = function()
+			local status, null_ls = pcall(require, "null-ls")
+			if (not status) then return end
+
+			require'null-ls'.setup({
+				sources = {
+
+				}
+			})
+		end,
+  		requires = { "nvim-lua/plenary.nvim" }
+	}
 
 	-- Auto complete
 	use {
 		'hrsh7th/nvim-cmp',
-		requires = { 'onsails/lspkind.nvim' }
+		requires = {
+			'onsails/lspkind.nvim',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-nvim-lsp-signature-help',
+			'hrsh7th/cmp-nvim-lua',
+			'hrsh7th/cmp-cmdline',
+			'mattn/emmet-vim',
+			'saadparwaiz1/cmp_luasnip',
+		}
 	}
 	-- Auto complete sources
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-nvim-lsp-signature-help'
-	use 'hrsh7th/cmp-nvim-lua' -- neovim lua api
-	use 'hrsh7th/cmp-cmdline'
-	use 'mattn/emmet-vim'
-	use 'saadparwaiz1/cmp_luasnip'
+
+	-- Rest Client
+	use {
+  		"NTBBloodbath/rest.nvim",
+  		requires = { "nvim-lua/plenary.nvim" },
+  		config = function()
+    		require'rest-nvim'.setup({
+				result_split_in_place = true,
+    		})
+    	end
+	}
 
 	-- Testing
 	use {

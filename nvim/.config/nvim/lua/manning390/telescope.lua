@@ -17,7 +17,7 @@ require("telescope").setup({
         mappings = {
             i = {
                 -- ["<C-u>"] = false,
-                ["<C-x>"] = false,
+                -- ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_to_qflist,
             },
@@ -47,6 +47,19 @@ M.project_files = function()
     local opts = {}
     local ok = pcall(require'telescope.builtin'.git_files, opts)
     if not ok then require'telescope.builtin'.find_files(opts) end
+end
+M.related_files = function()
+    print("WIP")
+    -- local cwd = vim.fn.getcwd()
+    -- local p = vim.fn.expand('%')
+    -- local j, k = string.find(p, cwd)
+    -- print(cwd, p, j, k)
+    -- local i, _ = string.find(p, '.', 1, true)
+    -- local sans = string.sub(p, 1, i-1)
+    -- require'telescope.builtin'.find_files({
+    --     find_command = {'rg', sans, '--files', '--hidden', '-g', '!.git'},
+    --     prompt_title = "< RELATED >",
+    -- })
 end
 
 return M

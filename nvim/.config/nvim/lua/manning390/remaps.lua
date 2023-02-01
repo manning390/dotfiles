@@ -22,13 +22,13 @@ nmap('<leader>/', ':noh<cr>', {silent =true})
 nnoremap('<enter>', ':let @/=""<cr>', {silent = true}) -- Clear search buffer
 
 nnoremap('Q', '<nop>', {silent = true})
-nnoremap('<leader><CR>', function() require('reload') end)
+nnoremap('<leader><cr>', function() require('reload') end)
 
 -- Setting local variables for qwerty <-> colemak for downsteam mappings
 local sf = string.format
 local h, j, k, l, n, N, f = 'h', 'j', 'k', 'l', 'n', 'N', 'f'
 if vim.env.COLEMAK == '1' then
-	h, j, k, i, n, N, f = 'm', 'n', 'e', 'i', 'h', 'H', 't'
+	h, j, k, l, n, N, f = 'm', 'n', 'e', 'i', 'h', 'H', 't'
 	map('m', 'h') -- left
 	map('n', 'j') -- down
 	map('e', 'k') -- up
@@ -47,33 +47,43 @@ nnoremap(sf('<C-%s>', k), ':wincmd k<cr>', {silent = true}) -- change window up
 nnoremap(sf('<C-%s>', l), ':wincmd l<cr>', {silent = true}) -- change window right
 
 -- Harpoon
-nnoremap('<leader>a', function() require'harpoon.mark'.add_file() end)
-nnoremap('<leader>`', function() require'harpoon.ui'.toggle_quick_menu() end)
+nnoremap('<leader>a', require'harpoon.mark'.add_file)
+nnoremap('<leader>`', require'harpoon.ui'.toggle_quick_menu)
 for i = 1, 9 do
 	nnoremap('<leader>'..i, function() require'harpoon.ui'.nav_file(i) end)
 end
-nnoremap('<leader>t`', function() require'harpoon.cmd-ui'.toggle_quick_menu() end)
+nnoremap('<leader>t`', require'harpoon.cmd-ui'.toggle_quick_menu)
 nnoremap('<leader>tt', function() require'harpoon.term'.gotoTerminal(1) end)
 nnoremap('<leader>ts', function() require'harpoon.term'.gotoTerminal(0) end)
 
 -- Telescope
 local mtel = require'manning390.telescope'
 local tel = require'telescope.builtin'
-nnoremap('<C-p>', function() mtel.project_files() end)
-nnoremap('<leader>pf', function() tel.find_files() end)
-nnoremap('<leader>pg', function()
-	tel.grep_string{ search = vim.fn.input("Grep For > ")} end)
+nnoremap('<C-p>',  mtel.project_files, {desc = 'Search [P]roject'})
+nnoremap('<leader><space>', require'telescope.builtin'.buffers, {desc = '[ ] Find existing buffers'})
+nnoremap('<leader>?', require'telescope.builtin'.oldfiles, { desc = '[?] Find recently opened files' })
+nnoremap('<leader>pf', tel.find_files, {desc = 'Search [F]iles'})
+nnoremap('<leader>ph', require'telescope.builtin'.help_tags, { desc = 'Search [H]elp'})
+nnoremap('<leader>pd', require'telescope.builtin'.diagnostics, { desc = 'Search [D]iagnostics'})
+nnoremap('<leader>pg', require'telescope.builtin'.live_grep, { desc = 'Search by [G]rep'})
+nnoremap('<leader>pr', require'telescope.builtin'.grep_string, { desc = 'Search current [W]ord'})
+-- nnoremap('<leader>pg', function()
+-- 	tel.grep_string{ search = vim.fn.input("Grep For > ")} end)
 -- nnoremap('<leader>pw', function()
 -- 	tel.grep_string{ search = vim.fn.expand("<cword>")} end)
-nnoremap('<leader>pw', function() require('telescope').extensions.git_worktree.git_worktrees() end)
-nnoremap('<leader>pb', function() tel.buffers() end)
-nnoremap('<leader>pv', function() mtel.search_dotfiles() end)
+nnoremap('<leader>pt', require'telescope'.extensions.git_worktree.git_worktrees, {desc = 'Search Work[T]rees'})
+nnoremap('<leader>pv', mtel.search_dotfiles, {desc = 'Search [V]im Configs'})
 
 -- Lsp
-nnoremap('gd', function() vim.lsp.buf.definition() end, {silent = true})
-nnoremap('gD', function() vim.lsp.buf.declaration() end, {silent = true})
-nnoremap('gr', function() vim.lsp.buf.references() end, {silent = true})
-nnoremap('g?', function() vim.diagnostic.open_float() end, {silent = true})
+nnoremap('gd', vim.lsp.buf.definition, {silent = true, desc = 'LSP: [G]oto [D]efinition'})
+nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
+nnoremap('<leader>', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
+nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction'})
+nnoremap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition'})
+nnoremap('gD', vim.lsp.buf.declaration, {silent = true})
+nnoremap('g?', vim.diagnostic.open_float, {silent = true})
+nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs colemak rebind
+-- nnoremap(sf('<C-%s>', h), vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation'}) -- Needs colemak rebind
 nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})
 nmap('<leader>'..N, function()
 	vim.lsp.diagnostic.show_line_diagnostics()
@@ -103,18 +113,17 @@ inoremap("<C-i>", function()
 		ls.change_choice(1)
 	end
 end)
-nnoremap('<leader>s', '<cmd>source ~/.config/nvim/lua/manning390/luasnip.lua<CR>')
+-- nnoremap('<leader>s', '<cmd>source ~/.config/nvim/lua/manning390/luasnip.lua<cr>')
 
 
 -- Fugitive
-nnoremap('<leader>gs', ':G<CR>')
-nnoremap('<leader>gc', ':G ci<CR>')
-nnoremap('<leader>gp', ':G push<CR>')
--- Used with 
-nnoremap('<leader>g'..j, ':diffget //3<CR>')
-nnoremap('<leader>g'..f, ':diffget //2<CR>')
+nnoremap('<leader>gs', ':G<cr>')
+nnoremap('<leader>gc', ':G ci<cr>')
+nnoremap('<leader>gp', ':G push<cr>')
+nnoremap('<leader>g'..j, ':diffget //3<cr>')
+nnoremap('<leader>g'..f, ':diffget //2<cr>')
 
-nnoremap('<leader>gw', function() require('telescope').extensions.git_worktree.create_git_worktree() end)
+nnoremap('<leader>gw', require'telescope'.extensions.git_worktree.create_git_worktree)
 
 -- Quickfix lists
 nnoremap('g'..n, ':cnext<cr>', {silent = true})
@@ -124,14 +133,14 @@ nnoremap('gq', ':cclose<cr>', {silent = true})
 -- Jump to EOL
 inoremap(';;', '<ESC>A;<ESC>')
 inoremap(',,', '<ESC>A,<ESC>')
-inoremap('<space><space>', '<ESC>A')
 
 -- Visual Shifting
 vnoremap('<', '<gv')
 vnoremap('>', '>gv')
-vnoremap('.', ':normal .<CR>')
-nnoremap('<leader>%', ':let @+=expand(\'%\')<CR>') -- Yank filepath into copy buffer
+
+vnoremap('.', ':normal .<cr>')
+nnoremap('<leader>%', ':let @+=expand(\'%\')<cr>') -- Yank filepath into copy buffer
 nnoremap('Y', 'y$') -- Add missing yank
 nnoremap('0', function() require('manning390.fn').toggleMovement('^', '0') end)
-nnoremap('~', function() require('manning390.fn').customCaseToggle() end)
+nnoremap('~', require'manning390.fn'.customCaseToggle)
 

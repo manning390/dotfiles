@@ -38,18 +38,18 @@ vim.o.wrap = false --don't wrap lines
 vim.o.linebreak = true
 --vim.o.colorcolumn = "80"
 vim.signcolumn = "yes"
-vim.o.foldmethod = 'indent'
-vim.o.foldlevel=99
 
 vim.o.hidden = true --hides buffers rather than closing them when not active
-
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 --vim.o.listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
 vim.o.listchars = "eol:¶,tab:>·,trail:~,extends:>,precedes:<,space:·"
 
 --vim.o.formatoptions-=ro
 
-vim.o.number = true
-vim.o.relativenumber = true --Show line numbers Relative line numbers
+vim.wo.number = true
+vim.wo.relativenumber = true --Show line numbers Relative line numbers
 vim.o.showmatch = true--show matching parenthesis
 vim.o.cursorline = true--show what line the cursor is on
 vim.o.title = true--show title in window

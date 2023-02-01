@@ -18,4 +18,3 @@ for from,to in pairs({
         vim.cmd('let @/="'..reg..'"') -- Return search buffer to original state
     end, {range = true})
 end
-
