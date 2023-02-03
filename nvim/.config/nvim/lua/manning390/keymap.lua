@@ -14,6 +14,7 @@ local xnoremap = bind('x')
 local inoremap = bind('i')
 
 vim.g.mapleader = "'"
+vim.g.maplocalleader = "'"
 -- vim.g.localmapleader = '\\'
 -- vim.keymap.set('', ' ', '\\')
 print('Leader is '..vim.g.mapleader)
@@ -22,6 +23,8 @@ nmap('<leader>/', ':noh<cr>', {silent =true})
 nnoremap('<enter>', ':let @/=""<cr>', {silent = true}) -- Clear search buffer
 
 nnoremap('Q', '<nop>', {silent = true})
+vim.keymap.set({'n','v'},'<Space>', '<nop>', {silent = true})
+
 nnoremap('<leader><cr>', function() require('reload') end)
 
 -- Setting local variables for qwerty <-> colemak for downsteam mappings
@@ -41,6 +44,9 @@ if vim.env.COLEMAK == '1' then
 	nmap('N', 'J') -- join
 	nmap('I', '<nop>') -- Shift I
 end
+nnoremap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+nnoremap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
 nnoremap(sf('<C-%s>', h), ':wincmd h<cr>', {silent = true}) -- change window left
 nnoremap(sf('<C-%s>', j), ':wincmd j<cr>', {silent = true}) -- change window down
 nnoremap(sf('<C-%s>', k), ':wincmd k<cr>', {silent = true}) -- change window up
@@ -73,15 +79,17 @@ nnoremap('<leader>pr', require'telescope.builtin'.grep_string, { desc = 'Search 
 -- 	tel.grep_string{ search = vim.fn.expand("<cword>")} end)
 nnoremap('<leader>pt', require'telescope'.extensions.git_worktree.git_worktrees, {desc = 'Search Work[T]rees'})
 nnoremap('<leader>pv', mtel.search_dotfiles, {desc = 'Search [V]im Configs'})
+nnoremap('<leader>/', mtel.fuzzy_buffer, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- Lsp
 nnoremap('gd', vim.lsp.buf.definition, {silent = true, desc = 'LSP: [G]oto [D]efinition'})
 nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
-nnoremap('<leader>', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
+nnoremap('<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
 nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction'})
 nnoremap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition'})
 nnoremap('gD', vim.lsp.buf.declaration, {silent = true})
 nnoremap('g?', vim.diagnostic.open_float, {silent = true})
+nnoremap('<leader>q', vim.diagnostic.setloclist)
 nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs colemak rebind
 -- nnoremap(sf('<C-%s>', h), vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation'}) -- Needs colemak rebind
 nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})

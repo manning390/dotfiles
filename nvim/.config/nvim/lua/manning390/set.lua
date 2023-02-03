@@ -11,8 +11,8 @@ vim.o.encoding = 'utf-8'
 vim.o.fileformats = 'unix,mac,dos'
 vim.o.magic = true
 vim.o.tabstop = 4 --A tab is four spaces
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4 -- number of spaces to use for autoindenting
+-- vim.o.softtabstop = 4
+-- vim.o.shiftwidth = 4 -- number of spaces to use for autoindenting
 vim.o.expandtab = true --always convert tabs to spaces
 vim.o.smartindent = true
 vim.o.autoindent = true --always set autoindenting on
@@ -21,6 +21,7 @@ vim.o.preserveindent = true --preserves original tabs or spaces in use
 vim.o.shiftround = true --use multiple of shiftwidth when indenting with '<' and '>'
 vim.o.clipboard = 'unnamedplus'
 
+vim.o.undofile = true
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
@@ -38,6 +39,7 @@ vim.o.wrap = false --don't wrap lines
 vim.o.linebreak = true
 --vim.o.colorcolumn = "80"
 vim.signcolumn = "yes"
+vim.o.completeopt = 'menuone,noselect'
 
 vim.o.hidden = true --hides buffers rather than closing them when not active
 vim.opt.foldmethod = "expr"
@@ -64,7 +66,7 @@ vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
 
 -- Search
-vim.o.hlsearch   = true --highlight search terms
+vim.o.hlsearch   = false --highlight search terms
 vim.o.incsearch  = true --show search matches as you type
 vim.o.ignorecase = true
 vim.o.smartcase  = true --ignore case if search pattern is all lowercase
@@ -77,6 +79,7 @@ vim.o.splitright = true
 vim.o.switchbuf = 'useopen'
 vim.o.backspace= 'indent,eol,start' --allow backspacing over everything in insert mode
 
+vim.o.update = 250
 --[[
 -- Auto commands (run functions/snippets)
 

@@ -1,7 +1,5 @@
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "help", "lua", "vim", "http", "json", "tsx", "scss", "html", "python", "bash" },
-	sync_install = true,
-	auto_install = true,
+	ensure_installed = { "help", "lua", "vim", "http", "json", "typescript", "tsx", "scss", "html", "python", "bash", "c", "cpp" },
 	highlight = { enable = true },
 	indent    = { enable = true, disable = { 'python' } },
 	incremental_selection = {
@@ -13,6 +11,8 @@ require('nvim-treesitter.configs').setup {
 			node_decremental  = '<c-backspace>',
 		},
 	},
+	sync_install = true,
+	auto_install = true,
 	textobjects = {
 		select = {
 			enable = true,
@@ -27,5 +27,25 @@ require('nvim-treesitter.configs').setup {
         		['ic'] = '@class.inner',
 			}
 		}
-	}
+	},
+    	move = {
+      		enable = true,
+      		set_jumps = true, -- whether to set jumps in the jumplist
+      		goto_next_start = {
+        		[']m'] = '@function.outer',
+        		[']]'] = '@class.outer',
+      		},
+      		goto_next_end = {
+        		[']M'] = '@function.outer',
+        		[']['] = '@class.outer',
+      		},
+      		goto_previous_start = {
+        		['[m'] = '@function.outer',
+        		['[['] = '@class.outer',
+      		},
+      		goto_previous_end = {
+        		['[M'] = '@function.outer',
+        		['[]'] = '@class.outer',
+      		},
+    	},
 }

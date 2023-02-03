@@ -16,8 +16,8 @@ require("telescope").setup({
 
         mappings = {
             i = {
-                -- ["<C-u>"] = false,
-                -- ["<C-x>"] = false,
+                ["<C-u>"] = false,
+                ["<C-d>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_to_qflist,
             },
@@ -32,8 +32,8 @@ require("telescope").setup({
     },
 })
 
-require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("git_worktree")
+pcall(require("telescope").load_extension, "fzy")
+pcall(require("telescope").load_extension, "git_worktree")
 
 local M = {}
 M.search_dotfiles = function()
@@ -60,6 +60,13 @@ M.related_files = function()
     --     find_command = {'rg', sans, '--files', '--hidden', '-g', '!.git'},
     --     prompt_title = "< RELATED >",
     -- })
+end
+M.fuzzy_buffer = function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
 end
 
 return M

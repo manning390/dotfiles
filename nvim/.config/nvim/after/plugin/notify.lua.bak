@@ -1,4 +1,5 @@
-vim.notify = require("notify")
+local ok, vim.notify = pcall(require('notify'))
+if not ok then return end
 
 local client_notifs = {}
 
