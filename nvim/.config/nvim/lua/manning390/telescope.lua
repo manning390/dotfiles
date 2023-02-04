@@ -45,28 +45,49 @@ M.search_dotfiles = function()
 end
 M.project_files = function()
     local opts = {}
-    local ok = pcall(require'telescope.builtin'.git_files, opts)
-    if not ok then require'telescope.builtin'.find_files(opts) end
+   local ok = pcall(require 'telescope.builtin'.git_files, opts)
+    if not ok then require 'telescope.builtin'.find_files(opts) end
 end
 M.related_files = function()
-    print("WIP")
-    -- local cwd = vim.fn.getcwd()
-    -- local p = vim.fn.expand('%')
-    -- local j, k = string.find(p, cwd)
-    -- print(cwd, p, j, k)
-    -- local i, _ = string.find(p, '.', 1, true)
-    -- local sans = string.sub(p, 1, i-1)
-    -- require'telescope.builtin'.find_files({
-    --     find_command = {'rg', sans, '--files', '--hidden', '-g', '!.git'},
-    --     prompt_title = "< RELATED >",
-    -- })
+    local removeAfterLastSlash = function(s)
+        return string.sub(s, 1, string.find(s, '/[^/]*$') - 1)
+    end
+
+    local path = removeAfterLastSlash(vim.fn.expand('%'))
+    local opath = ''
+
+    -- Set opposite path to the opposite side of the project
+    if string.find(path, 'test') then
+        opath = string.gsub(path, 'test', 'main')
+    else
+        opath = string.gsub(path, 'main', 'test')
+    end
+
+    -- Make the opposite path the longer of the two paths
+    if #path > #opath then
+        local tmp = path
+        path = opath
+        opath = tmp
+    end
+
+    -- Get to the closest existing directory
+    while opath ~= '' and vim.fn.isdirectory(opath) ~= 1 do
+        opath = removeAfterLastSlash(string.sub(opath, 1, -2))
+    end
+
+    -- Open telescope
+    require 'telescope.builtin'.find_files({
+        find_command = { 'rg', path, opath, '--files'},
+        prompt_title = "< RELATED >",
+    })
 end
 M.fuzzy_buffer = function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes')
+        .get_dropdown {
+            winblend = 10,
+            previewer = false,
+        })
 end
 
 return M

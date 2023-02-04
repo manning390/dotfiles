@@ -16,9 +16,9 @@ local  harpoon = {
     end
 }
 require('lualine').setup{
-    -- options = {
-    --     -- theme = 'snow',
-    -- },
+    options = {
+        theme = 'nord',
+    },
     sections = {
         lualine_c = {'filename', harpoon}
     },

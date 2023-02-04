@@ -73,7 +73,7 @@ require('packer').startup(function(use)
 
 	-- Color scheme
 	-- use 'haystackandroid/snow'
-	use 'arcticicestudio/nord-vim'
+	use 'shaunsingh/nord.nvim'
 	use {
 		'nvim-lualine/lualine.nvim', -- Bottom status bar
 		requires = { 'kyazdani42/nvim-web-devicons' }
@@ -104,9 +104,10 @@ require('packer').startup(function(use)
 
 	use {
 		'windwp/nvim-autopairs',
-		config = function() require("nvim-autopairs").setup{
-			fast_wrap = {}
-		}  end
+		config = function() require("nvim-autopairs").setup {
+				fast_wrap = {}
+			}
+		end
 	}
 
 	-- use {
@@ -123,20 +124,20 @@ require('packer').startup(function(use)
 	-- 	end
 	-- }
 	-- use 'folke/trouble.nvim'
-	-- use {
-	-- 	'jose-elias-alvarez/null-ls.nvim',
-	-- 	config = function()
-	-- 		local status, null_ls = pcall(require, "null-ls")
-	-- 		if (not status) then return end
-	--
-	-- 		require'null-ls'.setup({
-	-- 			sources = {
-	--
-	-- 			}
-	-- 		})
-	-- 	end,
-	--  		requires = { "nvim-lua/plenary.nvim" }
-	-- }
+	use {
+		'jose-elias-alvarez/null-ls.nvim',
+		config = function()
+			local ok, null_ls = pcall(require, "null-ls")
+			if not ok then return end
+			require 'null-ls'.setup({
+				sources = {
+					null_ls.builtins.diagnostics.eslint,
+					null_ls.builtins.completion.spell,
+				}
+			})
+		end,
+		requires = { "nvim-lua/plenary.nvim" }
+	}
 
 
 	-- Rest Client
