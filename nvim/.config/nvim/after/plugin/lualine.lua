@@ -15,12 +15,11 @@ local  harpoon = {
         end
     end
 }
--- require('lualine').setup{
---     -- options = {
---     --     -- theme = 'snow',
---     -- },
---     sections = {
---         lualine_c = {'filename', harpoon}
---     },
--- }
-
+require('lualine').setup{
+    options = {
+        theme = 'nord',
+    },
+    sections = {
+        lualine_c = {'filename', harpoon}
+    },
+}

@@ -5,7 +5,7 @@ require("telescope").setup({
         prompt_prefix = " >",
         color_devicons = true,
 
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        file_previewer = require("telescope.previewers").cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
@@ -17,10 +17,9 @@ require("telescope").setup({
         mappings = {
             i = {
                 ["<C-u>"] = false,
-                ["<C-x>"] = false,
+                ["<C-d>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_to_qflist,
-                ["<esc>"] = actions.close,
             },
         },
 
@@ -33,7 +32,8 @@ require("telescope").setup({
     },
 })
 
-require("telescope").load_extension("fzy_native")
+pcall(require("telescope").load_extension, "fzy")
+pcall(require("telescope").load_extension, "git_worktree")
 
 local M = {}
 M.search_dotfiles = function()
@@ -45,13 +45,49 @@ M.search_dotfiles = function()
 end
 M.project_files = function()
     local opts = {}
-    local ok = pcall(require'telescope.builtin'.git_files, opts)
-    if not ok then require'telescope.builtin'.find_files(opts) end
+   local ok = pcall(require 'telescope.builtin'.git_files, opts)
+    if not ok then require 'telescope.builtin'.find_files(opts) end
 end
+M.related_files = function()
+    local removeAfterLastSlash = function(s)
+        return string.sub(s, 1, string.find(s, '/[^/]*$') - 1)
+    end
 
--- M.git_branches = function()
-    -- require("telescope.builtin").git_branches({
-    -- })
--- end
+    local path = removeAfterLastSlash(vim.fn.expand('%'))
+    local opath = ''
+
+    -- Set opposite path to the opposite side of the project
+    if string.find(path, 'test') then
+        opath = string.gsub(path, 'test', 'main')
+    else
+        opath = string.gsub(path, 'main', 'test')
+    end
+
+    -- Make the opposite path the longer of the two paths
+    if #path > #opath then
+        local tmp = path
+        path = opath
+        opath = tmp
+    end
+
+    -- Get to the closest existing directory
+    while opath ~= '' and vim.fn.isdirectory(opath) ~= 1 do
+        opath = removeAfterLastSlash(string.sub(opath, 1, -2))
+    end
+
+    -- Open telescope
+    require 'telescope.builtin'.find_files({
+        find_command = { 'rg', path, opath, '--files'},
+        prompt_title = "< RELATED >",
+    })
+end
+M.fuzzy_buffer = function()
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes')
+        .get_dropdown {
+            winblend = 10,
+            previewer = false,
+        })
+end
 
 return M

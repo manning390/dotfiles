@@ -1,28 +1,39 @@
-local numbertoggle = vim.api.nvim_create_augroup('numbertoggle', { clear = true })
-vim.api.nvim_create_autocmd({'BufEnter', 'FocusGained', 'InsertLeave'}, {
+local au = vim.api.nvim_create_autocmd
+local ag = vim.api.nvim_create_augroup
+
+local numbertoggle = ag('numbertoggle', { clear = true })
+au({'BufEnter', 'FocusGained', 'InsertLeave'}, {
     group = numbertoggle,
     command = 'set relativenumber'
 })
-vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost', 'InsertEnter'}, {
+au({'BufLeave', 'FocusLost', 'InsertEnter'}, {
     group = numbertoggle,
     command = 'set norelativenumber'
 })
 
-vim.api.nvim_create_autocmd({'FileType'}, {
-    pattern = {'*.md', '*.mkd', '.txt'},
-    group = vim.api.nvim_create_augroup('writing', { clear = true }),
+au({'BufEnter', 'BufNew', 'BufNewFile', 'BufWinEnter'}, {
+    group = ag('treesitter_fold_workaround', {}),
     callback = function()
-        vim.call("pencil#init({'wrap':'soft'})")
-        vim.call('litecorrect#init()')
-        vim.call('lexical#init()')
-        vim.cmd('DittoOn')
+        vim.opt.foldmethod = 'expr'
+        vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
     end
 })
-vim.api.nvim_create_autocmd({'BufWritePost'}, {
-    group =  vim.api.nvim_create_augroup('packer', {clear = true}),
-    pattern = '*packer.lua',
+-- au({'BufReadPost', 'FileReadPost', 'BufEnter'}, {
+--     group = ag('openfolds', {clear = true}),
+--     command = 'normal zR'
+-- })
+au('TextYankPost', {
+  group = ag('yank_highlight', {clear = true}),
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup='IncSearch', timeout=300 }
+  end,
+})
+-- Show line diagnostics automatically in hover window
+au({'CursorHold,CursorHoldI'}, {
+    pattern = {'*'},
+    group = ag('diagnostic', {clear = true}),
     callback = function()
-        require('packer').compile()
-        vim.notify('Packer Compile', 'info', {render = 'minimal'})
+      vim.diagnostic.open_float(nil, {focus=false})
     end
 })
