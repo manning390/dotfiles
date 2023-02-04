@@ -61,3 +61,6 @@ alias fixcaps="setxkbmap -option caps:escape"
 alias colemak="xmodmap ~/.dotfiles/colemak_dh_ansi_us_esc.xmodmap && export KEYBOARD=colemak"
 alias qwerty="xmodmap ~/.dotfiles/qwerty_ansi_us_esc.xmodmap && export KEYBOARD=qwerty"
 alias dock="docker-compose"
+alias wifi="nmcli device connect wlp5s0"
+alias led="headsetcontrol -l 0"
+

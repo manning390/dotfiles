@@ -2,43 +2,36 @@
 
 # Create helpers functions
 function opon() {
-    if [[ -z $OP_SESSION_my ]]; then
-        eval $(op signin my)
+    if [[ -z $OP_SESSION ]]; then
+        export OP_SESSION="$(op signin --account my --raw)"
     fi
 }
 function opoff() {
-    op signout
-    unset OP_SESSION_my
+    op signout --account my
+    unset OP_SESSION
 }
 function opp() {
     opon
     i=$1
-    if [[ -n $OP_SESSION_my ]]; then
-        if [[ -n $OP_CACHED_UUID ]]; then
-            i=$OP_CACHED_UUID
-        fi
-        op get item $i | jq -r '.details.fields[] | select(.designation=="password").value' | xclip -selection clipboard
-    fi
+    op item get $i --session $OP_SESSION --fields password | xclip -selection clipboard
 }
 function opw() {
     opon
     i=$1
-    if [[ -n $OP_SESSION_my ]]; then
-        if [[ -n $OP_CACHED_UUID ]]; then
-            i=$OP_CACHED_UUID
-        fi
-
-        u=$(op get item $i | jq -r '.details.fields[] | select(.designation=="username").value')
-        echo $u
-        echo $u | xclip -selection clipboard
-    fi
+    op item get $i --session $OP_SESSION --fields username | xclip -selection clipboard
+}
+function opt() {
+    opon
+    i=$1
+    op item get $i --session $OP_SESSION --otp | xclip -selection clipboard
 }
 function ops() {
-    opon
-    if [[ -n $OP_SESSION_my ]]; then
-        t=$(op list items --categories Login | jq -c '.[]|.overview.title' |tr -d '\042'| fzf --preview 'op get item {} | jq "{title: .overview.title, url: .overview.url, uuid: .uuid}"')
-        export OP_CACHED_UUID=$(op get item $t --cache | jq -r '.uuid' | tr -d '\042')
-        echo "Cached Search, Password in clipboard"
-        opp
-    fi
+    echo "Shit is broken m8, hello future me, fuck you"
+    # opon
+    # if [[ -n $OP_SESSION_my ]]; then
+    #     t=$(op item list --categories Login --session $OP_SESSION --format=json | jq -c '.[]|.overview.title' |tr -d '\042'| fzf --preview 'op get item {} | jq "{title: .overview.title, url: .overview.url, uuid: .uuid}"')
+    #     export OP_CACHED_UUID=$(op item get $t --cache --session $OP_SESSION | jq -r '.uuid' | tr -d '\042')
+    #     echo "Cached Search, Password in clipboard"
+    #     opp
+    # fi
 }

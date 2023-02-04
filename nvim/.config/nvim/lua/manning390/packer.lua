@@ -4,6 +4,8 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim' -- Manages itself
 
+	use 'tpope/vim-abolish' -- Useful substitutions
+
 	use	{
 		'numToStr/Comment.nvim',
 		config = function() require('Comment').setup() end

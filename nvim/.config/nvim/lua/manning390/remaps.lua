@@ -19,26 +19,17 @@ vim.g.mapleader = "'"
 print('Leader is '..vim.g.mapleader)
 
 nmap('<leader>/', ':noh<CR>', {silent =true})
-nnoremap('<Esc><Esc>', ':let @/ = ""<CR>', {silent = true}) -- Clear search buffer
+nnoremap('<enter>', ':let @/ = ""<CR>', {silent = true}) -- Clear search buffer
 nnoremap('Q', '<nop>', {silent = true})
 nnoremap('<leader><CR>', function() require('reload') end)
---	" Need to define these so mappings in downstream vimrc can map
---	let bind_to = g:colemak_dhm_automap ? 'dhm' : 'original'
---	let g:left  = get(g:colemak_dhm_mappings.left, bind_to)
---	let g:right  = get(g:colemak_dhm_mappings.right, bind_to)
---	let g:down  = get(g:colemak_dhm_mappings.down, bind_to)
---	let g:up  = get(g:colemak_dhm_mappings.up, bind_to)
---	let g:next  = get(g:colemak_dhm_mappings.next, bind_to)
---	let g:previous  = get(g:colemak_dhm_mappings.previous, bind_to)
+
+local h, j, k, l, n, N, f = 'h', 'j', 'k', 'l', 'n', 'N', 'f'
 if vim.env.COLEMAK == '1' then
+    h, j, k, l, n, N, f = 'm', 'n', 'e', 'i', 'h', 'H', 't'
 	map('m', 'h') -- left
 	map('n', 'j') -- down
 	map('e', 'k') -- up
 	map('i', 'l') -- right
- 	nnoremap('<C-m>', ':wincmd h<cr>', {silent = true}) -- change window left
-	nnoremap('<C-n>', ':wincmd j<cr>', {silent = true}) -- change window down
-	nnoremap('<C-e>', ':wincmd k<cr>', {silent = true}) -- change window up
-	nnoremap('<C-i>', ':wincmd l<cr>', {silent = true}) -- change window right
 	map('l', 'i') -- insert
 	nmap('h', 'n') -- next
 	nmap('H', 'N') -- previous
@@ -47,6 +38,11 @@ if vim.env.COLEMAK == '1' then
 	nmap('N', 'J') -- join
 	nmap('I', '<nop>') -- Shift I
 end
+local sf = string.format
+nnoremap(sf('<C-%s>', h), ':wincmd h<cr>', {silent = true}) -- change window left
+nnoremap(sf('<C-%s>', j), ':wincmd j<cr>', {silent = true}) -- change window down
+nnoremap(sf('<C-%s>', k), ':wincmd k<cr>', {silent = true}) -- change window up
+nnoremap(sf('<C-%s>', l), ':wincmd l<cr>', {silent = true}) -- change window right
 
 -- Harpoon
 nnoremap('<leader>a', function() require'harpoon.mark'.add_file() end)
@@ -63,7 +59,7 @@ local mtel = require'manning390.telescope'
 local tel = require'telescope.builtin'
 nnoremap('<C-p>', function() mtel.project_files() end)
 nnoremap('<leader>pf', function() tel.find_files() end)
-nnoremap('<leader>p/', function()
+nnoremap('<leader>pg', function()
 	tel.grep_string{ search = vim.fn.input("Grep For > ")} end)
 nnoremap('<leader>pw', function()
 	tel.grep_string{ search = vim.fn.expand("<cword>")} end)
@@ -80,26 +76,31 @@ nmap('<leader>H', function()
 	vim.lsp.util.show_line_diagnostics()
 end, {silent = true})
 -- Snippets
-local ls = require'luasnip'
-vim.keymap.set({'i','s'}, "<C-k>", function()
-	print(ls.expand_or_jumpable())
-	-- if ls.expand_or_jumpable() then
-		ls.expand_or_jump()
-	-- end
-end, {silent = true})
-vim.keymap.set({'i','s'}, "<C-j>", function()
-	print('what')
-	-- if ls.jumpable(-1) then
-		ls.jump(-1)
-	-- end
-end, {silent = true})
-inoremap("<C-i>", function()
-	print('who')
-	if ls.choice_active() then
-		ls.change_choice(1)
-	end
-end)
+-- local ls = require'luasnip'
+-- vim.keymap.set({'i','s'}, "<C-k>", function()
+-- 	print(ls.expand_or_jumpable())
+-- 	-- if ls.expand_or_jumpable() then
+-- 		ls.expand_or_jump()
+-- 	-- end
+-- end, {silent = true})
+-- vim.keymap.set({'i','s'}, "<C-j>", function()
+-- 	print('what')
+-- 	-- if ls.jumpable(-1) then
+-- 		ls.jump(-1)
+-- 	-- end
+-- end, {silent = true})
+-- inoremap("<C-i>", function()
+-- 	print('who')
+-- 	if ls.choice_active() then
+-- 		ls.change_choice(1)
+-- 	end
+-- end)
 nnoremap('<leader>s', '<cmd>source ~/.config/nvim/lua/manning390/luasnip.lua<CR>')
+
+-- Quick fix lists
+nnoremap('g'..n, ':cnext<cr>',  {silent = true})
+nnoremap('g'..N, ':cprev<cr>',  {silent = true})
+nnoremap('gq',   ':cclose<cr>', {silent = true})
 
 -- Editing
 inoremap(';;', '<ESC>A;')
@@ -113,4 +114,12 @@ vnoremap('.', ':normal .<CR>')
 nnoremap('Y', 'y$')
 nnoremap('0', function() require('manning390.fn').toggleMovement('^', '0') end)
 nnoremap('~', function() require('manning390.fn').customCaseToggle() end)
+
+nnoremap('<F4>', function() 
+	if vim.fn.expand('%:e') == 'cpp' then
+		vim.cmd('find %:t:r.hpp')
+	else
+		vim.cmd('find %:t:r.cpp')
+	end
+end)
 
