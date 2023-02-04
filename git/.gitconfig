@@ -16,7 +16,7 @@
     clear = "!clear; echo \"Good job.\""
 	pr="!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
 	yeet = !git add . && git commit
-	yolo = !git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt) -yolo\"  && git push origin HEAD -f
+	yolo = !git add . && git commit -m \"$(curl -s https://whatthecommit.com/index.txt) -yolo\"  && git push origin HEAD -f
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input
