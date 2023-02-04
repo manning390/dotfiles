@@ -61,11 +61,11 @@ require('packer').startup(function(use)
 		'lewis6991/gitsigns.nvim', -- Async git signs
 		config = function() require('gitsigns').setup {
 				signs = {
-					add = { text = '+' },
-					change = { text = '~' },
-					delete = { text = '_' },
-					topdelete = { text = '‾' },
-					changedelete = { text = '~' },
+					-- add = { text = '+' },
+					-- change = { text = '~' },
+					-- delete = { text = '_' },
+					-- topdelete = { text = '‾' },
+					-- changedelete = { text = '~' },
 				}
 			}
 		end
@@ -132,7 +132,6 @@ require('packer').startup(function(use)
 			require 'null-ls'.setup({
 				sources = {
 					null_ls.builtins.diagnostics.eslint,
-					null_ls.builtins.completion.spell,
 				}
 			})
 		end,
