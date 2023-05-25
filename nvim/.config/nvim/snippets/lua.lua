@@ -1,4 +1,7 @@
 return {
-   s('req', fmt('local {} = require\'{}\'{}',{ i(1, 'package'), rep(1), i(0) })),
+	s('req', fmt([[local {} = require "{}"]], { f(
+		function(import_name)
+			local parts = vim.split(import_name[1][1], ".", true)
+			return parts[#parts] or ""
+		end, { 1 }), i(1) })),
 }
-

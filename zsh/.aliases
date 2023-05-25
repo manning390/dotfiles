@@ -40,6 +40,6 @@ alias cat='bat'
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
-alias :w='clear;echo 21'
+alias :w="clear;echo \"You're not in vim but ok\""
 alias work="cd ~/workspace"
 alias dock="docker-compose"

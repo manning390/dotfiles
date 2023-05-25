@@ -1,5 +1,10 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+local n = vim.g.keymaps.n;
+local N = vim.g.keymaps.N;
+
+require('manning390.snippets')
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -16,7 +21,7 @@ cmp.setup({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        ['<C-n>'] = cmp.mapping(function(fallback)
+        ['<C-'..n..'>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -25,7 +30,7 @@ cmp.setup({
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-N>'] = cmp.mapping(function(fallback)
+        ['<C-S-'..n..'>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -45,6 +50,7 @@ cmp.setup({
         { name = 'nvim_lsp' },
         -- { name = 'nvim_lsp_signature_help' },
         { name = 'path' },
+        { name = 'calc' },
         { name = 'luasnip' },
         { name = 'buffer', keyword_length = 5 },
         -- { name = 'cmdline'},

@@ -19,7 +19,7 @@ require("telescope").setup({
                 ["<C-u>"] = false,
                 ["<C-d>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
-                ["<C-g>"] = actions.send_to_qflist,
+                ["<C-g>"] = actions.send_selected_to_qflist,
             },
         },
 
@@ -44,7 +44,7 @@ M.search_dotfiles = function()
     })
 end
 M.project_files = function()
-    local opts = {}
+    local opts = { show_untracked = true }
    local ok = pcall(require 'telescope.builtin'.git_files, opts)
     if not ok then require 'telescope.builtin'.find_files(opts) end
 end

@@ -1,5 +1,7 @@
 vim.api.nvim_create_user_command('W', ':w', {}) -- Fat finger save
 vim.api.nvim_create_user_command('Es', ':EslintFixAll', {}) -- Fast alias
+vim.api.nvim_create_user_command('Prit', 'silent !npx prettier --write % && :e', {})
+vim.api.nvim_create_user_command('Snips', 'e ~/.config/nvim/snippets', {}) -- Reload snippets
 
 -- Leverages tpope/abolish.vim :Subvert to create commands to swap the pairs in the list below
 -- ie, :'<,'>WH => var_width -> var_height

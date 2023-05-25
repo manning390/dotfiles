@@ -28,16 +28,17 @@ require('packer').startup(function(use)
 	use {
 		'hrsh7th/nvim-cmp',
 		requires = {
-			-- 'onsails/lspkind.nvim',
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-nvim-lsp',
-			-- 'hrsh7th/cmp-nvim-lsp-signature-help',
-			'hrsh7th/cmp-nvim-lua',
-			-- 'hrsh7th/cmp-cmdline',
-			'mattn/emmet-vim',
 			'L3MON4D3/LuaSnip',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-calc',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-nvim-lua',
+			'hrsh7th/cmp-path',
+			'mattn/emmet-vim',
 			'saadparwaiz1/cmp_luasnip',
+			-- 'hrsh7th/cmp-cmdline',
+			-- 'hrsh7th/cmp-nvim-lsp-signature-help',
+			-- 'onsails/lspkind.nvim',
 		}
 	}
 
@@ -47,43 +48,58 @@ require('packer').startup(function(use)
 		run = function()
 			pcall(require('nvim-treesitter.install').update { with_sync = true })
 		end,
-	}
-	-- Additional text objects via tree sitter
-	use {
-		'nvim-treesitter/nvim-treesitter-textobjects',
-		after = 'nvim-treesitter'
+		requires = {
+			'JoosepAlviste/nvim-ts-context-commentstring',
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		}
 	}
 
+	
 	-- Git reload plugins
 	use 'tpope/vim-fugitive' -- Git integration
 	use 'tpope/vim-rhubarb'
 	use {
 		'lewis6991/gitsigns.nvim', -- Async git signs
 		config = function() require('gitsigns').setup {
-				signs = {
-					-- add = { text = '+' },
-					-- change = { text = '~' },
-					-- delete = { text = '_' },
-					-- topdelete = { text = '‾' },
-					-- changedelete = { text = '~' },
-				}
+				-- signs = {
+				-- 	-- add = { text = '+' },
+				-- 	-- change = { text = '~' },
+				-- 	-- delete = { text = '_' },
+				-- 	-- topdelete = { text = '‾' },
+				-- 	-- changedelete = { text = '~' },
+				-- }
 			}
 		end
+	}
+
+	use 'nvim-tree/nvim-web-devicons'
+
+ 	-- Bottom status bar
+	use {
+		'nvim-lualine/lualine.nvim',
 	}
 
 	-- Color scheme
 	-- use 'haystackandroid/snow'
 	use 'shaunsingh/nord.nvim'
-	use {
-		'nvim-lualine/lualine.nvim', -- Bottom status bar
-		requires = { 'kyazdani42/nvim-web-devicons' }
-	}
+
 	use { 'lukas-reineke/indent-blankline.nvim',
 		config = function() require('indent_blankline').setup { char = '┊', show_trailing_blankline_indent = false, } end }
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end } -- Comment toggling
-	use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth auto
+
 	use 'tpope/vim-abolish' -- Better substitutions and iabbrev
+	use 'tpope/vim-eunuch' -- :Rename and :SudoWrite
+	use 'tpope/vim-repeat' -- bracket mappings
+	use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth auto
+	use 'tpope/vim-surround' -- Surround operator
+	use 'tpope/vim-unimpaired' -- bracket mappings
+	use 'jessarcher/vim-heritage' -- Create new directories on edit file in non-existent dir
+
 	-- use 'sheerun/vim-polyglot' -- Syntax library
+	use {
+		'whatyouhide/vim-textobj-xmlattr',
+		requires = 'kana/vim-textobj-user'
+	}
 
 	-- Telescope
 	use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { "nvim-lua/plenary.nvim" } }
@@ -91,7 +107,7 @@ require('packer').startup(function(use)
 
 	-- Harpoo"n
 	use {
-		'ThePrimeagen/harpoon',
+		"ThePrimeagen/harpoon",
 		config = function()
 			require 'harpoon'.setup({
 				global_settings = { save_on_change = true }
@@ -101,7 +117,6 @@ require('packer').startup(function(use)
 	-- Worktrees
 	use { 'ThePrimeagen/git-worktree.nvim', config = function() require 'git-worktree'.setup() end }
 
-
 	use {
 		'windwp/nvim-autopairs',
 		config = function() require("nvim-autopairs").setup {
@@ -109,6 +124,35 @@ require('packer').startup(function(use)
 			}
 		end
 	}
+
+	-- Smooth scrolling
+	use {
+		'karb94/neoscroll.nvim',
+		config = function()
+			require('neoscroll').setup()
+		end
+	}
+
+	-- Fix pasting indents
+	use {
+		'sickill/vim-pasta',
+		config = function()
+			vim.g.pasta_disabled_filetypes = {'fugitive'}
+		end
+	}
+
+	-- Array helpers
+	-- gS to turn 1 line into array
+	-- gJ to turn multiline array to one line
+	-- Breaks with current join line mapping
+	-- use {
+	-- 	'AndrewRadev/splitjoin.vim',
+	-- 	config = function()
+	-- 		vim.g.splitjoin_html_attributes_bracket_on_new_line = 1
+	-- 		vim.g.splitjoin_trailing_comma = 1
+	-- 		vim.g.splitjoin_php_method_chain_full = 1
+	-- 	end
+	-- }
 
 	-- use {
 	-- 	'glepnir/lspsaga.nvim',
@@ -173,6 +217,11 @@ require('packer').startup(function(use)
 		end
 	}
 
+	use {
+		'phpactor/phpactor',
+		ft = 'php',
+		run = 'composer install --no-dev --optimize-autoloader',
+	}
 
 	if is_bootstrap then
 		require('packer').sync()

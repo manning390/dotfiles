@@ -29,7 +29,7 @@ local servers = {
     --     end
     -- },
     emmet_ls = {
-        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte' },
     },
     cmake = {},
     phpactor = {},
@@ -37,7 +37,7 @@ local servers = {
     vimls = {},
     cssls = {},
     eslint = {},
-    sumneko_lua = {
+    lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
@@ -46,7 +46,10 @@ local servers = {
 }
 
 vim.diagnostic.config({
-    virtual_text = false
+    virtual_text = false,
+    float = {
+        source = true,
+    }
 })
 
 require('neodev').setup()

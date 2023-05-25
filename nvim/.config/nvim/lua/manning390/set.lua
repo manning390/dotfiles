@@ -30,7 +30,8 @@ vim.o.directory = cache_dir .. 'swag/'
 vim.o.undodir = cache_dir .. 'undo/'
 vim.o.backupdir = cache_dir .. 'backup/'
 vim.o.viewdir = cache_dir .. 'view/'
--- vim.o.spellfile = cache_dir .. 'spell/en.uft-8.add'
+vim.o.spellfile = cache_dir .. 'spell/en.uft-8.add'
+vim.o.spelllang = 'en_us'
 -- let &directory=g:configPath .'/swap//' --vim.o.where we're saving swaps
 -- let &undodir=g:configPath .'/undo//' --and undos
 
@@ -67,7 +68,7 @@ vim.g.indent_guides_start_level = 2
 vim.g.indent_guides_guide_size = 1
 
 -- Search
-vim.o.hlsearch   = false --highlight search terms
+vim.o.hlsearch   = true --highlight search terms
 vim.o.incsearch  = true --show search matches as you type
 vim.o.ignorecase = true
 vim.o.smartcase  = true --ignore case if search pattern is all lowercase

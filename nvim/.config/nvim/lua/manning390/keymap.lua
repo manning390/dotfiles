@@ -19,6 +19,8 @@ vim.g.maplocalleader = "'"
 -- vim.keymap.set('', ' ', '\\')
 print('Leader is '..vim.g.mapleader)
 
+inoremap('<Tab>', '\t')
+
 nmap('<leader>/', ':noh<cr>', {silent =true})
 nnoremap('<enter>', ':let @/=""<cr>', {silent = true}) -- Clear search buffer
 
@@ -81,23 +83,28 @@ nnoremap('<leader>pt', require'telescope'.extensions.git_worktree.git_worktrees,
 nnoremap('<leader>pv', mtel.search_dotfiles, {desc = 'Search [V]im Configs'})
 nnoremap('<leader>p<space>', mtel.related_files, { desc = '[p ] Search related files'})
 nnoremap('<leader>/', mtel.fuzzy_buffer, { desc = '[/] Fuzzily search in current buffer]' })
+nnoremap('z?', require'telescope.builtin'.spell_suggest, {desc = 'Suggest Spelling Correction'})
 
 -- Lsp
 nnoremap('gd', vim.lsp.buf.definition, {silent = true, desc = 'LSP: [G]oto [D]efinition'})
-nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
+-- nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
+nnoremap('gi', require'telescope.builtin'.lsp_implementations, { silent = true, desc = 'LSP: [G]oto [I]mplementations'})
+nnoremap('gr', require'telescope.builtin'.lsp_references, { silent = true, desc = 'LSP: [G]oto [R]eferences'})
 nnoremap('<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
 nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction'})
 nnoremap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition'})
 nnoremap('gD', vim.lsp.buf.declaration, {silent = true})
 nnoremap('g?', vim.diagnostic.open_float, {silent = true})
+nnoremap('[d', vim.diagnostic.goto_prev, {desc = 'Previous Diagnostic'})
+nnoremap(']d', vim.diagnostic.goto_next, {desc = 'Next Diagnostic '})
 nnoremap('<leader>q', vim.diagnostic.setloclist)
 nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs colemak rebind
 -- nnoremap(sf('<C-%s>', h), vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation'}) -- Needs colemak rebind
-nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})
-nmap('<leader>'..N, function()
-	vim.lsp.diagnostic.show_line_diagnostics()
-	vim.lsp.util.show_line_diagnostics()
-end, {silent = true})
+-- nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})
+-- nmap('<leader>'..N, function()
+-- 	vim.lsp.diagnostic.show_line_diagnostics()
+-- 	vim.lsp.util.show_line_diagnostics()
+-- end, {silent = true})
 
 -- Neotest
 nnoremap('<leader>tn', function() require'neotest'.run.run() end)
@@ -134,7 +141,7 @@ nnoremap('<leader>g'..f, ':diffget //2<cr>')
 
 nnoremap('<leader>gw', require'telescope'.extensions.git_worktree.create_git_worktree)
 
--- Quickfix lists
+-- Quick fix lists
 nnoremap('g'..n, ':cnext<cr>', {silent = true})
 nnoremap('g'..N, ':cprevious<cr>', {silent = true})
 nnoremap('gq', ':cclose<cr>', {silent = true})
@@ -147,9 +154,34 @@ inoremap(',,', '<ESC>A,<ESC>')
 vnoremap('<', '<gv')
 vnoremap('>', '>gv')
 
+nnoremap('<leader>s', ':setlocal spell!<cr>', { silent = true})
 vnoremap('.', ':normal .<cr>')
 nnoremap('<leader>%', ':let @+=expand(\'%\')<cr>') -- Yank filepath into copy buffer
 nnoremap('Y', 'y$') -- Add missing yank
 nnoremap('0', function() require('manning390.fn').toggleMovement('^', '0') end)
 nnoremap('~', require'manning390.fn'.customCaseToggle)
+
+nnoremap('<leader>pm', ':PhpactorContextMenu<cr>')
+
+if vim.env.COLEMAK == '1' then
+	vim.g.keymaps = {
+		h = 'm',
+		j = 'n',
+		k = 'e',
+		l = 'i',
+		n = 'h',
+		N = 'H',
+		f = 't',
+	}
+else
+	vim.g.keymaps = {
+		h = 'h',
+		j = 'j',
+		k = 'k',
+		l = 'l',
+		n = 'n',
+		N = 'N',
+		f = 'f',
+	}
+end
 
