@@ -6,7 +6,7 @@ require('nvim-treesitter.configs').setup {
  		"http",
  		"json",
  		"typescript",
- 		"tsx",
+ 		-- "tsx",
  		"scss",
  		"html",
  		"python",

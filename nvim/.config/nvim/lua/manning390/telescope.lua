@@ -11,15 +11,29 @@ require("telescope").setup({
 
         file_ignore_patterns = {
             "node_modules",
-            "vendor"
+            "^vendor/",
         },
+        -- vimgrep_arguments = {
+        --     'rg',
+        --     '--no-ignore-vcs',
+        --     '--color=never',
+        --     '--no-heading',
+        --     '--with-filename',
+        --     '--line-number',
+        --     '--column',
+        --     '--smart-case',
+        --     '--hidden',
+        -- },
 
+        -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
         mappings = {
             i = {
+                ['<C-v>'] = actions.select_vertical,
                 ["<C-u>"] = false,
                 ["<C-d>"] = false,
-                ["<C-q>"] = actions.send_to_qflist,
+                ["<C-a>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_selected_to_qflist,
+                ["<C-q>"] = actions.send_selected_to_qflist,
             },
         },
 
@@ -45,7 +59,7 @@ M.search_dotfiles = function()
 end
 M.project_files = function()
     local opts = { show_untracked = true }
-   local ok = pcall(require 'telescope.builtin'.git_files, opts)
+    local ok = pcall(require 'telescope.builtin'.git_files, opts)
     if not ok then require 'telescope.builtin'.find_files(opts) end
 end
 M.related_files = function()
@@ -77,7 +91,7 @@ M.related_files = function()
 
     -- Open telescope
     require 'telescope.builtin'.find_files({
-        find_command = { 'rg', path, opath, '--files'},
+        find_command = { 'rg', path, opath, '--files' },
         prompt_title = "< RELATED >",
     })
 end

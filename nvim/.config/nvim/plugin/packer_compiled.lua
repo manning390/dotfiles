@@ -80,11 +80,6 @@ _G.packer_plugins = {
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  ["FixCursorHold.nvim"] = {
-    loaded = true,
-    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
-    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -126,6 +121,7 @@ _G.packer_plugins = {
     url = "https://github.com/mattn/emmet-vim"
   },
   ["fidget.nvim"] = {
+    config = { "\27LJ\2\nX\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\ttext\1\0\0\1\0\1\fspinner\tdots\nsetup\vfidget\frequire\0" },
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
@@ -180,17 +176,6 @@ _G.packer_plugins = {
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
     url = "https://github.com/karb94/neoscroll.nvim"
   },
-  neotest = {
-    config = { "\27LJ\2\nñ\1\0\0\a\0\a\1\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\5\0004\3\3\0006\4\0\0'\6\3\0B\4\2\0025\6\4\0B\4\2\0?\4\0\0=\3\6\2B\0\2\1K\0\1\0\radapters\1\0\0\1\0\2\16jestCommandD./node_modules/.bin/jest --runInBand --coverage=false --bail --\19jestConfigFile\31./src/test/js/jest.unit.js\17neotest-jest\nsetup\fneotest\frequire\3€€À™\4\0" },
-    loaded = true,
-    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/neotest",
-    url = "https://github.com/nvim-neotest/neotest"
-  },
-  ["neotest-jest"] = {
-    loaded = true,
-    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/neotest-jest",
-    url = "https://github.com/haydenmeade/neotest-jest"
-  },
   ["nord.nvim"] = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/nord.nvim",
@@ -217,6 +202,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-test"] = {
+    config = { "\27LJ\2\n‡\2\0\0\5\0\n\0\0186\0\0\0'\2\1\0B\0\2\2\18\2\0\0009\0\2\0005\3\4\0005\4\3\0=\4\5\3B\0\3\0016\0\0\0'\2\6\0B\0\2\0029\0\2\0005\2\a\0005\3\b\0=\3\t\2B\0\2\1K\0\1\0\rtermOpts\1\0\2\rkeep_one\2\14direction\15horizontal\1\0\1\vsilent\2\14nvim-test\targs\1\0\0\1\4\0\0*--config=./src/test/js/jest.config.js\21--coverage=false\20--verbose=false\nsetup\27nvim-test.runners.jest\frequire\0" },
+    loaded = true,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/nvim-test",
+    url = "https://github.com/manning390/nvim-test"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -249,6 +240,11 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/opt/phpactor",
     url = "https://github.com/phpactor/phpactor"
+  },
+  playground = {
+    loaded = true,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -337,46 +333,50 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: neotest
-time([[Config for neotest]], true)
-try_loadstring("\27LJ\2\nñ\1\0\0\a\0\a\1\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\5\0004\3\3\0006\4\0\0'\6\3\0B\4\2\0025\6\4\0B\4\2\0?\4\0\0=\3\6\2B\0\2\1K\0\1\0\radapters\1\0\0\1\0\2\16jestCommandD./node_modules/.bin/jest --runInBand --coverage=false --bail --\19jestConfigFile\31./src/test/js/jest.unit.js\17neotest-jest\nsetup\fneotest\frequire\3€€À™\4\0", "config", "neotest")
-time([[Config for neotest]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-try_loadstring("\27LJ\2\nš\1\0\0\a\0\t\0\0206\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1€K\0\1\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\a\0004\5\3\0009\6\4\0019\6\5\0069\6\6\6>\6\1\5=\5\b\4B\2\2\1K\0\1\0\fsources\1\0\0\veslint\16diagnostics\rbuiltins\nsetup\fnull-ls\frequire\npcall\0", "config", "null-ls.nvim")
-time([[Config for null-ls.nvim]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\2\nn\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2#show_trailing_blankline_indent\1\tchar\bâ”Š\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
 time([[Config for indent-blankline.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\nX\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\ttext\1\0\0\1\0\1\fspinner\tdots\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
 -- Config for: vim-pasta
 time([[Config for vim-pasta]], true)
 try_loadstring("\27LJ\2\nG\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rfugitive\29pasta_disabled_filetypes\6g\bvim\0", "config", "vim-pasta")
 time([[Config for vim-pasta]], false)
--- Config for: git-worktree.nvim
-time([[Config for git-worktree.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-worktree\frequire\0", "config", "git-worktree.nvim")
-time([[Config for git-worktree.nvim]], false)
 -- Config for: harpoon
 time([[Config for harpoon]], true)
 try_loadstring("\27LJ\2\ng\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\20global_settings\1\0\0\1\0\1\19save_on_change\2\nsetup\fharpoon\frequire\0", "config", "harpoon")
 time([[Config for harpoon]], false)
--- Config for: neoscroll.nvim
-time([[Config for neoscroll.nvim]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
-time([[Config for neoscroll.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
+-- Config for: git-worktree.nvim
+time([[Config for git-worktree.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-worktree\frequire\0", "config", "git-worktree.nvim")
+time([[Config for git-worktree.nvim]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+try_loadstring("\27LJ\2\nš\1\0\0\a\0\t\0\0206\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1€K\0\1\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\a\0004\5\3\0009\6\4\0019\6\5\0069\6\6\6>\6\1\5=\5\b\4B\2\2\1K\0\1\0\fsources\1\0\0\veslint\16diagnostics\rbuiltins\nsetup\fnull-ls\frequire\npcall\0", "config", "null-ls.nvim")
+time([[Config for null-ls.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-test
+time([[Config for nvim-test]], true)
+try_loadstring("\27LJ\2\n‡\2\0\0\5\0\n\0\0186\0\0\0'\2\1\0B\0\2\2\18\2\0\0009\0\2\0005\3\4\0005\4\3\0=\4\5\3B\0\3\0016\0\0\0'\2\6\0B\0\2\0029\0\2\0005\2\a\0005\3\b\0=\3\t\2B\0\2\1K\0\1\0\rtermOpts\1\0\2\rkeep_one\2\14direction\15horizontal\1\0\1\vsilent\2\14nvim-test\targs\1\0\0\1\4\0\0*--config=./src/test/js/jest.config.js\21--coverage=false\20--verbose=false\nsetup\27nvim-test.runners.jest\frequire\0", "config", "nvim-test")
+time([[Config for nvim-test]], false)
+-- Config for: neoscroll.nvim
+time([[Config for neoscroll.nvim]], true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
+time([[Config for neoscroll.nvim]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)

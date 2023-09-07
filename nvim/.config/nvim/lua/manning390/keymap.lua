@@ -1,4 +1,4 @@
-function bind(op, outer_opts)
+local function bind(op, outer_opts)
 	outer_opts = outer_opts or {noremap = true}
 	return function(lhs, rhs, opts)
 		opts = vim.tbl_extend("force", outer_opts, opts or {})
@@ -10,7 +10,7 @@ local map      = bind('')
 local nmap     = bind('n', {noremap = false})
 local nnoremap = bind('n')
 local vnoremap = bind('v')
-local xnoremap = bind('x')
+--local xnoremap = bind('x')
 local inoremap = bind('i')
 
 vim.g.mapleader = "'"
@@ -82,7 +82,7 @@ nnoremap('<leader>pr', require'telescope.builtin'.grep_string, { desc = 'Search 
 nnoremap('<leader>pt', require'telescope'.extensions.git_worktree.git_worktrees, {desc = 'Search Work[T]rees'})
 nnoremap('<leader>pv', mtel.search_dotfiles, {desc = 'Search [V]im Configs'})
 nnoremap('<leader>p<space>', mtel.related_files, { desc = '[p ] Search related files'})
-nnoremap('<leader>/', mtel.fuzzy_buffer, { desc = '[/] Fuzzily search in current buffer]' })
+nnoremap('<leader>/', mtel.fuzzy_buffer, { desc = '[/] Fuzzily search in current buffer' })
 nnoremap('z?', require'telescope.builtin'.spell_suggest, {desc = 'Suggest Spelling Correction'})
 
 -- Lsp
@@ -106,10 +106,10 @@ nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs 
 -- 	vim.lsp.util.show_line_diagnostics()
 -- end, {silent = true})
 
--- Neotest
-nnoremap('<leader>tn', function() require'neotest'.run.run() end)
-nnoremap('<leader>tf', function() require'neotest'.run.run(vim.fn.expand('%')) end)
-nnoremap('<leader>tc', function() require'neotest'.run.stop() end)
+-- Run tests
+nnoremap('<leader>tq', ':TestNearest<CR>', { desc = 'Tests: [T]est [N]earest'})
+nnoremap('<leader>ta', ':TestFile<CR>', { desc = 'Tests: [T]est [A]ll in File'})
+nnoremap('<leader>tz', ':TestSuite<CR>', { desc = 'Tests: [T]est Suite [Z]'})
 
 -- Snippets
 local ls = require'luasnip'
@@ -138,6 +138,9 @@ nnoremap('<leader>gc', ':G ci<cr>')
 nnoremap('<leader>gp', ':G push<cr>')
 nnoremap('<leader>g'..j, ':diffget //3<cr>')
 nnoremap('<leader>g'..f, ':diffget //2<cr>')
+nnoremap('<leader>g'..f, ':diffget //2<cr>')
+nnoremap('<leader>gb', ':GBrowse<cr>')
+vnoremap('<leader>gb', ":'<,'>GBrowse<cr>")
 
 nnoremap('<leader>gw', require'telescope'.extensions.git_worktree.create_git_worktree)
 

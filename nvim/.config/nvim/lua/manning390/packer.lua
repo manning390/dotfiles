@@ -19,7 +19,17 @@ require('packer').startup(function(use)
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
 			-- Useful status updates for LSP
-			'j-hui/fidget.nvim',
+			{
+				'j-hui/fidget.nvim',
+				tag = 'legacy',
+				config = function()
+					require 'fidget'.setup {
+						text = {
+							spinner = 'dots'
+						}
+					}
+				end
+			},
 			-- Additional lua configuration
 			'folke/neodev.nvim'
 		},
@@ -51,16 +61,17 @@ require('packer').startup(function(use)
 		requires = {
 			'JoosepAlviste/nvim-ts-context-commentstring',
 			'nvim-treesitter/nvim-treesitter-textobjects',
+			'nvim-treesitter/playground',
 		}
 	}
 
-	
 	-- Git reload plugins
 	use 'tpope/vim-fugitive' -- Git integration
 	use 'tpope/vim-rhubarb'
 	use {
 		'lewis6991/gitsigns.nvim', -- Async git signs
-		config = function() require('gitsigns').setup {
+		config = function()
+			require('gitsigns').setup {
 				-- signs = {
 				-- 	-- add = { text = '+' },
 				-- 	-- change = { text = '~' },
@@ -74,7 +85,7 @@ require('packer').startup(function(use)
 
 	use 'nvim-tree/nvim-web-devicons'
 
- 	-- Bottom status bar
+	-- Bottom status bar
 	use {
 		'nvim-lualine/lualine.nvim',
 	}
@@ -87,13 +98,13 @@ require('packer').startup(function(use)
 		config = function() require('indent_blankline').setup { char = '┊', show_trailing_blankline_indent = false, } end }
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end } -- Comment toggling
 
-	use 'tpope/vim-abolish' -- Better substitutions and iabbrev
-	use 'tpope/vim-eunuch' -- :Rename and :SudoWrite
-	use 'tpope/vim-repeat' -- bracket mappings
-	use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth auto
-	use 'tpope/vim-surround' -- Surround operator
-	use 'tpope/vim-unimpaired' -- bracket mappings
-	use 'jessarcher/vim-heritage' -- Create new directories on edit file in non-existent dir
+	use 'tpope/vim-abolish'                                                          -- Better substitutions and iabbrev
+	use 'tpope/vim-eunuch'                                                           -- :Rename and :SudoWrite
+	use 'tpope/vim-repeat'                                                           -- bracket mappings
+	use 'tpope/vim-sleuth'                                                           -- Detect tabstop and shiftwidth auto
+	use 'tpope/vim-surround'                                                         -- Surround operator
+	use 'tpope/vim-unimpaired'                                                       -- bracket mappings
+	use 'jessarcher/vim-heritage'                                                    -- Create new directories on edit file in non-existent dir
 
 	-- use 'sheerun/vim-polyglot' -- Syntax library
 	use {
@@ -119,7 +130,8 @@ require('packer').startup(function(use)
 
 	use {
 		'windwp/nvim-autopairs',
-		config = function() require("nvim-autopairs").setup {
+		config = function()
+			require("nvim-autopairs").setup {
 				fast_wrap = {}
 			}
 		end
@@ -137,7 +149,7 @@ require('packer').startup(function(use)
 	use {
 		'sickill/vim-pasta',
 		config = function()
-			vim.g.pasta_disabled_filetypes = {'fugitive'}
+			vim.g.pasta_disabled_filetypes = { 'fugitive' }
 		end
 	}
 
@@ -196,24 +208,19 @@ require('packer').startup(function(use)
 
 	-- Testing
 	use {
-		"nvim-neotest/neotest",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-			-- Adapters
-			'haydenmeade/neotest-jest',
-		},
+		'manning390/nvim-test',
 		config = function()
-			require("neotest").setup({
-				adapters = {
-					require("neotest-jest")({ -- still WIP, probably won't work
-						-- ./node_modules/.bin/jest --bail --config ./src/test/js/jest.unit.js --runInBand --coverage=false -- src/test/js/pages/clinics/new.test.tsx
-						jestCommand = './node_modules/.bin/jest --runInBand --coverage=false --bail --',
-						jestConfigFile = './src/test/js/jest.unit.js'
-					}),
-				}
-			})
+			require('nvim-test.runners.jest'):setup {
+				args = {"--config=./src/test/js/jest.config.js", "--coverage=false", "--verbose=false" },
+			}
+			require('nvim-test').setup {
+				silent = true,
+				termOpts = {
+    				direction = "horizontal",   -- terminal's direction ("horizontal"|"vertical"|"float")
+					-- go_back = true,
+					keep_one = true,
+				},
+			}
 		end
 	}
 
@@ -226,7 +233,6 @@ require('packer').startup(function(use)
 	if is_bootstrap then
 		require('packer').sync()
 	end
-
 end)
 
 -- When we are bootstrapping a configuration, it doesn't
@@ -242,12 +248,9 @@ if is_bootstrap then
 	return
 end
 
-local au = vim.api.nvim_create_autocmd
-local ag = vim.api.nvim_create_augroup
-
 -- Automatically source and re-compile packer whenever you save packer
-au({ 'BufWritePost' }, {
-	group = ag('packer', { clear = true }),
+vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+	group = vim.api.nvim_create_augroup('packer', { clear = true }),
 	command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
 	pattern = '*packer.lua',
 })

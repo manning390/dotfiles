@@ -33,7 +33,7 @@ M.toggleMovement = function(first, second)
 	end
 end
 
-M.customCaseToggle = function()	
+M.customCaseToggle = function()
     local p = vim.fn.col('.')
     local char = string.sub(vim.api.nvim_get_current_line(), p, p)
     local seq = ({
@@ -43,5 +43,8 @@ M.customCaseToggle = function()
         ["'"]  = '"_r"l',
     })[char]
     vim.cmd('normal! '..(seq or '~'))
+end
+M.bufOnly = function()
+  vim.cmd('%bd|e#|bd#')
 end
 return M
