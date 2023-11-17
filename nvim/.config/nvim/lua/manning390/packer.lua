@@ -24,9 +24,7 @@ require('packer').startup(function(use)
 				tag = 'legacy',
 				config = function()
 					require 'fidget'.setup {
-						text = {
-							spinner = 'dots'
-						}
+						text = { spinner = 'dots' }
 					}
 				end
 			},
@@ -44,7 +42,13 @@ require('packer').startup(function(use)
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-nvim-lua',
 			'hrsh7th/cmp-path',
-			'mattn/emmet-vim',
+			{
+				'mattn/emmet-vim',
+				config = function()
+					vim.g.user_emmet_leader_key = '<C-Z>'
+				end
+			},
+			'dcampos/cmp-emmet-vim',
 			'saadparwaiz1/cmp_luasnip',
 			-- 'hrsh7th/cmp-cmdline',
 			-- 'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -86,16 +90,19 @@ require('packer').startup(function(use)
 	use 'nvim-tree/nvim-web-devicons'
 
 	-- Bottom status bar
-	use {
-		'nvim-lualine/lualine.nvim',
-	}
+	use 'nvim-lualine/lualine.nvim'
 
 	-- Color scheme
 	-- use 'haystackandroid/snow'
 	use 'shaunsingh/nord.nvim'
 
 	use { 'lukas-reineke/indent-blankline.nvim',
-		config = function() require('indent_blankline').setup { char = '┊', show_trailing_blankline_indent = false, } end }
+		config = function()
+			require('ibl').setup {
+				scope = { enabled = false }
+			}
+		end
+	}
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end } -- Comment toggling
 
 	use 'tpope/vim-abolish'                                                          -- Better substitutions and iabbrev
@@ -115,6 +122,10 @@ require('packer').startup(function(use)
 	-- Telescope
 	use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { "nvim-lua/plenary.nvim" } }
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+	use {
+		"danielvolchek/tailiscope.nvim",
+		requires = { 'nvim-telescope/telescope.nvim' }
+	}
 
 	-- Harpoo"n
 	use {
@@ -147,7 +158,7 @@ require('packer').startup(function(use)
 
 	-- Fix pasting indents
 	use {
-		'sickill/vim-pasta',
+		'ku1ik/vim-pasta',
 		config = function()
 			vim.g.pasta_disabled_filetypes = { 'fugitive' }
 		end
@@ -180,24 +191,30 @@ require('packer').startup(function(use)
 	-- 	end
 	-- }
 	-- use 'folke/trouble.nvim'
-	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		config = function()
-			local ok, null_ls = pcall(require, "null-ls")
-			if not ok then return end
-			require 'null-ls'.setup({
-				sources = {
-					null_ls.builtins.diagnostics.eslint,
-				}
-			})
-		end,
-		requires = { "nvim-lua/plenary.nvim" }
-	}
 
+	-- Archived, no longer being used efm-langserver as replacement, if need none-ls is community supported
+	-- use {
+	-- 	'jose-elias-alvarez/null-ls.nvim',
+	-- 	config = function()
+	-- 		local ok, null_ls = pcall(require, "null-ls")
+	-- 		if not ok then return end
+	-- 		require 'null-ls'.setup({
+	-- 			sources = {
+	-- 				null_ls.builtins.diagnostics.eslint,
+	-- 			}
+	-- 		})
+	-- 	end,
+	-- 	requires = { "nvim-lua/plenary.nvim" }
+	-- }
+	use {
+		"creativenull/efmls-configs-nvim", -- configurations for efm lang, installed via mason
+		tag = "v1.*",                -- tag is optional, but recommended
+		requires = { "neovim/nvim-lspconfig" },
+	}
 
 	-- Rest Client
 	use {
-		"NTBBloodbath/rest.nvim",
+		"rest-nvim/rest.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
 		-- config = function()
 		-- 		require'rest-nvim'.setup({
@@ -211,12 +228,12 @@ require('packer').startup(function(use)
 		'manning390/nvim-test',
 		config = function()
 			require('nvim-test.runners.jest'):setup {
-				args = {"--config=./src/test/js/jest.config.js", "--coverage=false", "--verbose=false" },
+				args = { "--config=./src/test/js/jest.config.js", "--coverage=false", "--verbose=false" },
 			}
 			require('nvim-test').setup {
 				silent = true,
 				termOpts = {
-    				direction = "horizontal",   -- terminal's direction ("horizontal"|"vertical"|"float")
+					direction = "horizontal", -- terminal's direction ("horizontal"|"vertical"|"float")
 					-- go_back = true,
 					keep_one = true,
 				},
@@ -228,6 +245,15 @@ require('packer').startup(function(use)
 		'phpactor/phpactor',
 		ft = 'php',
 		run = 'composer install --no-dev --optimize-autoloader',
+	}
+
+	use {
+		'ron89/thesaurus_query.vim',
+		setup = function()
+			-- vim.g.tq_language={'en'}
+			vim.g.tq_openoffice_en_file = '~/Documents/MyThes-1.0/th_en_US_new'
+			vim.g.tq_enabled_backends = { "openoffice_en", "datamuse_com" }
+		end
 	}
 
 	if is_bootstrap then

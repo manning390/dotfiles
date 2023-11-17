@@ -119,3 +119,10 @@ eval "$(starship init zsh)"
 
 # Welcome Message
 echo "Hi. Hello. Welcome. <3"
+
+# bun completions
+[ -s "/Users/mmanning2/.bun/_bun" ] && source "/Users/mmanning2/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

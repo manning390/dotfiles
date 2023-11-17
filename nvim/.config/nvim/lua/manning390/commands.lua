@@ -1,5 +1,5 @@
 vim.api.nvim_create_user_command('W', ':w', {}) -- Fat finger save
-vim.api.nvim_create_user_command('Es', ':EslintFixAll', {}) -- Fast alias
+vim.api.nvim_create_user_command('F', ':Format', {}) -- Fat finger save
 vim.api.nvim_create_user_command('Prit', 'silent !npx prettier --write % && :e', {})
 vim.api.nvim_create_user_command('Snips', 'e ~/.config/nvim/snippets', {}) -- Reload snippets
 
@@ -20,3 +20,5 @@ for from,to in pairs({
         vim.cmd('let @/="'..reg..'"') -- Return search buffer to original state
     end, {range = true})
 end
+
+vim.api.nvim_create_user_command('Tw', ':Telescope tailiscope', {})

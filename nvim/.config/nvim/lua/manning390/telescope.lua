@@ -29,8 +29,6 @@ require("telescope").setup({
         mappings = {
             i = {
                 ['<C-v>'] = actions.select_vertical,
-                ["<C-u>"] = false,
-                ["<C-d>"] = false,
                 ["<C-a>"] = actions.send_to_qflist,
                 ["<C-g>"] = actions.send_selected_to_qflist,
                 ["<C-q>"] = actions.send_selected_to_qflist,
@@ -43,11 +41,15 @@ require("telescope").setup({
             override_generic_sorter = false,
             override_file_sorter = true,
         },
+        tailiscope = {
+            default = "all"
+        },
     },
 })
 
 pcall(require("telescope").load_extension, "fzy")
 pcall(require("telescope").load_extension, "git_worktree")
+pcall(require("telescope").load_extension, "tailiscope")
 
 local M = {}
 M.search_dotfiles = function()

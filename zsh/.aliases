@@ -24,10 +24,6 @@ alias art="php artisan"
 
 alias sail="[ -f sail ] && bash sail || bash vendor/bin/sail"
 
-# Git
-alias gpom="git push origin master"
-alias gpod="git push origin development"
-
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
 
@@ -40,7 +36,12 @@ alias cat='bat'
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-cdup)'
 
+# I'm not dumb, I'm a creature of habit
 alias bi="echo \"🏳️‍🌈\";sleep 1;vi"
 alias :w="clear;echo \"You're not in vim but ok\""
-alias work="cd ~/workspace"
+alias :q="exit"
+
 alias dock="docker-compose"
+alias cleannpm="rm -rf node_modules &&  npm cache clean --force && npm install --ignore-scripts"
+alias cleanaws="rm ~/.aws/credentials"
+alias work="cd ~/workspace"

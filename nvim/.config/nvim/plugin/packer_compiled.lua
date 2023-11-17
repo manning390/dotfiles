@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.1699801871/share/lua/5.1/?.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.1699801871/share/lua/5.1/?/init.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.1699801871/lib/luarocks/rocks-5.1/?.lua;/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.1699801871/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/mmanning2/.cache/nvim/packer_hererocks/2.1.1699801871/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -95,6 +95,11 @@ _G.packer_plugins = {
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/cmp-calc",
     url = "https://github.com/hrsh7th/cmp-calc"
   },
+  ["cmp-emmet-vim"] = {
+    loaded = true,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/cmp-emmet-vim",
+    url = "https://github.com/dcampos/cmp-emmet-vim"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -115,7 +120,13 @@ _G.packer_plugins = {
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["efmls-configs-nvim"] = {
+    loaded = true,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/efmls-configs-nvim",
+    url = "https://github.com/creativenull/efmls-configs-nvim"
+  },
   ["emmet-vim"] = {
+    config = { "\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\n<C-Z>\26user_emmet_leader_key\6g\bvim\0" },
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/emmet-vim",
     url = "https://github.com/mattn/emmet-vim"
@@ -145,7 +156,7 @@ _G.packer_plugins = {
     url = "https://github.com/ThePrimeagen/harpoon"
   },
   ["indent-blankline.nvim"] = {
-    config = { "\27LJ\2\nn\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2#show_trailing_blankline_indent\1\tchar\bâ”Š\nsetup\21indent_blankline\frequire\0" },
+    config = { "\27LJ\2\nR\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\nscope\1\0\0\1\0\1\fenabled\1\nsetup\bibl\frequire\0" },
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
@@ -180,12 +191,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/nord.nvim",
     url = "https://github.com/shaunsingh/nord.nvim"
-  },
-  ["null-ls.nvim"] = {
-    config = { "\27LJ\2\nš\1\0\0\a\0\t\0\0206\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1€K\0\1\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\a\0004\5\3\0009\6\4\0019\6\5\0069\6\6\6>\6\1\5=\5\b\4B\2\2\1K\0\1\0\fsources\1\0\0\veslint\16diagnostics\rbuiltins\nsetup\fnull-ls\frequire\npcall\0" },
-    loaded = true,
-    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     config = { "\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0" },
@@ -254,7 +259,12 @@ _G.packer_plugins = {
   ["rest.nvim"] = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/rest.nvim",
-    url = "https://github.com/NTBBloodbath/rest.nvim"
+    url = "https://github.com/rest-nvim/rest.nvim"
+  },
+  ["tailiscope.nvim"] = {
+    loaded = true,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/tailiscope.nvim",
+    url = "https://github.com/danielvolchek/tailiscope.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     cond = { true },
@@ -268,6 +278,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["thesaurus_query.vim"] = {
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/opt/thesaurus_query.vim",
+    url = "https://github.com/ron89/thesaurus_query.vim"
   },
   ["vim-abolish"] = {
     loaded = true,
@@ -293,7 +309,7 @@ _G.packer_plugins = {
     config = { "\27LJ\2\nG\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rfugitive\29pasta_disabled_filetypes\6g\bvim\0" },
     loaded = true,
     path = "/Users/mmanning2/.local/share/nvim/site/pack/packer/start/vim-pasta",
-    url = "https://github.com/sickill/vim-pasta"
+    url = "https://github.com/ku1ik/vim-pasta"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -333,9 +349,16 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Setup for: thesaurus_query.vim
+time([[Setup for thesaurus_query.vim]], true)
+try_loadstring("\27LJ\2\nž\1\0\0\2\0\6\0\t6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0005\1\5\0=\1\4\0K\0\1\0\1\3\0\0\18openoffice_en\17datamuse_com\24tq_enabled_backends(~/Documents/MyThes-1.0/th_en_US_new\26tq_openoffice_en_file\6g\bvim\0", "setup", "thesaurus_query.vim")
+time([[Setup for thesaurus_query.vim]], false)
+time([[packadd for thesaurus_query.vim]], true)
+vim.cmd [[packadd thesaurus_query.vim]]
+time([[packadd for thesaurus_query.vim]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\nn\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2#show_trailing_blankline_indent\1\tchar\bâ”Š\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
+try_loadstring("\27LJ\2\nR\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\nscope\1\0\0\1\0\1\fenabled\1\nsetup\bibl\frequire\0", "config", "indent-blankline.nvim")
 time([[Config for indent-blankline.nvim]], false)
 -- Config for: fidget.nvim
 time([[Config for fidget.nvim]], true)
@@ -345,38 +368,38 @@ time([[Config for fidget.nvim]], false)
 time([[Config for vim-pasta]], true)
 try_loadstring("\27LJ\2\nG\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rfugitive\29pasta_disabled_filetypes\6g\bvim\0", "config", "vim-pasta")
 time([[Config for vim-pasta]], false)
--- Config for: harpoon
-time([[Config for harpoon]], true)
-try_loadstring("\27LJ\2\ng\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\20global_settings\1\0\0\1\0\1\19save_on_change\2\nsetup\fharpoon\frequire\0", "config", "harpoon")
-time([[Config for harpoon]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: git-worktree.nvim
-time([[Config for git-worktree.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-worktree\frequire\0", "config", "git-worktree.nvim")
-time([[Config for git-worktree.nvim]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-try_loadstring("\27LJ\2\nš\1\0\0\a\0\t\0\0206\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\1€K\0\1\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\a\0004\5\3\0009\6\4\0019\6\5\0069\6\6\6>\6\1\5=\5\b\4B\2\2\1K\0\1\0\fsources\1\0\0\veslint\16diagnostics\rbuiltins\nsetup\fnull-ls\frequire\npcall\0", "config", "null-ls.nvim")
-time([[Config for null-ls.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
 -- Config for: nvim-test
 time([[Config for nvim-test]], true)
 try_loadstring("\27LJ\2\n‡\2\0\0\5\0\n\0\0186\0\0\0'\2\1\0B\0\2\2\18\2\0\0009\0\2\0005\3\4\0005\4\3\0=\4\5\3B\0\3\0016\0\0\0'\2\6\0B\0\2\0029\0\2\0005\2\a\0005\3\b\0=\3\t\2B\0\2\1K\0\1\0\rtermOpts\1\0\2\rkeep_one\2\14direction\15horizontal\1\0\1\vsilent\2\14nvim-test\targs\1\0\0\1\4\0\0*--config=./src/test/js/jest.config.js\21--coverage=false\20--verbose=false\nsetup\27nvim-test.runners.jest\frequire\0", "config", "nvim-test")
 time([[Config for nvim-test]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\nU\0\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\2B\0\2\1K\0\1\0\14fast_wrap\1\0\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: emmet-vim
+time([[Config for emmet-vim]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\n<C-Z>\26user_emmet_leader_key\6g\bvim\0", "config", "emmet-vim")
+time([[Config for emmet-vim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: neoscroll.nvim
 time([[Config for neoscroll.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14neoscroll\frequire\0", "config", "neoscroll.nvim")
 time([[Config for neoscroll.nvim]], false)
+-- Config for: git-worktree.nvim
+time([[Config for git-worktree.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-worktree\frequire\0", "config", "git-worktree.nvim")
+time([[Config for git-worktree.nvim]], false)
+-- Config for: harpoon
+time([[Config for harpoon]], true)
+try_loadstring("\27LJ\2\ng\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\20global_settings\1\0\0\1\0\1\19save_on_change\2\nsetup\fharpoon\frequire\0", "config", "harpoon")
+time([[Config for harpoon]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)

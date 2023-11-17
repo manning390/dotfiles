@@ -87,18 +87,19 @@ nnoremap('z?', require'telescope.builtin'.spell_suggest, {desc = 'Suggest Spelli
 
 -- Lsp
 nnoremap('gd', vim.lsp.buf.definition, {silent = true, desc = 'LSP: [G]oto [D]efinition'})
--- nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
-nnoremap('gi', require'telescope.builtin'.lsp_implementations, { silent = true, desc = 'LSP: [G]oto [I]mplementations'})
-nnoremap('gr', require'telescope.builtin'.lsp_references, { silent = true, desc = 'LSP: [G]oto [R]eferences'})
-nnoremap('<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
-nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction'})
-nnoremap('<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition'})
 nnoremap('gD', vim.lsp.buf.declaration, {silent = true})
+-- nnoremap('gr', vim.lsp.buf.references, {silent = true, desc = 'LSP: [G]oto [R]eferences'})
+nnoremap('gr', require'telescope.builtin'.lsp_references, { silent = true, desc = 'LSP: [G]oto [R]eferences'})
+nnoremap('gi', require'telescope.builtin'.lsp_implementations, { silent = true, desc = 'LSP: [G]oto [I]mplementations'})
+nnoremap('gt', vim.lsp.buf.type_definition, { desc = 'LSP: [G]oto [T]ype Definition'})
 nnoremap('g?', vim.diagnostic.open_float, {silent = true})
+nnoremap('<leader>cn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame'})
+nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction'})
 nnoremap('[d', vim.diagnostic.goto_prev, {desc = 'Previous Diagnostic'})
 nnoremap(']d', vim.diagnostic.goto_next, {desc = 'Next Diagnostic '})
 nnoremap('<leader>q', vim.diagnostic.setloclist)
 nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs colemak rebind
+nnoremap('<leader>f', ':Format<CR>', { desc = 'LSP: [F]ormat'})
 -- nnoremap(sf('<C-%s>', h), vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation'}) -- Needs colemak rebind
 -- nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})
 -- nmap('<leader>'..N, function()
@@ -107,7 +108,7 @@ nnoremap('K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation'}) -- Needs 
 -- end, {silent = true})
 
 -- Run tests
-nnoremap('<leader>tq', ':TestNearest<CR>', { desc = 'Tests: [T]est [N]earest'})
+nnoremap('<leader>tq', ':TestNearest<CR>', { desc = 'Tests: [T]est Nearest [Q]'})
 nnoremap('<leader>ta', ':TestFile<CR>', { desc = 'Tests: [T]est [A]ll in File'})
 nnoremap('<leader>tz', ':TestSuite<CR>', { desc = 'Tests: [T]est Suite [Z]'})
 
@@ -138,7 +139,6 @@ nnoremap('<leader>gc', ':G ci<cr>')
 nnoremap('<leader>gp', ':G push<cr>')
 nnoremap('<leader>g'..j, ':diffget //3<cr>')
 nnoremap('<leader>g'..f, ':diffget //2<cr>')
-nnoremap('<leader>g'..f, ':diffget //2<cr>')
 nnoremap('<leader>gb', ':GBrowse<cr>')
 vnoremap('<leader>gb', ":'<,'>GBrowse<cr>")
 
@@ -165,6 +165,9 @@ nnoremap('0', function() require('manning390.fn').toggleMovement('^', '0') end)
 nnoremap('~', require'manning390.fn'.customCaseToggle)
 
 nnoremap('<leader>pm', ':PhpactorContextMenu<cr>')
+
+nnoremap('z/', ':ThesaurusQueryReplaceCurrentWord<cr>')
+vnoremap('z/', 'y:ThesaurusQueryReplace <C-r>"<cr>')
 
 if vim.env.COLEMAK == '1' then
 	vim.g.keymaps = {

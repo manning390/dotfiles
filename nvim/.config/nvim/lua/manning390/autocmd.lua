@@ -62,3 +62,20 @@ au({ 'Filetype' }, {
         vim.opt_local.expandtab = false
     end
 })
+-- local tailwindwraptoggle = ag('tailwindwraptoggle', { clear = true})
+-- au({ 'BufEnter', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+--     pattern = 'svelte',
+--     group = tailwindwraptoggle,
+--     callback = function ()
+--         print('yep')
+--         vim.o.wrap = true
+--     end
+-- })
+-- au({ 'BufLeave', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+--     pattern = '*',
+--     group = tailwindwraptoggle,
+--     callback = function ()
+--         print('yep')
+--         vim.o.wrap = true
+--     end
+-- })

@@ -3,6 +3,7 @@
 local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
 
 vim.env.BASH_ENV = '~/.aliases'
+vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.o.termguicolors = true
 vim.cmd [[colorscheme nord]]
@@ -37,7 +38,10 @@ vim.o.spelllang = 'en_us'
 
 
 vim.o.sidescroll = 1 --sidescroll when needed
-vim.o.wrap = false --don't wrap lines
+vim.o.wrap = true
+vim.o.breakindent = true
+vim.o.breakindentopt = 'shift:2,min:40,sbr'
+vim.o.showbreak = '>>'
 vim.o.linebreak = true
 --vim.o.colorcolumn = "80"
 vim.signcolumn = "yes"
