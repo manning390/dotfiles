@@ -1,5 +1,5 @@
 PATH="$HOME/.local/bin:$PATH"
-export npm_config_prefix="$HOME/.local"
+unset npm_config_prefix
 export DOTFILES="$HOME/.dotfiles"
 export COLEMAK="$(lsusb | grep -c 'ErgoDox')"
 export XDG_DATA_HOME="$HOME/.local/share"

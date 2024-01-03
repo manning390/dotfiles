@@ -5,7 +5,7 @@ local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
 vim.env.BASH_ENV = '~/.aliases'
 
 vim.o.termguicolors = true
-vim.cmd [[colorscheme nord]]
+vim.cmd [[colorscheme nordfox]]
 vim.o.mouse = 'nv'
 vim.o.errorbells = false
 vim.o.encoding = 'utf-8'

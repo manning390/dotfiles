@@ -29,7 +29,7 @@ local servers = {
     --     end
     -- },
     emmet_ls = {
-        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte', 'blade.php' },
     },
     cmake = {},
     phpactor = {},

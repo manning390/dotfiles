@@ -54,7 +54,7 @@ require('packer').startup(function(use)
 		after = 'nvim-treesitter'
 	}
 
-	-- Git reload plugins
+	-- Git plugins
 	use 'tpope/vim-fugitive' -- Git integration
 	use 'tpope/vim-rhubarb'
 	use {
@@ -73,11 +73,15 @@ require('packer').startup(function(use)
 
 	-- Color scheme
 	use 'shaunsingh/nord.nvim'
-	use "EdenEast/nightfox.nvim" 
+	use "EdenEast/nightfox.nvim"
+
+ 	-- Bottom status bar
 	use {
-		'nvim-lualine/lualine.nvim', -- Bottom status bar
+		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' }
 	}
+
+	-- Utilities
 	use { 'lukas-reineke/indent-blankline.nvim',
 		config = function() require('indent_blankline').setup { char = '┊', show_trailing_blankline_indent = false, } end }
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end } -- Comment toggling
@@ -110,6 +114,9 @@ require('packer').startup(function(use)
 		end
 	}
 
+	use { 'mhartington/formatter.nvim' }
+
+	-- use 'folke/trouble.nvim'
 	-- use {
 	-- 	'glepnir/lspsaga.nvim',
 	-- 	config = function()
@@ -123,20 +130,18 @@ require('packer').startup(function(use)
 	-- 		})
 	-- 	end
 	-- }
-	-- use 'folke/trouble.nvim'
-	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		config = function()
-			local ok, null_ls = pcall(require, "null-ls")
-			if not ok then return end
-			require 'null-ls'.setup({
-				sources = {
-					null_ls.builtins.diagnostics.eslint,
-				}
-			})
-		end,
-		requires = { "nvim-lua/plenary.nvim" }
-	}
+	-- use {
+	-- 	'jose-elias-alvarez/null-ls.nvim',
+	-- 	config = function()
+	-- 		local ok, null_ls = pcall(require, "null-ls")
+	-- 		if not ok then return end
+	-- 		require 'null-ls'.setup({
+	-- 			sources = {
+	-- 			}
+	-- 		})
+	-- 	end,
+	-- 	requires = { "nvim-lua/plenary.nvim" }
+	-- }
 
 
 	-- Rest Client

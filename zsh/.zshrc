@@ -61,7 +61,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
 colored-man-pages
-last-working-dir
+#last-working-dir
 tmux # Adds aliases to tmux
 fzf
 archlinux # Adds alias to package installers

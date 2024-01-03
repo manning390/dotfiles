@@ -37,3 +37,8 @@ au({'CursorHold,CursorHoldI'}, {
       vim.diagnostic.open_float(nil, {focus=false})
     end
 })
+au({'BufEnter'}, {
+    group = ag('blade', {clear = true}),
+    pattern = '*.blade.php',
+    command = 'set filetype=blade.php',
+})
