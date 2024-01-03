@@ -28,7 +28,7 @@ au({ 'BufEnter', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
         vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
     end
 })
--- au({'BufReadPost', 'FileReadPost', 'BufEnter'}, {
+-- au({'BufReadPost', 'FileReadPost'}, {
 --     group = ag('openfolds', {clear = true}),
 --     command = 'normal zR'
 -- })

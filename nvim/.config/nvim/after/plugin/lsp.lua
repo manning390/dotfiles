@@ -1,29 +1,3 @@
-local formatAu = vim.api.nvim_create_augroup('format_write', { clear = true })
-
--- This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(client, bufnr)
-    -- Eslint is 'special' and can't actually format stuff since it's a fixer.
-    -- So we just swap in the lsp format with their command
-    if (client.name == 'eslint') then
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-            vim.cmd('EslintFixAll')
-            -- fidget.notify("Format")
-        end, { desc = 'Format current buffer with EslintFixAll' })
-    else
-        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-            vim.lsp.buf.format()
-            -- fidget.notify("Format")
-        end, { desc = 'Format current buffer with LSP' })
-    end
-
-    -- vim.api.nvim_clear_autocmds({ group = formatAu, buffer = bufnr })
-    -- vim.api.nvim_create_autocmd("BufWritePre", {
-    --     group = formatAu,
-    --     buffer = bufnr,
-    --     command = ':Format'
-    -- })
-end
-
 local efm_languages = {
     -- typescript = {
     --     require 'efmls-configs.linters.eslint',
@@ -64,19 +38,42 @@ local servers = {
     vimls = {},
     cssls = {},
     eslint = {
-        -- on_attach = function(client, bufnr)
-        --     print('I attached eslint')
-        --     -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        --     --     print('I tried to format with eslint')
-        --     --     -- vim.cmd(":EslintFixAll")
-        --     -- end, { desc = 'Format current buffer with LSP' })
-        -- end,
+        on_attach = function(_, bufnr)
+            vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+                vim.cmd('EslintFixAll')
+            end, { desc = 'Format current buffer with LSP' })
+        end,
     },
     lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        }
+        on_init = function(client)
+            local path = client.workspace_folders[1].name
+            if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+                client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+                    Lua = {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using
+                            -- (most likely LuaJIT in the case of Neovim)
+                            version = 'LuaJIT'
+                        },
+                        -- Make the server aware of Neovim runtime files
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME
+                                -- "${3rd}/luv/library"
+                                -- "${3rd}/busted/library",
+                            }
+                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                            -- library = vim.api.nvim_get_runtime_file("", true)
+                        },
+                        telemetry = { enable = false },
+                        diagnostics = { globals = { 'vim', 'require' } }
+                    }
+                })
+                client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+            end
+            return true
+        end,
     },
     efm = {
         filetypes = vim.tbl_keys(efm_languages),
@@ -106,6 +103,13 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+-- This function gets run when an LSP connects to a particular buffer.
+local on_attach = function(_, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+        vim.lsp.buf.format()
+    end, { desc = 'Format current buffer with LSP' })
+end
+
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
@@ -117,10 +121,9 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
     function(server_name)
-        require('lspconfig')[server_name].setup {
+        require('lspconfig')[server_name].setup(vim.tbl_extend('force', {
             capabilities = capabilities,
             on_attach = on_attach,
-            settings = servers[server_name],
-        }
+        }, servers[server_name] or {}))
     end,
 }

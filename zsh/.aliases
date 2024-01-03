@@ -8,20 +8,20 @@ alias ...='../..'
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-alias fixesc="setxkbmap -option caps:escape"
-
 alias alpha="echo 'a b c d e f g h i j k l m n o p q r s t u v w x y z'"
 
-# alias irc="weechat"
-# alias nord="sudo openpyn"
-alias vim="nvim"
-alias vi="nvim"
-alias oldvim="\vim"
+alias vi='nvim'
+alias vim='nvim'
+
+# Not in this house
+alias nano='nvim'
+alias emacs='nvim'
 
 alias zshrc="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
-alias art="php artisan"
 
+# Laravel stuff
+alias art="php artisan"
 alias sail="[ -f sail ] && bash sail || bash vendor/bin/sail"
 
 # Pretty print the path
@@ -31,6 +31,7 @@ alias path="echo $PATH | tr -s ':' '\n'"
 # alias cdwiki='cd ~/vimwiki'
 
 alias cat='bat'
+alias dog=cat
 # alias ping='prettyping'
 
 # Go to the root of a project (git root)
@@ -41,7 +42,9 @@ alias bi="echo \"🏳️‍🌈\";sleep 1;vi"
 alias :w="clear;echo \"You're not in vim but ok\""
 alias :q="exit"
 
+alias work="cd ~/workspace"
 alias dock="docker-compose"
 alias cleannpm="rm -rf node_modules &&  npm cache clean --force && npm install --ignore-scripts"
 alias cleanaws="rm ~/.aws/credentials"
-alias work="cd ~/workspace"
+
+alias preview="open -a Preview"

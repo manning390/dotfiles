@@ -1,6 +1,7 @@
+vim.api.nvim_create_user_command('Q', ':q', {}) -- Fat finger quit
 vim.api.nvim_create_user_command('W', ':w', {}) -- Fat finger save
 vim.api.nvim_create_user_command('F', ':Format', {}) -- Fat finger save
-vim.api.nvim_create_user_command('Prit', 'silent !npx prettier --write % && :e', {})
+vim.api.nvim_create_user_command('Prit', 'silent !npx prettier --write % && :e && :LspRestart', {})
 vim.api.nvim_create_user_command('Snips', 'e ~/.config/nvim/snippets', {}) -- Reload snippets
 
 -- Leverages tpope/abolish.vim :Subvert to create commands to swap the pairs in the list below
@@ -22,3 +23,11 @@ for from,to in pairs({
 end
 
 vim.api.nvim_create_user_command('Tw', ':Telescope tailiscope', {})
+
+vim.api.nvim_create_user_command('Icon', function()
+    local fname = vim.fn.input("File: ", "", "file")
+    local filepath = 'resources/js/Components/icons/'..fname:sub(1,1):upper()..fname:sub(2)..'.svelte'
+    print(filepath)
+    -- vim.cmd('e '..filepath)
+end, {})
+

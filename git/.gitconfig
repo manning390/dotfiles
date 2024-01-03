@@ -9,16 +9,20 @@
 	co = checkout
 	br = branch
 	cp = cherry-pick
+	cb = "!git branch --show-current | tr -d '\n' | pbcopy"
 	last = log -1
 	unstage = reset HEAD --
 	tree=log --all --graph --decorate --oneline
-    	mv = "!branchmv() { git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi }; branchmv"
-	pr="!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
-	cb = "!git branch --show-current | tr -d '\n' | pbcopy"
  	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    	mv = "!f(){ git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi };f"
+	pr="!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
     	clear = "!clear; echo \"Good job.\""
 	yeet = !git add . && git commit
+	yt=yeet
 	yolo = "!git add . && git commit -m \"$(curl -s https://whatthecommit.com/index.txt) -yolo\"  && git push origin HEAD -f"
+	yoink = "!git pull origin $(git branch -l master main | sed 's/^* //')"
+	yk=yoink
+	cull = "!git for-each-ref --format '%(refname:short)' refs/heads | grep -v 'master\\|main' | xargs git branch -D"
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input

@@ -21,16 +21,28 @@ require('packer').startup(function(use)
 			-- Useful status updates for LSP
 			{
 				'j-hui/fidget.nvim',
-				tag = 'legacy',
 				config = function()
 					require 'fidget'.setup {
-						text = { spinner = 'dots' }
+						notification = {
+							configs = {
+								default = vim.tbl_extend("force",
+									require('fidget.notification').default_config,
+									{
+										icon_on_left = true,
+									}),
+							},
+						}
 					}
 				end
 			},
 			-- Additional lua configuration
 			'folke/neodev.nvim'
 		},
+	}
+	use {
+		"creativenull/efmls-configs-nvim", -- configurations for efm lang, installed via mason
+		tag = "v1.*",                -- tag is optional, but recommended
+		requires = { "neovim/nvim-lspconfig" },
 	}
 	-- Auto complete
 	use {
@@ -111,6 +123,12 @@ require('packer').startup(function(use)
 	use 'tpope/vim-sleuth'                                                           -- Detect tabstop and shiftwidth auto
 	use 'tpope/vim-surround'                                                         -- Surround operator
 	use 'tpope/vim-unimpaired'                                                       -- bracket mappings
+	use {																			 -- Jump to keypairs via labels
+		'ggandor/leap.nvim',
+		config = function()
+			require('leap').add_default_mappings()
+		end
+	}
 	use 'jessarcher/vim-heritage'                                                    -- Create new directories on edit file in non-existent dir
 
 	-- use 'sheerun/vim-polyglot' -- Syntax library
@@ -124,6 +142,14 @@ require('packer').startup(function(use)
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 	use {
 		"danielvolchek/tailiscope.nvim",
+		requires = { 'nvim-telescope/telescope.nvim' }
+	}
+	use {
+		"crispgm/telescope-heading.nvim", -- Markdown headers etc.
+		requires = { 'nvim-telescope/telescope.nvim' }
+	}
+	use {
+		"dhruvmanila/browser-bookmarks.nvim", -- Browser bookmarks
 		requires = { 'nvim-telescope/telescope.nvim' }
 	}
 
@@ -206,11 +232,6 @@ require('packer').startup(function(use)
 	-- 	end,
 	-- 	requires = { "nvim-lua/plenary.nvim" }
 	-- }
-	use {
-		"creativenull/efmls-configs-nvim", -- configurations for efm lang, installed via mason
-		tag = "v1.*",                -- tag is optional, but recommended
-		requires = { "neovim/nvim-lspconfig" },
-	}
 
 	-- Rest Client
 	use {

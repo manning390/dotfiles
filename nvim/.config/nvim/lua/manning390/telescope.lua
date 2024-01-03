@@ -1,3 +1,8 @@
+if not pcall(require, 'telescope') then
+    print("Telescope not installed")
+    return
+end
+
 local actions = require("telescope.actions")
 require("telescope").setup({
     defaults = {
@@ -47,9 +52,10 @@ require("telescope").setup({
     },
 })
 
-pcall(require("telescope").load_extension, "fzy")
-pcall(require("telescope").load_extension, "git_worktree")
-pcall(require("telescope").load_extension, "tailiscope")
+require("telescope").load_extension("git_worktree")
+require("telescope").load_extension("tailiscope")
+require("telescope").load_extension("bookmarks")
+require("telescope").load_extension("heading")
 
 local M = {}
 M.search_dotfiles = function()
@@ -61,8 +67,7 @@ M.search_dotfiles = function()
 end
 M.project_files = function()
     local opts = { show_untracked = true }
-    local ok = pcall(require 'telescope.builtin'.git_files, opts)
-    if not ok then require 'telescope.builtin'.find_files(opts) end
+    require 'telescope.builtin'.find_files(opts)
 end
 M.related_files = function()
     local removeAfterLastSlash = function(s)
