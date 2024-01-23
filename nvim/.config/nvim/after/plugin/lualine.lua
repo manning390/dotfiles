@@ -1,6 +1,15 @@
+local function get_harpoon(val)
+    local items = require('harpoon'):list().items
+    for i, item in ipairs(items) do
+        if val == item.value then
+            return i
+        end
+    end
+    return nil
+end
 local harpoon = {
     function()
-        local harpoon_number = require('harpoon.mark').get_index_of(vim.fn.bufname())
+        local harpoon_number = get_harpoon(vim.fn.bufname())
         if harpoon_number then
             return "ﯠ " .. harpoon_number
         else
@@ -8,7 +17,7 @@ local harpoon = {
         end
     end,
     color = function()
-        if require('harpoon.mark').get_index_of(vim.fn.bufname()) then
+        if get_harpoon(vim.fn.bufname()) then
             return { fg = "#98be65", gui = 'bold' }
         else
             return { fg = "#ec5f67" }

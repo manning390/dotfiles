@@ -129,7 +129,8 @@ require('packer').startup(function(use)
 			require('leap').add_default_mappings()
 		end
 	}
-	use 'jessarcher/vim-heritage'                                                    -- Create new directories on edit file in non-existent dir
+	use 'jghauser/mkdir.nvim'
+--	use 'jessarcher/vim-heritage' -- Create missing directories on :e                                                   -- Create new directories on edit file in non-existent dir
 
 	-- use 'sheerun/vim-polyglot' -- Syntax library
 	use {
@@ -156,11 +157,16 @@ require('packer').startup(function(use)
 	-- Harpoo"n
 	use {
 		"ThePrimeagen/harpoon",
+		branch = 'harpoon2',
 		config = function()
 			require 'harpoon'.setup({
-				global_settings = { save_on_change = true }
+				settings = {
+					save_on_toggle = true,
+					sync_on_ui_close = true
+				}
 			})
-		end
+		end,
+		requires = {{"nvim-lua/plenary.nvim"}}
 	}
 	-- Worktrees
 	use { 'ThePrimeagen/git-worktree.nvim', config = function() require 'git-worktree'.setup() end }

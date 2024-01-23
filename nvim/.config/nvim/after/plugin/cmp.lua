@@ -1,7 +1,6 @@
 local cmp = require('cmp')
 local has_luasnip, luasnip = pcall(require, 'luasnip')
 local n = vim.g.keymaps.n;
-local N = vim.g.keymaps.N;
 
 require('manning390.snippets')
 require('manning390.cmp.githandles').setup()
@@ -52,12 +51,6 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
     -- { name = 'nvim_lsp_signature_help' },
-    {
-      name = 'githandles',
-      option = {
-        filetypes = { 'gitcommit' }
-      }
-    },
     { name = 'path' },
     { name = 'calc' },
     { name = 'luasnip' },
@@ -80,6 +73,11 @@ cmp.setup({
   window = {
     documentation = cmp.config.window.bordered(),
   }
+})
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources(
+    { name = 'githandles' }
+  ),
 })
 cmp.event:on(
   'confirm_done',

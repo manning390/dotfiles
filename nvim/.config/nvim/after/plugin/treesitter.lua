@@ -4,13 +4,11 @@ end
 
 require('nvim-treesitter.configs').setup {
 	ensure_installed      = {
-		"help",
 		"lua",
 		"vim",
 		"http",
 		"json",
 		"typescript",
-		-- "tsx",
 		"scss",
 		"html",
 		"python",
