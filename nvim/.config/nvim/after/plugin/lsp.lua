@@ -1,48 +1,37 @@
-local efm_languages = {
-    -- typescript = {
-    --     require 'efmls-configs.linters.eslint',
-    --     require 'efmls-configs.formatters.prettier',
-    -- },
-    lua = {
-        require 'efmls-configs.formatters.stylua'
-    }
-}
+local efm_languages = { }
 local servers = {
-    tsserver = {},
+    -- tsserver = {
+    --     on_attach = function(client)
+    --         client.server_capabilities.documentFormattingProvider = false
+    --         client.server_capabilities.documentRangeFormattingProvider = false
+    --     end,
+    -- },
     clangd = {
         init_options = {
             compilationDatabaseDirectory = "build"
         }
     },
-    -- gdscript = {
-    --     cmd = {"ncat", "localhost", "6008"},
-    --     on_attach = function (client)
-    --         local _notify = client.notify
-    --         client.notify = function (method, params)
-    --             if method == 'textDocument/didClose' then
-    --                 return
-    --             end
-    --             _notify(method, params)
-    --         end
-    --     end
-    -- },
-    -- emmet_ls = {
-    --     filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte', 'vue' },
-    -- },
     emmet_language_server = {
         filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte', 'vue' },
     },
     cmake = {},
-    phpactor = {},
+    -- phpactor = {},
     tailwindcss = {},
     vimls = {},
-    cssls = {},
+    cssls = {
+        on_attach = function(client)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+    },
     eslint = {
-        -- on_attach = function(_, bufnr)
-        --     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        --         vim.cmd('EslintFixAll')
-        --     end, { desc = 'Format current buffer with LSP' })
-        -- end,
+        filetypes = {'javascriptreact', 'typescriptreact', 'javascript', 'svelte'},
+        on_attach = function(_, bufnr)
+            vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+                vim.lsp.buf.format()
+                vim.cmd('EslintFixAll')
+            end, { desc = 'Format current buffer with LSP' })
+        end,
     },
     lua_ls = {
         on_init = function(client)
@@ -67,7 +56,10 @@ local servers = {
                             -- library = vim.api.nvim_get_runtime_file("", true)
                         },
                         telemetry = { enable = false },
-                        diagnostics = { globals = { 'vim', 'require' } }
+                        diagnostics = { globals = { 'vim', 'require' } },
+                        completion = {
+                            callSnippet = "Replace"
+                        }
                     }
                 })
                 client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
@@ -79,7 +71,9 @@ local servers = {
         filetypes = vim.tbl_keys(efm_languages),
         settings = {
             rootMarkers = { ".git/" },
-            languages = efm_languages
+            languages = vim.tbl_extend('force',
+                require 'efmls-configs.defaults'.languages(), efm_languages
+            )
         },
         init_options = {
             documentFormatting = true,
@@ -87,10 +81,19 @@ local servers = {
         },
     },
     jsonls = {},
+    ltex = {
+        filetypes = { 'markdown' },
+        filter_notifications = {
+            'checking document'
+        },
+        -- on_init = function(client)
+        --     client.server_capabilities
+        -- end
+    },
 }
 
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = true,
     float = {
         source = true,
     }

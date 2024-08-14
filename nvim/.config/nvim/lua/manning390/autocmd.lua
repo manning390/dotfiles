@@ -3,8 +3,15 @@ local ag = vim.api.nvim_create_augroup
 
 au({ 'BufWritePre' }, {
     group = ag('LspFormatting', {}),
+    pattern = { 'svelte', 'javascript', 'typescript', 'html' },
     command = 'Format'
 })
+-- au("BufWritePre", {
+--   pattern = "*",
+--   callback = function(args)
+--     require("conform").format({ bufnr = args.buf })
+--   end,
+-- })
 
 local numbertoggle = ag('numbertoggle', {})
 au({ 'BufEnter', 'FocusGained', 'InsertLeave' }, {
@@ -66,6 +73,12 @@ au({ 'Filetype' }, {
         vim.opt_local.shiftwidth = 4
         vim.opt_local.expandtab = false
     end
+})
+
+au({ 'QuickFixCmdPost' }, {
+    group = ag('AutoOpenQuickFix', {}),
+    pattern = '[^l]*',
+    command = 'cwindow',
 })
 -- local tailwindwraptoggle = ag('tailwindwraptoggle', {})
 -- au({ 'BufEnter', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {

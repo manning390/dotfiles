@@ -12,11 +12,12 @@ vim.o.showcmd = true
 vim.o.cmdheight = 1
 
 vim.o.termguicolors = true
-vim.cmd [[colorscheme nord]]
 vim.o.mouse = 'nv'
 vim.o.errorbells = false
+-- vim.o.errorformat = '%A%f:%l:%c:%m,%-G\\\\s%#,%-G%*\\\\d\\ problem%.%#'
 vim.o.encoding = 'utf-8'
 vim.o.fileformats = 'unix,mac,dos'
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 vim.o.magic = true
 
 vim.o.tabstop = 4      --A tab is four spaces
@@ -104,3 +105,9 @@ vim.o.switchbuf                 = 'useopen'
 vim.o.backspace                 = 'indent,eol,start' --allow backspacing over everything in insert mode
 
 -- vim.o.update                    = 250
+--
+vim.filetype.add({
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+  },
+})

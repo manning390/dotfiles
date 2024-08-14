@@ -1,3 +1,8 @@
+local wordcount = {
+    function()
+        local lnum = 1
+    end
+}
 local function get_harpoon(val)
     local items = require('harpoon'):list().items
     for i, item in ipairs(items) do

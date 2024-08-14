@@ -4,19 +4,21 @@ end
 
 require('nvim-treesitter.configs').setup {
 	ensure_installed      = {
-		"lua",
-		"vim",
-		"http",
-		"json",
-		"typescript",
-		"scss",
-		"html",
-		"python",
 		"bash",
 		"c",
 		"cpp",
+		"graphql",
+		"html",
+		"http",
+		"json",
+		"lua",
 		"php",
+		"python",
+		"scss",
 		"svelte",
+		"typescript",
+		"vim",
+		"xml",
 	},
 	highlight             = { enable = true },
 	indent                = { enable = true, disable = { 'python' } },
@@ -66,6 +68,17 @@ require('nvim-treesitter.configs').setup {
 			['[]'] = '@class.outer',
 		},
 	},
+	tree_docs             = { enable = true }
 }
 require('ts_context_commentstring').setup {}
 vim.g.skip_ts_context_commentstring_module = true
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.blade = {
+  install_info = {
+    url = "https://github.com/EmranMR/tree-sitter-blade",
+    files = {"src/parser.c"},
+    branch = "main",
+  },
+  filetype = "blade"
+}

@@ -3,6 +3,7 @@ vim.api.nvim_create_user_command('W', ':w', {})                            -- Fa
 vim.api.nvim_create_user_command('F', ':Format', {})                       -- Fat finger save
 vim.api.nvim_create_user_command('Prit', 'silent !npx prettier --write % && :e && :LspRestart', {})
 vim.api.nvim_create_user_command('Snips', 'e ~/.config/nvim/snippets', {}) -- Reload snippets
+vim.api.nvim_create_user_command('E', ':e|lua vim.diagnostic.reset()', {})     -- Reset diagnostics
 
 -- Leverages tpope/abolish.vim :Subvert to create commands to swap the pairs in the list below
 -- ie, :'<,'>WH => var_width -> var_height
@@ -24,9 +25,23 @@ end
 
 vim.api.nvim_create_user_command('Tw', ':Telescope tailiscope', {})
 
-vim.api.nvim_create_user_command('Icon', function()
-    local fname = vim.fn.input("File: ", "", "file")
-    local filepath = 'resources/js/Components/icons/' .. fname:sub(1, 1):upper() .. fname:sub(2) .. '.svelte'
-    print(filepath)
-    -- vim.cmd('e '..filepath)
-end, {})
+-- From https://github.com/stevearc/overseer.nvim/blob/master/doc/recipes.md#make-similar-to-vim-dispatch
+vim.api.nvim_create_user_command("Make", function(params)
+  -- Insert args at the '$*' in the makeprg
+  local cmd, num_subs = vim.o.makeprg:gsub("%$%*", params.args)
+  if num_subs == 0 then
+    cmd = cmd .. " " .. params.args
+  end
+  local task = require("overseer").new_task({
+    cmd = vim.fn.expandcmd(cmd),
+    components = {
+      { "on_output_quickfix", open = not params.bang, open_height = 8 },
+      "default",
+    },
+  })
+  task:start()
+end, {
+  desc = "Run your makeprg as an Overseer task",
+  nargs = "*",
+  bang = true,
+})

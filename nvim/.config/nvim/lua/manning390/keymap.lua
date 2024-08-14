@@ -13,7 +13,7 @@ local map            = bind('')
 local nmap           = bind('n', { noremap = false })
 local nnoremap       = bind('n')
 local vnoremap       = bind('v')
---local xnoremap = bind('x')
+local xnoremap       = bind('x')
 local inoremap       = bind('i')
 
 nmap('<leader>/', ':noh<cr>', { silent = true })
@@ -34,6 +34,8 @@ if vim.env.COLEMAK == '1' then
 	map('e', 'k')   -- up
 	map('i', 'l')   -- right
 	map('l', 'i')   -- insert
+	nmap('e', 'k')  -- end word
+	nmap('E', 'K')  -- end WORD
 	nmap('h', 'n')  -- next
 	nmap('H', 'N')  -- previous
 	nmap('k', 'm')  -- mark
@@ -53,7 +55,7 @@ inoremap('<S-Tab>', '<C-V><Tab>')
 
 -- Harpoon
 local harpoon = require('harpoon')
-nnoremap('<leader>a', function() harpoon:list():append() end)
+nnoremap('<leader>a', function() harpoon:list():add() end)
 nnoremap('<leader>`', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 for i = 1, 9 do
 	nnoremap('<leader>' .. i, function() harpoon:list():select(i) end)
@@ -71,7 +73,7 @@ nnoremap('<leader>pr', require 'telescope.builtin'.oldfiles, { desc = 'Find [R]e
 nnoremap('<leader>pf', tel.find_files, { desc = 'Search [F]iles' })
 nnoremap('<leader>ph', require 'telescope.builtin'.help_tags, { desc = 'Search [H]elp' })
 nnoremap('<leader>pd', require 'telescope.builtin'.diagnostics, { desc = 'Search [D]iagnostics' })
-nnoremap('<leader>pg', require 'telescope.builtin'.live_grep, { desc = 'Search by [G]rep' })
+nnoremap('<leader>pg', require 'telescope'.extensions.live_grep_args.live_grep_args, { desc = 'Search by [G]rep' })
 nnoremap('<leader>p/', require 'telescope.builtin'.grep_string, { desc = 'Search current [W]ord' })
 -- nnoremap('<leader>pg', function()
 -- 	tel.grep_string{ search = vim.fn.input("Grep For > ")} end)
@@ -93,19 +95,32 @@ nnoremap('gt', vim.lsp.buf.type_definition, { desc = 'LSP: [G]oto [T]ype Definit
 nnoremap('g?', vim.diagnostic.open_float, { silent = true })
 nnoremap('<leader>cn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame' })
 nnoremap('<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction' })
-nnoremap('[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostic' })
 nnoremap(']d', vim.diagnostic.goto_next, { desc = 'Next Diagnostic ' })
-nnoremap('[e', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Previous Error' })
+nnoremap('[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostic' })
 nnoremap(']e', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Next Error' })
+nnoremap('[e', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Previous Error' })
+--nnoremap(']t', require'todo-comments'.jump_next, { desc = "Next todo comment"})
+--nnoremap('[t', require'todo-comments'.jump_prev, { desc = "Previous todo comment"})
 nnoremap('<leader>q', vim.diagnostic.setloclist)
 nnoremap('K', vim.lsp.buf.hover, { buffer = 0, desc = 'LSP: Hover Documentation' }) -- Needs colemak rebind
 nnoremap('<leader>f', ':Format<CR>', { desc = 'LSP: [F]ormat' })
+nnoremap('<leader>d', ':OverseerRun<CR>', { desc = '[D]ispatch Overseer action' })
 -- nnoremap(sf('<C-%s>', h), vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation'}) -- Needs colemak rebind
 -- nmap('<leader>'..n, function() vim.lsp.diagnostic.goto_next() end, {silent = true})
 -- nmap('<leader>'..N, function()
 -- 	vim.lsp.diagnostic.show_line_diagnostics()
 -- 	vim.lsp.util.show_line_diagnostics()
 -- end, {silent = true})
+
+-- Refactoring
+xnoremap("<leader>re", ":Refactor extract ")
+xnoremap("<leader>rf", ":Refactor extract_to_file ")
+xnoremap("<leader>rv", ":Refactor extract_var ")
+vim.keymap.set({"n", "x"}, "<leader>ri", ":Refactor inline_var")
+nnoremap("<leader>rI", ":Refactor inline_func")
+nnoremap("<leader>rb", ":Refactor extract_block")
+nnoremap("<leader>rbf", ":Refactor extract_block_to_file")
+vim.keymap.set({"n", "x"}, "<leader>rr", function() require('telescope').extensions.refactoring.refactors() end)
 
 -- Run tests
 nnoremap('<leader>tq', ':TestNearest<CR>', { desc = 'Tests: [T]est Nearest [Q]' })
@@ -176,7 +191,8 @@ nnoremap('~', fn.customCaseToggle)
 
 nnoremap('<leader>pm', ':PhpactorContextMenu<cr>')
 
-nnoremap('z/', ':ThesaurusQueryReplaceCurrentWord<cr>')
-vnoremap('z/', 'y:ThesaurusQueryReplace <C-r>"<cr>')
+-- nnoremap('z/', ':ThesaurusQueryReplaceCurrentWord<cr>')
+-- vnoremap('z/', 'y:ThesaurusQueryReplace <C-r>"<cr>')
+nnoremap('z/', ':Wrd<cr>')
 
 nnoremap('z ', ':set invlist!<cr>', { silent = true })

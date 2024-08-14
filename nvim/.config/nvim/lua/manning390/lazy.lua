@@ -1,4 +1,8 @@
-local opts = {}
+local opts = {
+	dev = {
+		path = "~/Documents",
+	},
+}
 local plugins = {
 	-- LSP
 	{
@@ -12,22 +16,8 @@ local plugins = {
 				"williamboman/mason-lspconfig.nvim",
 				enabled = true, -- eventual nix override
 			},
-			{ -- Lsp notification library
-				"j-hui/fidget.nvim",
-				opts = {
-					-- notification = {
-					-- 	configs = {
-					-- 		default = vim.tbl_extend(
-					-- 			"force",
-					-- 			require("fidget.notification").default_config,
-					-- 			{ icon_on_left = true }
-					-- 		),
-					-- 	},
-					-- },
-				},
-			},
 			{
-				"folke/neodev.nvim",-- Additional lua information
+				"folke/neodev.nvim", -- Additional lua information
 				-- config = function()
 				-- 	require('neodev').setup({
 				-- 		library = { plugins = {"neotest"}, types = true},
@@ -41,6 +31,11 @@ local plugins = {
 		version = "v1.x.x",          -- tag is optional, but recommended
 		dependencies = { "neovim/nvim-lspconfig" },
 	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
 	{ -- PHP Actions
 		"gbprod/phpactor.nvim",
 		tag = "v1.0.1",
@@ -48,7 +43,7 @@ local plugins = {
 		ft = "php",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"neovim/nvim-lspconfig"
+			"neovim/nvim-lspconfig",
 		},
 		config = function()
 			require("phpactor").setup({
@@ -66,7 +61,59 @@ local plugins = {
 					options = {},
 				},
 			})
-		end
+		end,
+	},
+	{
+		enabled = false,
+		"adalessa/laravel.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"tpope/vim-dotenv",
+			"MunifTanjim/nui.nvim",
+			"nvimtools/none-ls.nvim",
+		},
+		cmd = { "Sail", "Artisan", "Composer", "Npm", "Laravel" },
+		keys = {
+			{ "<leader>la", ":Laravel artisan<cr>" },
+			{ "<leader>lr", ":Laravel routes<cr>" },
+			{ "<leader>lm", ":Laravel related<cr>" },
+		},
+		event = { "VeryLazy" },
+		config = true,
+	},
+	{
+		"folke/trouble.nvim",
+		enabled = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	{
+		"stevearc/conform.nvim",
+		enabled = false,
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				typescript = { { "prettierd", "prettier" } },
+				javascript = { { "prettierd", "prettier" } },
+				php = { "pint" },
+			},
+		},
+	},
+	-- Notifications
+	{
+		"rcarriga/nvim-notify",
+		main = "notify",
+		priority = 70,
+		config = function()
+			local notify = require("notify")
+			notify.setup({})
+			vim.notify = notify
+		end,
+	},
+	-- Snippets
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2.*",
+		build = "make install_jsregexp",
 	},
 	-- Autocomplete
 	{
@@ -87,7 +134,7 @@ local plugins = {
 							vim.g.user_emmet_leader_key = "<C-Z>"
 						end,
 					},
-				}
+				},
 			},
 			"saadparwaiz1/cmp_luasnip",
 			-- 'hrsh7th/cmp-cmdline',
@@ -104,19 +151,31 @@ local plugins = {
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-tree-docs",
 			"nvim-treesitter/playground",
 		},
 	},
 	-- Git
 	"tpope/vim-fugitive", -- :G commands
 	"tpope/vim-rhubarb", -- :GBrowse
-	"gitsigns-nvim",   -- Sidebar signs
+	{                  -- Sidebar signs
+		"lewis6991/gitsigns.nvim",
+		main = "gitsigns",
+		config = true,
+	},
 
 	-- Theme
 	"nvim-lualine/lualine.nvim",
-	{ "nvim-tree/nvim-web-devicons", lazy = false },
+	{ "nvim-tree/nvim-web-devicons", lazy = false, priority = 100 },
 	-- 'haystackandroid/snow'
-	"shaunsingh/nord.nvim",
+	{
+		"shaunsingh/nord.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd([[colorscheme nord]])
+		end,
+	},
 	-- Utils
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -125,18 +184,23 @@ local plugins = {
 	},
 	{ -- Comment toggling
 		"numToStr/Comment.nvim",
+		lazy = false,
 		opts = {},
 	},
 	-- Our lord and savior
-	"tpope/vim-abolish",                           -- Better substitutions and iabbrev
-	"tpope/vim-eunuch",                            -- :Rename and :SudoWrite
-	"tpope/vim-repeat",                            -- bracket mappings
-	"tpope/vim-sleuth",                            -- Detect tabstop and shiftwidth auto
-	"tpope/vim-surround",                          -- Surround operator
-	"tpope/vim-unimpaired",                        -- bracket mappings
+	"tpope/vim-abolish",               -- Better substitutions and iabbrev
+	"tpope/vim-eunuch",                -- :Rename and :SudoWrite
+	"tpope/vim-repeat",                -- bracket mappings
+	"tpope/vim-sleuth",                -- Detect tabstop and shiftwidth auto
+	"tpope/vim-surround",              -- Surround operator
+	"tpope/vim-unimpaired",            -- bracket mappings
 	-- No bindings or cmds by default, make telescope command?
 	{ "Vonr/align.nvim",             branch = "v2" }, -- Align things vertically
-	{                                              -- Jump to keypairs via labels
+	{
+		"folke/todo-comments.nvim",    -- Highlight todo comments
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{ -- Jump to keypairs via labels
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap").add_default_mappings()
@@ -149,7 +213,7 @@ local plugins = {
 			fast_wrap = {},
 		},
 	},
-	{"karb94/neoscroll.nvim", opts = {}}, -- Smooth scroll
+	{ "karb94/neoscroll.nvim", opts = {} }, -- Smooth scroll
 	{
 		"ku1ik/vim-pasta",
 		config = function()
@@ -161,16 +225,20 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build =
-		"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build =
+				"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			},
+		},
 	},
 	"danielvolchek/tailiscope.nvim",   -- Tailwind
 	"crispgm/telescope-heading.nvim",  -- Markdown headers etc.
 	"dhruvmanila/browser-bookmarks.nvim", -- Browser bookmarks
+	"cwebster2/github-coauthors.nvim", -- Co-authors
 
 	-- Harpoo"n
 	{
@@ -184,16 +252,16 @@ local plugins = {
 		},
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-	'ThePrimeagen/git-worktree.nvim',
-
-	-- Rest Client
+	"ThePrimeagen/git-worktree.nvim",
 	{
-		"rest-nvim/rest.nvim",
-		lazy = true,
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			result_split_in_place = true,
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
+		config = function()
+			require("refactoring").setup()
+		end,
 	},
 
 	-- Testing
@@ -220,7 +288,7 @@ local plugins = {
 	-- 	lazy = true,
 	-- 	dependencies = {
 	-- 		"nvim-lua/plenary.nvim",
- --    		"antoinemadec/FixCursorHold.nvim",
+	--    		"antoinemadec/FixCursorHold.nvim",
 	-- 		"nvim-treesitter/nvim-treesitter",
 	-- 		"nvim-neotest/neotest-jest",
 	-- 	},
@@ -234,7 +302,31 @@ local plugins = {
 	-- 		})
 	-- 	end
 	-- },
+	{
+		"stevearc/overseer.nvim",
+		dependencies = "stevearc/dressing.nvim",
+		opts = {},
+	},
 
+	-- Writing related plugins
+	{
+		"okuuva/auto-save.nvim",
+		enabled = false,
+		lazy = true,
+		cmd = "ASToggle",
+	},
+	{
+		"folke/twilight.nvim",
+		enabled = false,
+		cmd = "Twilight",
+		lazy = true,
+	},
+	{
+		"folke/zen-mode.nvim",
+		enabled = false,
+		cmd = "ZenMode",
+		lazy = true,
+	},
 	{
 		"ron89/thesaurus_query.vim",
 		config = function()
@@ -242,6 +334,16 @@ local plugins = {
 			vim.g.tq_openoffice_en_file = "~/Documents/MyThes-1.0/th_en_US_new"
 			vim.g.tq_enabled_backends = { "openoffice_en", "datamuse_com" }
 		end,
+	},
+	{
+		"wrd.nvim",
+		dev = true,
+		dir = "~/Documents/wrd.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {},
 	},
 }
 

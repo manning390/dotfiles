@@ -4,7 +4,8 @@ if not pcall(require, 'telescope') then
 end
 
 local actions = require("telescope.actions")
-require("telescope").setup({
+local tel = require("telescope")
+tel.setup({
     defaults = {
         file_sorter = require("telescope.sorters").get_fzy_sorter,
         prompt_prefix = " >",
@@ -42,20 +43,25 @@ require("telescope").setup({
 
     },
     extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
+        fzf = {
+            override_generic_sorter = true,
             override_file_sorter = true,
         },
         tailiscope = {
             default = "all"
         },
+        live_grep_args = {
+
+        }
     },
 })
 
-require("telescope").load_extension("git_worktree")
-require("telescope").load_extension("tailiscope")
-require("telescope").load_extension("bookmarks")
-require("telescope").load_extension("heading")
+tel.load_extension('fzf')
+tel.load_extension("git_worktree")
+tel.load_extension("tailiscope")
+tel.load_extension("bookmarks")
+tel.load_extension("heading")
+
 
 local M = {}
 M.search_dotfiles = function()
