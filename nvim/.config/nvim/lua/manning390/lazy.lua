@@ -155,6 +155,18 @@ local plugins = {
 			"nvim-treesitter/playground",
 		},
 	},
+	-- Tmux
+	{
+		"christoomey/vim-tmux-navigator",
+		lazy = false,
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+	},
 	-- Git
 	"tpope/vim-fugitive", -- :G commands
 	"tpope/vim-rhubarb", -- :GBrowse
@@ -192,7 +204,12 @@ local plugins = {
 	"tpope/vim-eunuch",                -- :Rename and :SudoWrite
 	"tpope/vim-repeat",                -- bracket mappings
 	"tpope/vim-sleuth",                -- Detect tabstop and shiftwidth auto
-	"tpope/vim-surround",              -- Surround operator
+	{
+		"kylechui/nvim-surround",      -- Surround operator
+		version = "*",
+		event = "VeryLazy",
+		opts = {}
+	},
 	"tpope/vim-unimpaired",            -- bracket mappings
 	-- No bindings or cmds by default, make telescope command?
 	{ "Vonr/align.nvim",             branch = "v2" }, -- Align things vertically

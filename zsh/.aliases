@@ -3,7 +3,12 @@
 alias tailf='tail -f' # Follow tail
 alias ln='ln -v' # More verbose ln
 alias mkdir='mkdir -p' # Always make full path if not exist
-alias ...='../..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ls='ls --color'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
 
 alias e="$EDITOR"
 alias v="$VISUAL"

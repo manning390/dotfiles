@@ -46,10 +46,11 @@ end
 nnoremap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 nnoremap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-nnoremap(sf('<C-%s>', h), ':wincmd h<cr>', { silent = true }) -- change window left
-nnoremap(sf('<C-%s>', j), ':wincmd j<cr>', { silent = true }) -- change window down
-nnoremap(sf('<C-%s>', k), ':wincmd k<cr>', { silent = true }) -- change window up
-nnoremap(sf('<C-%s>', l), ':wincmd l<cr>', { silent = true }) -- change window right
+nnoremap(sf('<C-%s>', h), ':TmuxNavigateLeft<cr>', { silent = true }) -- change window left
+nnoremap(sf('<C-%s>', j), ':TmuxNavigateDown<cr>', { silent = true }) -- change window down
+nnoremap(sf('<C-%s>', k), ':TmuxNavigateUp<cr>', { silent = true }) -- change window up
+nnoremap(sf('<C-%s>', l), ':TmuxNavigateRight<cr>', { silent = true }) -- change window right
+nnoremap("<C-\\>", ':TmuxNavigatePrevious<cr>', { silent = true })
 
 inoremap('<S-Tab>', '<C-V><Tab>')
 
