@@ -45,7 +45,6 @@ vim.o.spelllang = 'en_us'
 -- let &directory=g:configPath .'/swap//' --vim.o.where we're saving swaps
 -- let &undodir=g:configPath .'/undo//' --and undos
 
-
 vim.o.sidescroll                = 1 --sidescroll when needed
 vim.o.wrap                      = true
 vim.o.breakindent               = true
@@ -74,6 +73,7 @@ vim.o.listchars                 = "eol:¶,tab:>·,trail:~,extends:>,precedes:<,s
 -- 	+ "j" -- Auto-remove comments if possible.
 -- 	- "2" -- I'm not in gradeschool anymore
 vim.o.formatoptions = 'cqrn'
+vim.o.conceallevel = 1;
 
 vim.wo.number                   = true
 vim.wo.relativenumber           = true --Show line numbers Relative line numbers

@@ -43,8 +43,8 @@ if vim.env.COLEMAK == '1' then
 	nmap('N', 'J')  -- join
 	nmap('I', '<nop>') -- Shift I
 end
-nnoremap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-nnoremap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+nnoremap(k, "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+nnoremap(j, "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 nnoremap(sf('<C-%s>', h), ':TmuxNavigateLeft<cr>', { silent = true }) -- change window left
 nnoremap(sf('<C-%s>', j), ':TmuxNavigateDown<cr>', { silent = true }) -- change window down
@@ -174,6 +174,12 @@ nnoremap('gq', fn.toggleQuickfix, { silent = true, desc = "Toggle Quickfix Windo
 
 -- Edit file path under cursor
 nnoremap('gf', ':edit <cfile><cr>')
+
+-- Split and join lines syntactically
+local tsj = require('treesj')
+nnoremap('gm', tsj.toggle)
+nnoremap('gs', tsj.split)
+nnoremap('gJ', tsj.join)
 
 -- Jump to EOL
 inoremap(';;', '<ESC>A;<ESC>')

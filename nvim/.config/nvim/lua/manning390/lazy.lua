@@ -199,16 +199,20 @@ local plugins = {
 		lazy = false,
 		opts = {},
 	},
-	-- Our lord and savior
-	"tpope/vim-abolish",               -- Better substitutions and iabbrev
-	"tpope/vim-eunuch",                -- :Rename and :SudoWrite
-	"tpope/vim-repeat",                -- bracket mappings
-	"tpope/vim-sleuth",                -- Detect tabstop and shiftwidth auto
 	{
-		"kylechui/nvim-surround",      -- Surround operator
+		"Wansmer/treesj",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
+	-- Our lord and savior
+	"tpope/vim-abolish",    -- Better substitutions and iabbrev
+	"tpope/vim-eunuch",     -- :Rename and :SudoWrite
+	"tpope/vim-repeat",     -- bracket mappings
+	"tpope/vim-sleuth",     -- Detect tabstop and shiftwidth auto
+	{
+		"kylechui/nvim-surround", -- Surround operator
 		version = "*",
 		event = "VeryLazy",
-		opts = {}
+		opts = {},
 	},
 	"tpope/vim-unimpaired",            -- bracket mappings
 	-- No bindings or cmds by default, make telescope command?
@@ -351,6 +355,29 @@ local plugins = {
 			vim.g.tq_openoffice_en_file = "~/Documents/MyThes-1.0/th_en_US_new"
 			vim.g.tq_enabled_backends = { "openoffice_en", "datamuse_com" }
 		end,
+	},
+	{
+		"epwalsh/obsidian.nvim",
+		ft = "markdown",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "Personal",
+					path = "~/Documents/obsidian/Personal",
+				},
+				{
+					name = "Work",
+					path = "~/Documents/obsidian/Work",
+				},
+			},
+			follow_url_func = function(url)
+				vim.ui.open(url) -- need Neovim 0.10.0+
+			end,
+		},
 	},
 	{
 		"wrd.nvim",

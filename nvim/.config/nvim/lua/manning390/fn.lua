@@ -44,6 +44,7 @@ M.customCaseToggle = function()
     })[char]
     vim.cmd('normal! '..(seq or '~'))
 end
+
 M.bufOnly = function()
   vim.cmd('%bd|e#|bd#')
 end

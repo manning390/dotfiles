@@ -40,7 +40,7 @@
 [url "ssh://git@github"]
     insteradOf = https://github.com
 [github]
-	user = mmanning2
+	user = mmanning2-chwy
 [init]
 	defaultBranch = dev
 
