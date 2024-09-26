@@ -1,7 +1,7 @@
 [push]
 	default = current
 [pull]
-    rebase = false
+        rebase = false
 [alias]
 	st = status
 	ci = commit
@@ -14,17 +14,17 @@
 	vi = "!nvim -c 'G'"
 	last = log -1
 	unstage = reset HEAD --
-	tree=log --all --graph --decorate --oneline
- 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-    	mv = "!f(){ git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi };f"
-	pr="!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
-	fd="!f(){ git branch -a | grep -v remotes | grep $1 | head -n 1 | xargs git checkout; };f"
-    	clear = "!clear; echo \"Good job.\""
+	tree = log --all --graph --decorate --oneline
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	mv = "!f(){ git branch -m $1 $2; if [[ `git ls-remote --heads origin $1 | wc -l` -eq 1 ]]; then git push origin :$1; git push origin $2; fi };f"
+	pr = "!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
+	fd = "!f(){ git branch -a | grep -v remotes | grep $1 | head -n 1 | xargs git checkout; };f"
+	clear = "!clear; echo \"Good job.\""
 	yeet = !git add . && git commit
-	yt=yeet
+	yt = yeet
 	yolo = "!git add . && git commit -m \"$(curl -s https://whatthecommit.com/index.txt) -yolo\"  && git push origin HEAD -f"
 	yoink = "!git pull origin $(git branch --show-current | tr -d '\n')"
-	yk=yoink
+	yk = yoink
 	rent = "!git pull origin $(git branch -l master main | sed 's/^* //')"
 	cull = "!git for-each-ref --format '%(refname:short)' refs/heads | grep -v 'master\\|main' | xargs git branch -D"
 [core]
@@ -38,7 +38,7 @@
 	email = mmanning2@chewy.com
 	name = Michael Manning
 [url "ssh://git@github"]
-    insteradOf = https://github.com
+	insteradOf = https://github.com
 [github]
 	user = mmanning2-chwy
 [init]
