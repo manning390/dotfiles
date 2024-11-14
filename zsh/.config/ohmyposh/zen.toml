@@ -1,6 +1,34 @@
-version = 2
-final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[palette]
+  blue1 = '#8fbcbb'
+  blue2 = '#88c0d0'
+  blue3 = '#b1c1c1'
+  blue4 = '#5e81ac'
+  dark1 = '#2e3440'
+  dark2 = '#3b4252'
+  dark3 = '#434c5e'
+  dark4 = '#4c566a'
+  green = '#a3be8c'
+  light1 = '#d8dee9'
+  light2 = '#e5e9f0'
+  light3 = '#eceff4'
+  orange = '#d08770'
+  purple = '#b48ead'
+  red = '#bf616a'
+  yellow = '#ebcb8b'
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '❯ '
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
 [[blocks]]
   type = 'prompt'
@@ -8,23 +36,25 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   newline = true
 
   [[blocks.segments]]
+    template = '{{ .Path }}'
+    foreground = 'blue'
+    background = 'transparent'
     type = 'path'
     style = 'plain'
-    background = 'transparent'
-    foreground = 'blue'
-    template = '{{ .Path }}'
 
     [blocks.segments.properties]
+      cache_duration = 'none'
       style = 'full'
 
   [[blocks.segments]]
-    type = 'git'
-    style = 'plain'
+    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
     foreground = 'p:light2'
     background = 'transparent'
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+    type = 'git'
+    style = 'plain'
 
     [blocks.segments.properties]
+      cache_duration = 'none'
       commit_icon = '@'
       fetch_status = true
 
@@ -33,13 +63,14 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   overflow = 'hidden'
 
   [[blocks.segments]]
-    type = 'executiontime'
-    style = 'plain'
+    template = '{{ .FormattedMs }}'
     foreground = 'yellow'
     background = 'transparent'
-    template = '{{ .FormattedMs }}'
+    type = 'executiontime'
+    style = 'plain'
 
     [blocks.segments.properties]
+      cache_duration = 'none'
       threshold = 5000
 
 [[blocks]]
@@ -48,43 +79,11 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   newline = true
 
   [[blocks.segments]]
+    template = '❯'
+    background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}",
-    ]
-    background = 'transparent'
-    template = '❯'
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
-[transient_prompt]
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
-  ]
-  background = 'transparent'
-  template = '❯ '
-
-[secondary_prompt]
-  foreground = 'magenta'
-  background = 'transparent'
-  template = '❯❯ '
-
-# Nord Palette
-[palette]
-  blue1 = '#8fbcbb'
-  blue2 = '#88c0d0'
-  blue3 = '#b1c1c1'
-  blue4 = '#5e81ac'
-  red = '#bf616a'
-  orange = '#d08770'
-  yellow = '#ebcb8b'
-  green = '#a3be8c'
-  purple = '#b48ead'
-  dark1 = '#2e3440'
-  dark2 = '#3b4252'
-  dark3 = '#434c5e'
-  dark4 = '#4c566a'
-  light1 = '#d8dee9'
-  light2 = '#e5e9f0'
-  light3 = '#eceff4'
+    [blocks.segments.properties]
+      cache_duration = 'none'

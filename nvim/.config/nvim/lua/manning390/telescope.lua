@@ -11,7 +11,7 @@ tel.setup({
         prompt_prefix = " >",
         color_devicons = true,
 
-        file_previewer = require("telescope.previewers").cat.new,
+        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
@@ -61,7 +61,7 @@ tel.load_extension("git_worktree")
 tel.load_extension("tailiscope")
 tel.load_extension("bookmarks")
 tel.load_extension("heading")
-
+tel.load_extension("wrd")
 
 local M = {}
 M.search_dotfiles = function()

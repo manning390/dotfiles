@@ -28,6 +28,7 @@ local single_line_if = {
 			format_tree = function(tsj)
 				if tsj:tsnode():parent():type() == "if_statement" then
 					tsj:remove_child({ left = "{", right = "}" })
+                  	tsj:update_preset({ recursive = false }, "join")
 				else
 					print("arrow")
 					arrow_body_format_join(tsj)
@@ -48,16 +49,16 @@ local single_line_if = {
 			end,
 		},
 	},
-	-- return_statement = {
-	-- 	split = {
-	-- 		enable = function(tsn)
-	-- 			return tsn:parent():type() == "if_statement"
-	-- 		end,
-	-- 		format_tree = function(tsj)
-	-- 			tsj:wrap({ left = "{", right = "}" })
-	-- 		end,
-	-- 	},
-	-- },
+	return_statement = {
+		split = {
+			enable = function(tsn)
+				return tsn:parent():type() == "if_statement"
+			end,
+			format_tree = function(tsj)
+				tsj:wrap({ left = "{", right = "}" })
+			end,
+		},
+	},
 }
 require("treesj").setup({
 	use_default_keymaps = false,

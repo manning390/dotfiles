@@ -45,22 +45,38 @@ local plugins = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
 		},
-		config = function()
-			require("phpactor").setup({
-				install = {
-					path = vim.fn.stdpath("data") .. "/lazy/phpactor",
-					branch = "2023.09.24.0",
-					bin = vim.fn.stdpath("data") .. "/lazy/phpactor/bin/phpactor",
-					php_bin = "php",
-					composer_bin = "composer2",
-					git_bin = "git",
-					check_on_startup = "none",
+		-- build = function()
+		-- 	require("phpactor.handler.update")()
+		-- end,
+		opts = {
+			-- install = {
+			-- 	path = vim.fn.stdpath("data") .. "/lazy/phpactor",
+			-- 	branch = "2024.06.30.0",
+			-- 	bin = vim.fn.stdpath("data") .. "/lazy/phpactor/bin/phpactor",
+			-- 	php_bin = "php",
+			-- 	composer_bin = "composer2",
+			-- 	git_bin = "git",
+			-- 	check_on_startup = "none",
+			-- },
+			lspconfig = {
+				enabled = false,
+				options = {},
+			},
+		},
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		opts = function()
+			local nls = require("null-ls")
+			return {
+				sources = {
+					-- nls.builtins.diagnostics.phpstan.with({
+					-- 	extra_args = {
+					-- 		"--memory-limit=2G",
+					-- 	},
+					-- }),
 				},
-				lspconfig = {
-					enabled = false,
-					options = {},
-				},
-			})
+			}
 		end,
 	},
 	{
@@ -85,6 +101,12 @@ local plugins = {
 		"folke/trouble.nvim",
 		enabled = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		enabled = true,
+    		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+		opts = {}
 	},
 	{
 		"stevearc/conform.nvim",
@@ -125,6 +147,7 @@ local plugins = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-emoji",
 			{
 				"dcampos/cmp-emmet-vim",
 				dependencies = {
@@ -139,8 +162,11 @@ local plugins = {
 			"saadparwaiz1/cmp_luasnip",
 			-- 'hrsh7th/cmp-cmdline',
 			-- 'hrsh7th/cmp-nvim-lsp-signature-help',
-			-- 'onsails/lspkind.nvim',
 		},
+	},
+	{
+		"onsails/lspkind.nvim", -- Completion context icons
+		dependencies = { "hrsh7th/nvim-cmp" },
 	},
 	-- Highlight, edit, navigate code
 	{
@@ -178,7 +204,7 @@ local plugins = {
 
 	-- Theme
 	"nvim-lualine/lualine.nvim",
-	{ "nvim-tree/nvim-web-devicons", lazy = false, priority = 100 },
+	{ "nvim-tree/nvim-web-devicons",      lazy = false, priority = 100 },
 	-- 'haystackandroid/snow'
 	{
 		"shaunsingh/nord.nvim",
@@ -203,6 +229,7 @@ local plugins = {
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
+	{ "NTBBloodbath/color-converter.nvim" },
 	-- Our lord and savior
 	"tpope/vim-abolish",    -- Better substitutions and iabbrev
 	"tpope/vim-eunuch",     -- :Rename and :SudoWrite
@@ -216,7 +243,7 @@ local plugins = {
 	},
 	"tpope/vim-unimpaired",            -- bracket mappings
 	-- No bindings or cmds by default, make telescope command?
-	{ "Vonr/align.nvim",             branch = "v2" }, -- Align things vertically
+	{ "Vonr/align.nvim",       branch = "v2" }, -- Align things vertically
 	{
 		"folke/todo-comments.nvim",    -- Highlight todo comments
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -389,6 +416,25 @@ local plugins = {
 		},
 		opts = {},
 	},
+	-- Copilot / LLM shit
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+			filetypes = {
+				scss = false,
+				css = false,
+			}
+		},
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		opts = {},
+	},
+	{ "AndreM222/copilot-lualine" },
 }
 
 -- Bootstrap & Install --

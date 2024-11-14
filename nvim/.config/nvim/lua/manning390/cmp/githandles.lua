@@ -17,11 +17,16 @@ handles.setup = function()
     return
   end
 
-  local config = vim.fn.expand('~/.github-handles.json')
-  if vim.fn.filereadable(config) == 0 then
+  local success, handles_with_names_and_emails = pcall(function()
+    local yaml_path = vim.fn.expand('~/.github-handles.yaml')
+    if vim.fn.filereadable(yaml_path) == 0 then
+      error(yaml_path .. ' not readable')
+    end
+    return vim.fn.yaml_decode(vim.fn.readfile(yaml_path))
+  end)
+  if not success then
     return
   end
-  local addresses = vim.fn.json_decode(vim.fn.readfile(config))
 
   local source = {}
 
@@ -44,12 +49,15 @@ handles.setup = function()
 
     if vim.startswith(input, '@') and (prefix == '@' or vim.endswith(prefix, ' @')) then
       local items = {}
-      for handle, address in pairs(addresses) do
+      for handle, name_and_email in pairs(handles_with_names_and_emails) do
         table.insert(items, {
-            filterText = handle .. ' pineapple ' .. address,
-            label = address,
+            data = {
+              handle = handle,
+            },
+            filterText = '@'.. handle .. ' ' .. name_and_email,
+            label = name_and_email,
             textEdit = {
-              newText = address,
+              newText = name_and_email,
               range = {
                 start = {
                   line = request.context.cursor.row - 1,
@@ -71,6 +79,11 @@ handles.setup = function()
     else
       callback({isIncomplete = true})
     end
+  end
+
+  source.resolve = function(self, completion_item, callback)
+    completion_item.documentation = '@'..completion_item.data.handle
+    callback(completion_item)
   end
 
   cmp.register_source('githandles', source.new())

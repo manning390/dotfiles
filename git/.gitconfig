@@ -27,6 +27,8 @@
 	yk = yoink
 	rent = "!git pull origin $(git branch -l master main | sed 's/^* //')"
 	cull = "!git for-each-ref --format '%(refname:short)' refs/heads | grep -v 'master\\|main' | xargs git branch -D"
+	ticket = "!~/workspace/ticket.sh"
+	tk = ticket
 [core]
 	execludesfile = ~/.gitignore
 	autocrlf = input

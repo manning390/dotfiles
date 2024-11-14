@@ -53,3 +53,4 @@ alias cleannpm="rm -rf node_modules &&  npm cache clean --force && npm install -
 alias cleanaws="rm ~/.aws/credentials"
 
 alias preview="open -a Preview"
+alias today="date +\"%m/%d/%Y\""

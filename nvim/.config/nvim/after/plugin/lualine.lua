@@ -83,6 +83,7 @@ require("lualine").setup({
     sections = {
         lualine_b = { branch },
         lualine_c = { filename, harpoon, space },
+        lualine_x = { {'copilot', show_colors = true } ,'encoding', 'fileformat', 'filetype' },
         lualine_y = { { wordCount, cond = is_markdown }, "progress" },
         lualine_z = { "location" },
     },

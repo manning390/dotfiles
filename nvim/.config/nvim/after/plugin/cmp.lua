@@ -1,9 +1,10 @@
-local cmp = require('cmp')
-local has_luasnip, luasnip = pcall(require, 'luasnip')
-local n = vim.g.keymaps.n;
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+local has_luasnip, luasnip = pcall(require, "luasnip")
+local n = vim.g.keymaps.n
 
-require('manning390.snippets')
-require('manning390.cmp.githandles').setup()
+require("manning390.snippets")
+require("manning390.cmp.githandles").setup()
 
 cmp.setup({
   snippet = {
@@ -11,19 +12,19 @@ cmp.setup({
       if has_luasnip then
         luasnip.lsp_expand(args.body)
       end
-    end
+    end,
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping = cmp.mapping.preset.insert({
     -- ['<C-n>'] = cmp.mapping.select_next_item {behavior = cmp.SelectBehavior.Insert },
     -- ['<C-e>'] = cmp.mapping.select_prev_item {behavior = cmp.SelectBehavior.Insert },
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    },
-    ['<C-' .. n .. '>'] = cmp.mapping(function(fallback)
+    }),
+    ["<C-" .. n .. ">"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -31,8 +32,8 @@ cmp.setup({
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<C-S-' .. n .. '>'] = cmp.mapping(function(fallback)
+    end, { "i", "s" }),
+    ["<C-S-" .. n .. ">"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -40,30 +41,39 @@ cmp.setup({
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<esc>'] = cmp.mapping.close(),
-  },
+    end, { "i", "s" }),
+    ["<esc>"] = cmp.mapping.close(),
+  }),
   sources = {
     -- Configuration Opions
     --     keyword_length
     --     priority (also ordering sources in list)
     --     max_item_count
-    { name = 'nvim_lua' },
-    { name = 'nvim_lsp' },
+    { name = "copilot", group_index = 2 },
+    { name = "nvim_lua" },
+    { name = "nvim_lsp" },
     -- { name = 'nvim_lsp_signature_help' },
-    { name = 'path' },
-    { name = 'calc' },
-    { name = 'luasnip' },
+    { name = "path" },
+    { name = "calc" },
+    { name = "luasnip" },
+    { name = "buffer", keyword_length = 5 },
     {
-      name = 'emmet_vim',
+      name = "emmet_vim",
       option = {
         filetypes = {
-          'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte', 'vue'
-        }
-      }
+          "html",
+          "typescriptreact",
+          "javascriptreact",
+          "css",
+          "sass",
+          "scss",
+          "less",
+          "svelte",
+          "vue",
+        },
+      },
     },
-    { name = 'buffer', keyword_length = 5 },
-    { name = 'emoji' },
+    { name = "emoji" },
     -- { name = 'cmdline'},
   },
   experimental = {
@@ -72,17 +82,16 @@ cmp.setup({
   },
   window = {
     documentation = cmp.config.window.bordered(),
-  }
+  },
+  formatting = {
+    format = lspkind.cmp_format({ mode = "symbol", maxwidth = 50, symbol_map = { Copilot = "" } }),
+  },
 })
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources(
-    { name = 'githandles' }
-  ),
+cmp.setup.filetype("gitcommit", {
+  sources = cmp.config.sources({ name = "githandles" }),
 })
-cmp.event:on(
-  'confirm_done',
-  require('nvim-autopairs.completion.cmp').on_confirm_done()
-)
+cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

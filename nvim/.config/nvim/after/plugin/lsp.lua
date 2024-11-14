@@ -1,4 +1,4 @@
-local efm_languages = { }
+local efm_languages = {}
 local servers = {
     -- tsserver = {
     --     on_attach = function(client)
@@ -8,11 +8,11 @@ local servers = {
     -- },
     clangd = {
         init_options = {
-            compilationDatabaseDirectory = "build"
-        }
+            compilationDatabaseDirectory = "build",
+        },
     },
     emmet_language_server = {
-        filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'svelte', 'vue' },
+        filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue" },
     },
     cmake = {},
     -- phpactor = {},
@@ -25,42 +25,42 @@ local servers = {
         end,
     },
     eslint = {
-        filetypes = {'javascriptreact', 'typescriptreact', 'javascript', 'svelte'},
+        filetypes = { "javascriptreact", "typescriptreact", "javascript", "svelte" },
         on_attach = function(_, bufnr)
-            vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+            vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()
-                vim.cmd('EslintFixAll')
-            end, { desc = 'Format current buffer with LSP' })
+                vim.cmd("EslintFixAll")
+            end, { desc = "Format current buffer with LSP" })
         end,
     },
     lua_ls = {
         on_init = function(client)
             local path = client.workspace_folders[1].name
-            if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-                client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+            if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+                client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
                     Lua = {
                         runtime = {
                             -- Tell the language server which version of Lua you're using
                             -- (most likely LuaJIT in the case of Neovim)
-                            version = 'LuaJIT'
+                            version = "LuaJIT",
                         },
                         -- Make the server aware of Neovim runtime files
                         workspace = {
                             checkThirdParty = false,
                             library = {
-                                vim.env.VIMRUNTIME
+                                vim.env.VIMRUNTIME,
                                 -- "${3rd}/luv/library"
                                 -- "${3rd}/busted/library",
-                            }
+                            },
                             -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
                             -- library = vim.api.nvim_get_runtime_file("", true)
                         },
                         telemetry = { enable = false },
-                        diagnostics = { globals = { 'vim', 'require' } },
+                        diagnostics = { globals = { "vim", "require" } },
                         completion = {
-                            callSnippet = "Replace"
-                        }
-                    }
+                            callSnippet = "Replace",
+                        },
+                    },
                 })
                 client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
             end
@@ -71,9 +71,7 @@ local servers = {
         filetypes = vim.tbl_keys(efm_languages),
         settings = {
             rootMarkers = { ".git/" },
-            languages = vim.tbl_extend('force',
-                require 'efmls-configs.defaults'.languages(), efm_languages
-            )
+            languages = vim.tbl_extend("force", require("efmls-configs.defaults").languages(), efm_languages),
         },
         init_options = {
             documentFormatting = true,
@@ -82,13 +80,28 @@ local servers = {
     },
     jsonls = {},
     ltex = {
-        filetypes = { 'markdown' },
+        filetypes = { "markdown" },
         filter_notifications = {
-            'checking document'
+            "checking document",
         },
         -- on_init = function(client)
         --     client.server_capabilities
         -- end
+    },
+    intelephense = {
+        init_options = {
+            -- licenceKey = vim.fn.expand("$HOME/intelephense/licence.txt"),
+        },
+        filetypes = { "php", "blade", "php_only" },
+        settings = {
+            intelephense = {
+                filetypes = { "php", "blade", "php_only" },
+                files = {
+                    associations = { "*.php", "*.blade.php" },
+                    maxSize = 5000000,
+                },
+            },
+        },
     },
 }
 
@@ -96,37 +109,37 @@ vim.diagnostic.config({
     virtual_text = true,
     float = {
         source = true,
-    }
+    },
 })
 
-require('neodev').setup()
+require("neodev").setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to serveres
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
         vim.lsp.buf.format({ async = false })
-    end, { desc = 'Format current buffer with LSP' })
+    end, { desc = "Format current buffer with LSP" })
 end
 
 -- Setup mason so it can manage external tooling
-require('mason').setup()
+require("mason").setup()
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-mason_lspconfig.setup {
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup({
     ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
     function(server_name)
-        require('lspconfig')[server_name].setup(vim.tbl_extend('force', {
+        require("lspconfig")[server_name].setup(vim.tbl_extend("force", {
             capabilities = capabilities,
             on_attach = on_attach,
         }, servers[server_name] or {}))
     end,
-}
+})

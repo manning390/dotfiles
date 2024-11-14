@@ -20,9 +20,9 @@ vim.o.fileformats = 'unix,mac,dos'
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 vim.o.magic = true
 
-vim.o.tabstop = 4      --A tab is four spaces
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4   -- number of spaces to use for autoindenting
+vim.o.tabstop = 2      --A tab is four spaces
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2   -- number of spaces to use for autoindenting
 vim.o.expandtab = true --always convert tabs to spaces
 
 vim.o.smartindent = true
